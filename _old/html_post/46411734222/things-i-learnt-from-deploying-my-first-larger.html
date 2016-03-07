@@ -1,0 +1,39 @@
+<h1>Things I learnt from deploying my first larger Meteor.js app</h1><p>2013-03-27 10:00:28 GMT</p><article><p>With Google Reader <a href="http://www.ubergizmo.com/2013/03/google-reader-discontinued/">said to be discontinued</a> I had to look for alternatives.
+I had a look at the many alternatives but none made me really happy - <em>plus</em> I was already looking for a way of building a &ldquo;real&rdquo; app that I&rsquo;d like to use to learn more about the woes and joys of maintaining a Meteor.js app and potentially running it at a bigger scale on my own infrastructure.</p>
+
+<p>So building my own RSS reader and offering it to everybody as a hosted service on my private server seemed perfect to achieve more &ldquo;real life&rdquo; experience with Meteor.js.</p>
+
+<p>The result is my latest side project <a href="http://neee.ws">Neee.ws</a>, which is <a href="https://github.com/avgp/rssteroids">also on Github</a>.</p>
+
+<p>Okay, enough context - what went good, what went bad?</p>
+
+<p><strong>(Re-)Deployment</strong></p>
+
+<p>First of all, redeployment involved the following steps</p>
+
+<ol><li>Run <code>mrt bundle</code></li>
+<li>Copy the tar to the server</li>
+<li>Unpack it</li>
+<li>Delete the <code>fibers</code> package (because I bundle on a different architecture as my servers&rsquo;.</li>
+<li>Restart the application</li>
+</ol><p>to make this a little more convenient, I wrote a <a href="https://gist.github.com/anonymous/5249546">little shell script</a> to do that and also keep a backup of the previously deployed version.</p>
+
+<p>To run the app on the server I use <a href="https://github.com/nodejitsu/forever">forever</a>, which is super-simple and works reliably for me.</p>
+
+<p><strong>Beware of large collections!</strong></p>
+
+<p>I totally forgot about the client-side mongo instance.
+Meteor tries to download the whole database (<strong>!</strong>) to the client for caching. Even if you&rsquo;re limiting your query results: The client will get the <em>whole</em> database.
+That is part of the <code>autopublish</code> magic.
+Hence you should remove the autopublish package and use <code>Meteor.publish</code>, <code>Meteor.subscribe</code> and <code>Deps.autorun</code> and do as much filtering as possible on the server side to have only the most important documents cached locally.</p>
+
+<p>The performance gain is enormous - from <strong>28 seconds</strong> loading time down to <strong>1.9 seconds</strong>!</p>
+
+<p><strong>The many joys of Meteor.js</strong>
+The development was really quick &amp; easy - thanks to the many nice things Meteor gives you for free. I will just give a short list here:</p>
+
+<ul><li>Google Login + oAuth token for API access</li>
+<li>Reactivity in data sources</li>
+<li>Helpful <a href="https://github.com/oortcloud/meteorite">Meteorite</a> packages, particularly <a href="https://github.com/tmeasday/meteor-router">meteor-router</a></li>
+<li>Easy setup &amp; bundling</li>
+</ul></article>

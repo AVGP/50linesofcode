@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: So you don't like Firefox OS? Change it!</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>So you don't like Firefox OS? Change it!</h2>
+										<p>June 24th 2013</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#So you don't like Firefox OS? Change it!
+After getting my <a href="http://www.geeksphone.com/">Geeksphone PEAK</a> last week, I have to say, that it's a pretty neat device.</p>
+<p>However, some stuff was not making me happy. One example was the email app on the device.</p>
+<p>It's not bad, but I didn't like the appearance of the read vs. the unread mails.</p>
+<p>So here comes a wonderful thing about FirefoxOS: <strong>If you're not happy with something, change it.</strong></p>
+<p>If you want to change the system UI like I wanted, you need to make changes in <a href="https://wiki.mozilla.org/Gaia">Gaia</a>, the collection of system apps. Start by <a href="https://github.com/mozilla-b2g/gaia">checking out Gaia from Github</a> and make sure to checkout the right branch for your image.</p>
+<ul>
+<li>PEAK stable: Checkout the <code>v1.0.1</code> branch</li>
+<li>PEAK nightly: Checkout the latest master</li>
+</ul>
+<p>Now you can run</p>
+<pre><code>$ PRODUCTION=1 make
+$ PRODUCTION=1 make install-gaia
+</code></pre>
+<p>and get your latest Gaia version on your phone.
+In my case I just worked on the email app, so I sped things up with</p>
+<pre><code>$ PRODUCTION=1 APP=email make
+$ PRODUCTION=1 APP=email make install-gaia
+</code></pre>
+<p>to only recompile and push the email app.</p>
+<p>So, now go and make your Firefox OS phone yours!</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

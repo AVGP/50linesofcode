@@ -1,0 +1,50 @@
+{
+  "title": "Hiring developers",
+  "date": "2012-06-14 13:51:35 GMT"
+}
+
+---
+
+#Hiring developers
+<p>Hiring developers can be quite a difficult task.</p>&#13;
+<p>First of all, the most reliable metric for measuring the skills of a developer is code.</p>&#13;
+<p>The code showcase</p>&#13;
+<p>I still see some people who do not have code online for others to use and/or evaluate.</p>&#13;
+<p>But even if they have something for you to look at, the projects are usually small and don't leverage techniques for performing on a large scale. Which is fine for small projects - but you can't be sure they know how to do it "right" when it comes to larger applications.</p>&#13;
+<p>At least you should be aware if appropriate patterns are used and if there is documentation. Don't fall for "Yeah, I wanted to get it up first and document it later". There should always be docs. (I know I violated this rule in the past and still in the present. That is actually a point I am currently improving myself)</p>&#13;
+<p>So the open source code of a developer may be a first indicator on why not to hire someone. And the lack of code for you to look into should make you ask the question "why?". But what, if someone does not have open source code, because they worked full-time on code for some contractor and aren't allowed to publish anything from it?</p>&#13;
+<p><strong>The right questions</strong></p>&#13;
+<p>I have been interviewed a couple of times where people asked me questions that made sense and questions that didn't.</p>&#13;
+<p>What qualifies a question as "good"?</p>&#13;
+<p>First of all, it should allow the answer to be a bad one easily and should require some consideration to be answered in a good way.</p>&#13;
+<p>Additionally, it should be related to the field of software development or software engineering - preferably in a not too obvious way.</p>&#13;
+<p>After reflecting a very large number of conversations I had with fellow developers and after being through a handful of interviews myself, I think I found a set of very useful questions to tell apart good and bad developers.</p>&#13;
+<p>Finally I got some backing and inspiration from <a href="http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.guynirpaz.com%2F2012%2F06%2F11%2Fgood-developer-bad-developer%2F&amp;h=sAQG2P53IAQFNaqev9uYriTMMcNsj_zs8-mHq1Oh0pN6Sqw">this article</a> a colleague pointed me at.</p>&#13;
+<p>The questions:</p>&#13;
+<p><strong>Question Number 1: Do you consider being a programmer as some kind of craftmanship and why / why not?</strong></p>&#13;
+<p><strong>Best Answer:</strong></p>&#13;
+<p>"Yes. Because developing a solution requires a lot of design decisions and careful crafting of the architecture and the components themselve and you are creating something of value. But at the end of the day, of course, you have to deliver the product at some point. So you should not forget the fact that you're on a deadline and you should keep the big picture of the problem you're going to solve in mind."</p>&#13;
+<p><strong>Good Answer:</strong></p>&#13;
+<p>Any favour of "Yes" without pointing at the fact, that there is a schedule to stick with and that there is a problem to be solved, instead of writing artificial code that may turn out unmaintainable or overcomplicated.</p>&#13;
+<p><strong>Bad Answer:</strong></p>&#13;
+<p>No. As a developer you only spit out lots of code lines. There is no craft in just typing tons of lines.</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>Question Number 2: What programming language is the best one in your opinion?</strong></p>&#13;
+<p><strong>Best Answer:</strong></p>&#13;
+<p>That depends on the given problem. I know a few different languages to be abled to pick the right one for a certain problem.</p>&#13;
+<p><strong>Good Answer:</strong></p>&#13;
+<p>I would go with &lt;some language&gt;, but I'd be okay with &lt;a few others&gt;, too.</p>&#13;
+<p><strong>Bad Answer:</strong></p>&#13;
+<p>Definitely &lt;some language&gt;!</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>Question Number 3: How would you solve problem X?</strong></p>&#13;
+<p>Where "Problem X" refers to a problem of your usual problem domain.</p>&#13;
+<p>You should always include a small challenge from your "real world" environment.</p>&#13;
+<p>Let the candidate point out, what he will consider and make sure, that there is at least one thing that is solvable by just including a component or library.</p>&#13;
+<p>Ask explicitly: "Given you have to add &lt;some functionality&gt; - how would you do that?".</p>&#13;
+<p><strong>Best Answer: </strong></p>&#13;
+<p>I would look for an existing solution, evaluate that and if this works well enough I would go with that. If it turns out, that the component is not good enough, I would either improve it or just implement one myself at last.</p>&#13;
+<p><strong>Good Answer:</strong></p>&#13;
+<p>I would try to find a component for that.</p>&#13;
+<p><strong>Bad Answer:</strong></p>&#13;
+<p>I would implement it (maybe followed by a lot of detailed yadda-yadda).</p> 

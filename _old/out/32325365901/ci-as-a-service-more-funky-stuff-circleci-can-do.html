@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: CI as a service: More funky stuff CircleCI can do</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>CI as a service: More funky stuff CircleCI can do</h2>
+										<p>September 26th 2012</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#CI as a service: More funky stuff CircleCI can do</p>
+<p>In my recent post about CircleCI I pointed out how easy it is to get started with Continuous Testing thanks to CircleCI.</p>&#13;
+<p>After a few mails to and from the customer support (Thanks to <a href="http://twitter.com/paulbiggar">Paul Biggar</a> and <a href="http://twitter.com/arohner">Allen Rohner</a>!) I found out, you can do a lot more, than I suspected:</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>Deployment</strong></p>&#13;
+<p>A vital part of fully leveraging Continuous Integration for me is being abled to automatically deploy (either to a live or a staging environment) what has been identified as a working build - or Continuous Deployment in shorter terms.</p>&#13;
+<p>After browsing through the project settings and looking around in the platform, I only found a way to deploy to Heroku automatically and concluded, that other deployment strategies are not supported for now.</p>&#13;
+<p>This is a case of RTFM, I have been stupid here: You can deploy anyway you want, <a href="https://circleci.com/docs/configuration#deployment">as the docs point out</a>.</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>API</strong></p>&#13;
+<p>The curious child I sometimes am I wondered, if there is an API, like the Jenkins API, to have something on our wall displays, yelling at people if builds fail (as we have using the mentioned Jenkins API).</p>&#13;
+<p>There are two ways of accessing the data from CircleCI:</p>&#13;
+<ol><li><a href="https://circleci.com/docs/configuration#notify">A notification hook</a>: This is a URL in your control where CircleCI sends information about the project and its build state to (as JSON). You can put some server-side script there and do something with the data then.</li>&#13;
+<li>An initial version of a REST API! This one is undocumented and pretty limited for now - but promising!</li>&#13;
+</ol><div></div>&#13;
+<p><strong>Github Commit Status API</strong></p>&#13;
+<p>Github has published their "<a href="https://github.com/blog/1227-commit-status-api">Commit Status API</a>" which, to put it short, allows marking individual commits as "working" or "broken".</p>&#13;
+<p>That Circle CI supports this is pretty fancy.</p> 
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

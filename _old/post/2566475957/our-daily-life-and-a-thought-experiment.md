@@ -1,0 +1,46 @@
+{
+  "title": "Our daily life and a thought experiment",
+  "date": "2011-01-02 11:41:00 GMT"
+}
+
+---
+
+#Our daily life and a thought experiment
+<p>...its been a while since my last post.</p>&#13;
+<p>Anyway, I found the time to let you know about some thoughts currently spinning around in my head.</p>&#13;
+<p>I got inspired by a film called "Plug&amp;Pray", featuring <a href="http://en.wikipedia.org/wiki/Joseph_Weizenbaum">Joseph Weizenbaum</a>.</p>&#13;
+<p>Personally, I find it difficult to judge about the relationship between technology and mankind, because technology has many faces (as does mankind); its hard to grasp all the aspects of its correlation to us and our daily lifes.</p>&#13;
+<p>As a usual geek, I love gadgets, technology and science. I love to find new ways of easing my days by automating boring, dangerous or unpleasant tasks, gather information and get entertained by various pieces of tech and this way - slowly but progressively intrusive - it gets more and more interwoven with me and my life.</p>&#13;
+<p>Enough said - lets get medias in res!</p>&#13;
+<p>To have a common understanding of the term "Technology" in the context of the following article, I'd like to mention, that - for the scope of this article - I am limiting it to electricity and electricity-based artefacts. Of course this is a highly limited definition, compared to <a href="http://en.wikipedia.org/wiki/Technology">the usual one</a>.</p>&#13;
+<p>Anyway its perfectly fitting the needs of this article.</p>&#13;
+<p>To get a better understanding of the influence technology in general - and information technology (IT) in particular - has on us, I'd like to do a short thought experiment:</p>&#13;
+<p>Lets assume I would decide to stop using modern technology (i.e. [in this context] electricity-based technology) without any preparation and for an undefined (possibly infinite) period of time - what would that mean to me? What would be changed in my life? Lets go through a day, some days after I stoped "having electricity"! Please note, that this whole situation is specific to me (and fictional) - but you can adapt it for yourself very easily.</p>&#13;
+<p>I open my eyes. At this moment, I have no idea, what time it is, because the alarm clock next to my bed runs with electricity and is the only clock I have in my bedroom. I need to pick up my pocketwatch or the clock in the kitchen to get the time. I woke up far too late! Over in the bathroom I cannot shave, because I don't have a wet razor at hand. My stomach grumbles - the kitchen is not only as dark as the bathroom, the food in the fridge is decayed, neither the oven and stove nor the toaster nor coffee brewer aren't working. Thus, I have to get food for the immediate future only and I can't cook at home at all. For the moment I grab some bread and some cheese, which is still good.</p>&#13;
+<p>I have an appointment. I nearly forgot that! My mobile phone calendar would've reminded me - but my mobile phone ran out of battery already. So I hurry through the streets. Then I remember I don't have the directions - I have to ask many people, until I finally reach my destination. But only to find out, the appointment has been cancelled, because the person I was up to meet got ill today. I couldn't be reached by telephone (which runs on external power), email, sms...</p>&#13;
+<p>After having decided to visit my friend in a nearby town, I go to the train station. Its pretty empty - but why? I buy a local newspaper, which tells me, that there is some major maintenance work on the railway - today! This explains the empty station. I haven't heard of that in local radio or tv (both inoperational) and - of course - not haven't read about it on the net.</p>&#13;
+<p>Back home, I read a book - but not for too long. Its winter, which means: Early sunset. In the warm light of some candles I get ready for bedtime.</p>&#13;
+<p>The day ends.</p>&#13;
+<p>Having had a short thought about this, I was puzzled about how deep the technology had invaded my daily life. Even if I still have electricity and only telephone and internet are absent, it would change the way I live my everyday-life enormously...</p>&#13;
+<p>The level of comfort is one thing, the feeling I have about technology is another.</p>&#13;
+<p>We rely on it, we put a lot of faith in technology - some scientists are going too far on this, in my humble opinion.</p>&#13;
+<p>Saying "We [as humans] are obsolete" is insolent and - to give my honest opinion: Stupid.</p>&#13;
+<blockquote>&#13;
+<p>"Nescire scio" - "I know, that I don't know"</p>&#13;
+</blockquote>&#13;
+<p>People stating humans are obsolete - and concluding that we'll be building machines better than ourselves - is a naive, dangerous fantasy and plain stupid.</p>&#13;
+<p>Anyway speaking for now, we're far from being obsolete.</p>&#13;
+<p>We still don't exactly know, how our thoughts are formed in our brain. How exactly the complex subconsciousness works and how exactly human interaction and communication is working. The tasks we do in every second without even mentioning them are hard to teach to tech.</p>&#13;
+<p>Tech still can't think. And we don't know, how we do it - how could we then teach it to dead technology?</p>&#13;
+<p>All we do, currently and for my beliefs in the future, too, is imitate.</p>&#13;
+<p>We are proud of having our systems <em>look </em>and <em>act</em> like they're thinking. They aren't.</p>&#13;
+<p>Think of the highly developed algorithms for speech recognition. "Wow", you'll think, "it understands me!" but then order it to solve a puzzle.</p>&#13;
+<p>Sure, the system is not designed for it and if we connect it to another system, designed for solving puzzles....</p>&#13;
+<p>Gotcha!</p>&#13;
+<p><em>We</em> connect it. And its only <em>us</em>, who know whats necessary to connect it to.</p>&#13;
+<p>And its us, who are building a representation of the puzzle, so the system can grasp it anyway.</p>&#13;
+<p>We're a crucial part of the system's intelligence, because the system itself isn't intelligent.</p>&#13;
+<p>Even if we could build systems, which are intelligent, I am sure it won't be a good idea.</p>&#13;
+<p>Humans are unpredictable (non-deterministic, us computer-scientists would say) - this is only possible, because of the way our brain works.</p>&#13;
+<p>If we finally teach this to technology, we lose control of the technology.</p>&#13;
+<p>We know, that technology has a huge influence in our life - right now, we have a fair amount of control over it. Even though its a bad thing, when we lose this control (power outage, etc.) - how worse will it get, when we forfeit our control completely?</p> 

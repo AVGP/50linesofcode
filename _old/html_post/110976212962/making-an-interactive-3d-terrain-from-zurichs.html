@@ -1,0 +1,155 @@
+<h1>Making an interactive 3D terrain from Zurich's open geo data with Three.js</h1><p>2015-02-14 11:00:36 GMT</p><article><h1>Preface</h1>
+
+<p>A few days ago I stumbled upon <a href="https://twitter.com/OpenDataZurich/status/565201408077856769">this tweet</a> from  <a href="https://twitter.com/opendatazurich">@OpenDataZurich</a>:</p>
+
+<blockquote>
+  <p>Hochaufgelöste Höhendaten des @kantonzuerich neu als #opendata verfügbar! are.zh.ch/internet/baudi… by @GISZentrumZH ^si</p>
+</blockquote>
+
+<p>So I checked them out in the <a href="http://maps.zh.ch/mobile?topic=LidarZH&amp;offlayers=dom2014hillshade&amp;over=UpBackgroundZH">GIS browser</a> and was hit by the possibilities this meant.</p>
+
+<p>The data contains three interesting things:</p>
+
+<ul><li>the output files of the actual measurement done with the <a href="http://en.m.wikipedia.org/wiki/Lidar">LIDAR</a> </li>
+<li>the Digital Terrain Model (i.e. the pure terrain without buildings or vegetation) data </li>
+<li>the digital surface model (in German &ldquo;Digitales Oberflächen Modell, DOM) </li>
+</ul><p>I am particularly interested in the latter, as it allows for a number of ideas to become possible!</p>
+
+<p>Some of the things that came to my mind:</p>
+
+<ul><li>make an interactively explorable model from the data to allow getting a 3D look at Zurich</li>
+<li>hook it up to a physics engine and do a few neat simulations</li>
+<li>pair it with VR (e.g. the Oculus Rift or the Google Cardboard) and make it walkable</li>
+</ul><h1>There&rsquo;s the data. Now what?</h1>
+
+<p>Alright, enough ideas, let&rsquo;s go! 
+So first of all, I navigated into <a href="http://maps.zh.ch/download/hoehen/2014/dom/tif/">the directory that holds all the surface model data</a> and hunted for the tile that I identified using the GIS browser beforehand - in my case the tile <code>6830_2470.tif</code> that holds part of the city center. <a href="http://maps.zh.ch/download/hoehen/2014/dom/tif/6830_2470.tif">This is the one I&rsquo;m talking about</a>.</p>
+
+<p>Okay, now I have a TIFF image that contains geo data. Now what?
+Googling brought me to <a href="http://trac.osgeo.org/geotiff/">the GeoTIFF website</a> with a lot of information on the format, but I wondered if I really have to parse it myself.</p>
+
+<p>Obviously, I didn&rsquo;t have to. As nearly always <a href="https://www.npmjs.com/package/geo-pixel-stream">npm got me covered with geo-pixel-stream</a> from the folks at <a href="https://www.mapbox.com/">MapBox</a>!
+<a href="https://github.com/rclark">Ryan Clark</a>, if you read this: Thanks man!</p>
+
+<p>Okay, so I wrote a small script to do some evaluation of what the heck I will get from the file:</p>
+
+<pre><code>var ps = require('geo-pixel-stream'),
+    readers = ps.createReadStreams('data.tif');
+
+console.log(readers.length);
+console.log(readers[0].metadata);
+
+readers[0].on('data', function(data) {
+  console.log("----", data.offset, data.blockSize, data.buffer[0]);
+});
+</code></pre>
+
+<p>Okay, so that gave me some information:</p>
+
+<pre><code>{ 
+  driver: 'GTiff',
+  width: 2000,
+  height: 2000,
+  numBands: 1,
+  srs: {},
+  geotransform: [ 683000, 0.5, 0, 248000, 0, -0.5 ],
+  id: 1,
+  type: 'Float32',
+  blockSize: { x: 256, y: 256 } 
+}
+</code></pre>
+
+<p>Notably:</p>
+
+<ul><li>It&rsquo;s a 2000x2000 &quot;image&rdquo;</li>
+<li>It is a bunch of <code>Float32</code>s</li>
+<li>It comes in blocks of 256 by 256 data points</li>
+</ul><p>Ah-ha.
+So I have a stream of floats&hellip; that&rsquo;s possibly the elevation, huh?</p>
+
+<pre><code>{ x: 0, y: 0 } { x: 256, y: 256 } 411.1099853515625
+{ x: 1, y: 0 } { x: 256, y: 256 } 407.8500061035156
+{ x: 2, y: 0 } { x: 256, y: 256 } 430.29998779296875
+{ x: 3, y: 0 } { x: 256, y: 256 } 408.260009765625
+</code></pre>
+
+<p>That sounds about right (checking it with the GIS browser again).</p>
+
+<p>Cool, so I&rsquo;ll turn that into a terrain with <a href="http://www.threejs.org">Three.js</a> for which I need each block of 256x256 points in one JSON array - that&rsquo;s what <code>linearize.js</code> does:</p>
+
+<pre><code>var ps = require('geo-pixel-stream'),
+    readers = ps.createReadStreams('6830_2470.tif'),
+    fs = require('fs');
+
+var numPoints = 0, blocks = [];
+
+readers[0].on('data', function(data) {
+    var blockPoints = [],
+        blockLen = data.blockSize.x * data.blockSize.y;
+
+    for(var i=0;i&lt;blockLen;i++) {
+      blockPoints.push(data.buffer[i]);
+    }
+    blocks.push(blockPoints);
+});
+
+readers[0].on('end', function() {
+  fs.writeFile('data.json', JSON.stringify(blocks), function() {
+    console.log("Written " + blocks.length + " blocks to file.");
+  });
+});
+</code></pre>
+
+<p>So we&rsquo;re now having it all in a (large) JSON file (<code>data.json</code>) - ready for consumption in Three.js :)</p>
+
+<h1>Making it discoverable</h1>
+
+<p>Now that we have the data ready, it&rsquo;s time to put pixels on the screen, isn&rsquo;t it?</p>
+
+<p>For that, we&rsquo;ll read the <code>data.json</code> that is created by <code>linearize.js</code> and create a plane for each block.
+Each of those planes will represent a block of 256x256 points in our case - and we&rsquo;ll have 8x8 blocks arranged in a grid in the data.</p>
+
+<p>So let&rsquo;s start looking at how to create the planes containing the point data:</p>
+
+<pre><code>function createTerrainBlock(points, width, depth, blockWidth, blockDepth) {
+  var geometry = new THREE.PlaneBufferGeometry( width, depth, blockWidth - 1, blockDepth - 1 );
+  geometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+
+  var vertices = geometry.attributes.position.array;
+  for ( var i = 0, j = 0, l = vertices.length; i &lt; l; i++, j += 3 ) {
+    vertices[ j + 1 ] = points[ i ];
+  }
+
+  return geometry;
+}
+</code></pre>
+
+<p>This will create a plane, rotate it so that it&rsquo;s horizontal and set each of its vertices (it&rsquo;s an array in the form of [x1, y1, z1, x2, y2, z2, &hellip; , xn, yn, zn] so we&rsquo;re iterating in steps of 3 through that array) and set the y-coordinate to the point data from the GeoTIFF (i.e. the elevation of that point).</p>
+
+<p>Now we&rsquo;ll have to walk through each of our blocks and use the geometry to create meshes to put on screen:</p>
+
+<pre><code>function createTerrain(blocks, blocksPerRow, blockSize) {
+  var material = new THREE.MeshLambertMaterial();
+  var meshes = [];
+  for(var i=0; i&lt;blocks.length; i++) {
+    var geometry = createTerrainBlock(blocks[i], blockSize, blockSize, 256, 256);
+    var mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set((i%blocksPerRow) * blockSize, 0, Math.floor(i/blocksPerRow) * blockSize);
+  }
+
+  return meshes;
+}
+</code></pre>
+
+<p>And that&rsquo;s it for the generation and positioning.
+When you render it, together with some lighting, you get something similar to this:</p>
+
+<p><img src="http://i.imgur.com/OaQ59Ig.png" alt="Demo picture of the terrain data"/></p>
+
+<p>Nice, isn&rsquo;t it?</p>
+
+<h1>Where to go next?</h1>
+
+<p>What you can do with this data is up to your imagination now - so go and check out the data in the <a href="http://maps.zh.ch/mobile?topic=LidarZH&amp;offlayers=dom2014hillshade&amp;over=UpBackgroundZH">GIS browser</a> and play around with it.</p>
+
+<p>Would be happy to hear what you did, so why not drop me a tweet <a href="https://twitter.com/g33konaut">@g33konaut</a>?</p></article>

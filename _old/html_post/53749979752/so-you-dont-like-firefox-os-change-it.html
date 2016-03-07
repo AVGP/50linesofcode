@@ -1,0 +1,28 @@
+<h1>So you don't like Firefox OS? Change it!</h1><p>2013-06-24 11:00:22 GMT</p><article><p>After getting my <a href="http://www.geeksphone.com/">Geeksphone PEAK</a> last week, I have to say, that it&rsquo;s a pretty neat device.</p>
+
+<p>However, some stuff was not making me happy. One example was the email app on the device.</p>
+
+<p>It&rsquo;s not bad, but I didn&rsquo;t like the appearance of the read vs. the unread mails.</p>
+
+<p>So here comes a wonderful thing about FirefoxOS: <strong>If you&rsquo;re not happy with something, change it.</strong></p>
+
+<p>If you want to change the system UI like I wanted, you need to make changes in <a href="https://wiki.mozilla.org/Gaia">Gaia</a>, the collection of system apps. Start by <a href="https://github.com/mozilla-b2g/gaia">checking out Gaia from Github</a> and make sure to checkout the right branch for your image.</p>
+
+<ul><li>PEAK stable: Checkout the <code>v1.0.1</code> branch</li>
+<li>PEAK nightly: Checkout the latest master</li>
+</ul><p>Now you can run</p>
+
+<pre><code>$ PRODUCTION=1 make
+$ PRODUCTION=1 make install-gaia
+</code></pre>
+
+<p>and get your latest Gaia version on your phone.
+In my case I just worked on the email app, so I sped things up with</p>
+
+<pre><code>$ PRODUCTION=1 APP=email make
+$ PRODUCTION=1 APP=email make install-gaia
+</code></pre>
+
+<p>to only recompile and push the email app.</p>
+
+<p>So, now go and make your Firefox OS phone yours!</p></article>

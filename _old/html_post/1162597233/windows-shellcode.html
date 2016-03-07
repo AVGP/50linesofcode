@@ -1,0 +1,16 @@
+<h1>Windows Shellcode</h1><p>2010-09-21 19:21:00 GMT</p><article><p>Today I&rsquo;m gonna cover, how exploits get served with payload.</p>
+<p>To clear the terms:</p>
+<ul><li><strong>exploit:</strong> Data that, when inserted into a target application, lets the attacker execute some kind of payload-code. The exploit itself just triggers some kind of defect in the target software, to give control to user data and lets the attacker modify the running program. The payload is usually called <em>shellcode.</em></li>
+<li><strong>shellcode:</strong> The actual &ldquo;payload&rdquo;, that brings the actual harm of an exploit, by providing the attacker with whatever activity he wants.</li>
+</ul><p>The name shellcode comes from the fact, that in most cases you&rsquo;ll want to have some kind of remote shell. For this purpose the payload code spawns a shell. Over the years, the term evolved to a generalization for every payload, that is used in an exploit.</p>
+<p>Shellcodes are a bit special. For example: If you inject them into char-buffers, you&rsquo;ll need to make sure, that there is no 0-char in your binary, because that would cause the shellcode to fail.</p>
+<p>You should also keep in mind, that you usually have limited amount of memory available for your shellcode, unless you use techniques, so you&rsquo;re not injecting your shellcode directly into the exploited memory area.</p>
+<p>In the following example, I want to show you, how to create a simple shellcode for Windows. The code will just exec calc.exe, when inserted into an exploit. You don&rsquo;t have an exploit at hand? Then use <a title="Shellcode loader" target="_blank" href="http://gist.github.com/590261">this</a> code to start it without any exploit.</p>
+<p>I chose this example, because the used WinAPI function &ldquo;WinExec&rdquo; resides in kernel32.dll, which is mapped to every process. In any other case, we would&rsquo;ve had to call LoadLibraryA and GetProcAddress before we can use the function.</p>
+<p>For a first introduction to this topic, that&rsquo;d be too much, I think.</p>
+<p><a title="calc.exe Shellcode" target="_blank" href="http://gist.github.com/590331">Here</a> you find the documented code. To get the shellcode from it, you might use bin2c or just write yourself a small script, loading the elf and getting the binary part from it.</p>
+<p>All you need to exec a WinAPI function is to get the address, where its mapped to. Then you push the arguments on the stack and thats it.</p>
+<p>Would you have thought its that simple?</p>
+<p>If you wonder, why I come up with this: I refreshed my knowledge today after haven&rsquo;t done things like this for some years now&hellip;</p>
+<p>Hope you liked it - stay tuned.</p>
+<p>0x86</p></article>

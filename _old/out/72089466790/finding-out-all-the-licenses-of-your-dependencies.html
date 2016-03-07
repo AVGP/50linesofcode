@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Finding out all the licenses of your dependencies</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Finding out all the licenses of your dependencies</h2>
+										<p>January 3rd 2014</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Finding out all the licenses of your dependencies
+A while ago I wondered if, with all the dependencies creeping into software I build, I'm not violating a GPL license hidden somewhere.</p>
+<p>I turned to npm and Rubygems on the quest to fix this potential issue only to find that neither <code>bundler</code> nor <code>gem</code> or <code>npm</code> allow me to find out in a painless way.</p>
+<p>So I built a small ruby script to parse Gemfiles (and recently added <code>package.json</code> support for npm) and tell me the licenses.</p>
+<p>For NPM this is surprisingly boring and easy, as npm gives you the &quot;MIT&quot; license as the default when creating a new module - but in the Ruby world the journey is more cumbersome as there's no default license.</p>
+<p>After running the script against a bunch of projects I incorporated an additional mechanism to try to figure out more licenses and <em>today I want to invite you to give it a go, too</em></p>
+<p>You can find the script on the <a href="https://github.com/martin-naumann/all-your-licenses">all-your-licenses Github repository</a> and install the few dependencies it has with bundler, then run it with</p>
+<p><code>$ ruby main.rb -f /path/to/Gemfile_or_package.json</code></p>
+<p>Have fun and don't violate any licenses anymore ;-)</p>
+<p><em>DISCLAIMER</em>: The tool may output invalid results and does not provide any legally binding information to you. Use it <em>at your own risk</em>! No legal claims shall be made as this is <em>provided as is</em>!</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

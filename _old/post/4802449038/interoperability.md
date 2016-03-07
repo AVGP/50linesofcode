@@ -1,0 +1,29 @@
+{
+  "title": "Interoperability",
+  "date": "2011-04-21 10:00:06 GMT"
+}
+
+---
+
+#Interoperability
+<p>Nowadays many of use use the services of twitter, facebook, foursquare, tumblr, soup etc. and their number is growing.</p>&#13;
+<p>This causes two effects:</p>&#13;
+<ol><li><strong>Segregation of different communities</strong></li>&#13;
+<li><strong>Diffusion of users</strong></li>&#13;
+</ol><p>The first one is topic of this &lt;ENTER LINK THERE!&gt; post, this post will discuss the second effect, the diffusion.</p>&#13;
+<p><strong>What does diffusion of users mean?</strong></p>&#13;
+<p>Observing the growing number of people using communities (or social networks, but I'll summarize both of them in the term "community" for the scope of this article) shows, that the market provides different providers for the same purposes: Twitter and Identi.ca / <a target="_blank" href="http://www.status.net">Statusnet</a>, Facebook and MySpace and a dozen smaller networks (in Germany for example there are wer-kennt-wen, lokalisten, goolive and some others), Foursquare, Latitude-Check-In,Gowalla, Twitpic, yfrog, flickr, twitgoo, picplz, youtube, vimeo, ..</p>&#13;
+<p>The positive aspect of this is the competition it imposes on the market, keeping up service quality and innovation at quite a good level.</p>&#13;
+<p>The downside of this is the diffusion of users. While Facebook gained a decent degree of dominancy in the segment of communities for staying in contact with friends, the situation in other segments isn't that simple (on a closer look even the situation with Facebook is not so simple, considering <a target="_blank" href="https://joindiaspora.com/">diaspora</a> as a rising platform).</p>&#13;
+&#13;
+<p>The core functionality and purpose of all the communities is communication in various means: On Facebook, I'd like to stay in touch with people I know, on Twitter I'd like to get and tell interesting news from/to others, on Picplz I want to share impressions with others and enjoy those of others - on youtube I want to watch interesting video footage and share my videos with others.</p>&#13;
+<p>This works best, when I can get my activities from the platforms directly to all people who may be concerned as receipients - for example it works better, when all my friends I want to share a video with, are on Youtube. When some of them aren't registered on Youtube, but on Vimeo, I don't reach these people directly. Of course - I can reach them using a third party, which <em>often </em>works pretty good as well - Youtube, for example, allows me to put a video link on Facebook automatically.</p>&#13;
+<p>But the word <strong><em>"often"</em></strong> is the issue. There is no standardized and open way to interchange information between the different platforms - at least, most of the services provide an open API to exchange data between the platforms.</p>&#13;
+<p>Looking at most of these APIs its obvious, that they're handling pretty similar tasks. Sadly, they're relying on different mechanisms and formats for their data (I don't mean format as in JSON or XML, but more in the content delivered through these containers, like id vs. user_id etc.).</p>&#13;
+&#13;
+<p>In my opinion, it would be very nice and helpful for interoperability to have a common interface to integrate services with each other, to provide more comfort to the communicating users.</p>&#13;
+<p>There are approaches to this issue: OAuth for example provides a clearly specified, general mechanism of authorizing access to user data on any platform implementing it (eg. Twitter).</p>&#13;
+<p>OpenSocial is another project targeting interoperability striving to allow exchanging applications on different platforms implementing the interfaces.</p>&#13;
+<p>In my opinion we need something going one step further by providing a common way to obtain the data itself and integrate it into the implementing platforms.</p>&#13;
+&#13;
+<p>If there is such a project, I would be glad to hear about it in the reactions!</p> 

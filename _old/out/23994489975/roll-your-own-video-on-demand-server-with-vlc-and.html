@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Roll your own video-on-demand server with vlc and vodca</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Roll your own video-on-demand server with vlc and vodca</h2>
+										<p>May 29th 2012</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Roll your own video-on-demand server with vlc and vodca</p>
+<p><strong>Preface: Why?</strong></p>&#13;
+<p>I like to watch videos when I am getting bored or when I am alone.</p>&#13;
+<p>We have a bunch of DVDs and even some blurays staying in the shelf here.</p>&#13;
+<p>But I mostly want to watch them when I am not home: When I am on a business trip, when I visit my relatives, etc.</p>&#13;
+<p>In all these cases I have some spare time and an internet connection. But not all of the DVDs. Or only some of them. Or I have to carry a disk or usbstick or flash card with me. But usually I don't want to carry them with me or simply forget them.</p>&#13;
+<p>So why not put them on my server and stream them from there?</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>VLC as the streaming server</strong></p>&#13;
+<p><strong><br /></strong><a href="http://www.videolan.org/vlc/">VLC</a> is a very popular, open source media player - but it is more than just that: I is also capable of acting as a <strong>streaming server</strong>!</p>&#13;
+<p>When you want to use it, you can use the <a href="http://wiki.videolan.org/Control_VLC_via_a_browser">HTTP web interface</a> (<a href="http://web.ggpi.org/doc/vlc/stream/ch05.html">using the VLM interface</a>) or the telnet interface:</p>&#13;
+<blockquote>&#13;
+<p>vlc -I telnet</p>&#13;
+</blockquote>&#13;
+<p>You can log in using "telnet localhost 4212" - the default password is "admin".</p>&#13;
+<p>With the following command you can add a new on-demand stream:</p>&#13;
+<blockquote>&#13;
+<p>new Test enabled input "/path/to/some/file.avi"</p>&#13;
+</blockquote>&#13;
+<p>You can then access the stream via the url</p>&#13;
+<blockquote>&#13;
+<p>rtsp://your-server.org:554/Test</p>&#13;
+</blockquote>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>The problem</strong></p>&#13;
+<p>The vlc server is pretty good but there are two downsides:</p>&#13;
+<ol><li>The HTTP interface is very basic</li>&#13;
+<li>The streams need to be reconfigured, when the server is stopped (or crashed)</li>&#13;
+</ol><p><strong><br /></strong></p>&#13;
+<p><strong>The solution: Vodca</strong></p>&#13;
+<p>I decided to write a little interface myself: <a href="https://github.com/AVGP/vodca">vodca</a></p>&#13;
+<p><a href="http://imgur.com/NR6Bh"><img align="middle" height="242" src="http://i.imgur.com/NR6Bh.jpg" title="Hosted by imgur.com" width="450" /></a></p>&#13;
+<p>Vodca is a little interface that allows to add, remove, watch (if you have the vlc-plugin installed you can watch videos directly in your browser) and search your streams. It also allows you to recreate streams after a server restart with one click.</p>&#13;
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

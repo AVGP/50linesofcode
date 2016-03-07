@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: NASA Space Apps Challenge Lausanne - C&C CubeSat Project</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>NASA Space Apps Challenge Lausanne - C&C CubeSat Project</h2>
+										<p>April 23rd 2012</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#NASA Space Apps Challenge Lausanne - C&amp;C CubeSat Project</p>
+<p><strong>Abstract</strong></p>&#13;
+<p><img align="right" alt="CubeSats are small sats for educational purposes" height="107" src="http://www.nasa.gov/images/content/429961main_cubesat_1.jpg" width="175" /></p>&#13;
+<p>This weekend the "NASA Space Apps Challenge" took place and I participated at the EPFL, Lausanne to work on a challenge about <a href="ceappschallenge.org/challenge/new-command-and-control-protocol-cubesats">communicating with multiple CubeSats in space</a>. <strong><br /></strong></p>&#13;
+<p>Our amazing team decided to go all the way from "Satellites throw some bytes on us" to "You can tap a button on your iPad and see temperature curve of Satellite #1 for the last 10 days". Our Code is on <a href="https://github.com/AVGP/CubeSatRemote">GitHub</a>.</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>What a weekend!</strong></p>&#13;
+<p>This weekend, the <a href="http://spaceappschallenge.org/">NASA Space Apps Challenge</a> took place and a <a href="http://twitter.com/#!/SilverThorax">few</a> <a href="http://twitter.com/#!/krippch">cool</a> <a href="https://github.com/goupilapps">guys</a> and I decided to tackle the "New command &amp; control system for CubeSat"-Challenge.</p>&#13;
+<p>We were participating at the EPFL, Lausanne - a <a href="http://spaceappschallenge.org/location/swiss-space-center">very nice location</a> with a lot of cool people there! We had a lot of fun on Saturday &amp; Sunday and I'll definitely try to attend next time, too.</p>&#13;
+<p><strong>Thanks a lot</strong></p>&#13;
+<p>The organization team surely did a great job and I want to thank all of them! (I can only name a few of you, but you all did a great job, so count this as a big <em>THANK YOU</em>! to every one of you!)</p>&#13;
+<p>For our project, I would like to give a big thank you to the guys from the <a href="http://space.epfl.ch">Swiss Space Center</a> and <a href="http://people.epfl.ch/anton.ivanov">Dr. Anton Ivanov</a> for his patience and knowledge. Without him we wouldn't have had a clue where to find the right specs to talk with CubeSats.</p>&#13;
+<p>And last but not least: My teammates. You're awesome guys! Let's keep up the good work!</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>The Challenge: Command &amp; Control CubeSats</strong></p>&#13;
+<p>So our challenge was to create a command &amp; control system for CubeSat satellites.</p>&#13;
+<p>As Dr. Anton Ivanov from the Swiss Space Center pointed out to us, there is already a <a href="http://ctsgepc7.epfl.ch/08%20-%20Ground%20segment/S3-D-1-0-Ground%20segment%20software%20Overview.pdf">solution</a> going from the<a href="http://public.ccsds.org/publications/archive/200x0g6.pdf"> packetization layer up to the end-user</a>.</p>&#13;
+<p>That solution is currently capable of talking to a single satellite (currently "Swisscube 1" - call-sign "<span>HB9EG").</span></p>&#13;
+<p><span>Our task now is to go down one layer and take encapsulated TC-Transfer-Frames <a href="http://public.ccsds.org/publications/archive/202x0b3s.pdf">(resp. Segments)</a> and assemble them together to <a href="http://public.ccsds.org/publications/archive/203x0b2s.pdf">TC-Command-Packets</a> again.</span></p>&#13;
+<p>Our architecture is built upon 4 components:</p>&#13;
+<p><img align="middle" height="300" src="http://dl.dropbox.com/u/26012165/idea_schema.jpg" width="400" /></p>&#13;
+<ol><li>A p<em>acket-generator</em> generating sample packets and puts them into frames and a <em>library</em> to reassemble packets from some given frames.</li>&#13;
+<li>An interface to put packets enriched by information about the sending spacecraft and the status of the packet (valid or invalid) into a <em>database</em></li>&#13;
+<li>An <em>API-layer</em> to access data from the database as JSON</li>&#13;
+<li>A <em>client-application</em> for the end-user (for demo purposes)</li>&#13;
+</ol><div>For the sake of simplicity, the first to steps are both done in the packet generator, but can be easily deferred by using the packet generation functions and the packet reassembling functions separately.</div>&#13;
+<div></div>&#13;
+<p><strong>Our result</strong></p>&#13;
+<p>We put our code on <a href="https://github.com/AVGP/CubeSatRemote">GitHub</a> - more detailed documentation is in the <a href="https://github.com/AVGP/CubeSatRemote/wiki">wiki there</a>.</p>&#13;
+<p>We've been chosen as one of the two projects nominated for the global NASA challenge. (<a href="https://github.com/dankrusi/optimal-lunar-landing-analysis">This is the other one</a>, if I remember correctly)</p>&#13;
+<p>The current status is:</p>&#13;
+<ul><li>We have a basic version of the packet generator and the library (currently it only validates frames, but I am currently implementing the other functions [i.e. packet assembling and enrichment for the database).</li>&#13;
+<li>The API-Layer generates dummy data for testing purposes already (see the wiki).</li>&#13;
+<li>The client application exists in static mockups (<a href="http://dl.dropbox.com/u/26012165/App_satellites_list.png">more</a> and <a href="http://dl.dropbox.com/u/26012165/App_widget_example.png">more</a>)</li>&#13;
+</ul><p><strong><img align="middle" height="638" src="http://dl.dropbox.com/u/26012165/App_charts_examples.png" width="499" /></strong></p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>And the T-Shirt goes to...</strong></p>&#13;
+<p>Thanks to the sponsors (NASA, <a href="http://space.epfl.ch">Swiss Space Center</a> and <a href="http://twitter.com/#!/evolucix">evolucix</a> - tell me if I missed someone) the two teams nominated for the global challenge got T-Shirts! Yay!</p>&#13;
+&#13;
+<p><strong> Perspective</strong></p>&#13;
+<p>I am not really sure how exactly this will go on - the team stays in touch and we'll be giving some presentation at the Swiss Space Lab - and are participating at the global challenge. But how exactly this will all will happen is unknown to me now. Stay tuned!<strong><br /></strong></p> 
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

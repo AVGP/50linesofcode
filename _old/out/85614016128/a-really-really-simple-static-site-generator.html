@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: A really, really simple static site generator</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>A really, really simple static site generator</h2>
+										<p>May 13th 2014</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#A really, really simple static site generator
+When I asked for suggestions what <strong>simple</strong> tool I should use to generate static HTML pages from Markdown files, the answer I got mismatched in the definition of simple - and that mad me sad.</p>
+<p><strong>TL;DR</strong>: All the static site generators I found are pretty heavy in terms of dependencies and ship with a lot of things I don't need, so I created <a href="https://github.com/avgp/susi">Susi</a> - a really simple, 67 lines node.js based site generator. Give it a go if you want something <strong>truly simple</strong>.</p>
+<h2>A simple job</h2>
+<p>I wanted to get a super stupidly simple job done quickly:</p>
+<p>Compiling a few markdown files into HTML, using a shared HTML skeleton around it.</p>
+<h2>Static Site Generators</h2>
+<p>That is exactly the domain of static site generators - but there's <a href="http://staticsitegenerators.net/">a ton of them</a> - and even the <a href="http://staticgen.com/">&quot;Top list&quot;</a> counts a whopping 26 of them.</p>
+<p>And all of them appear to come with <strong>lots of stuff I don't need at all</strong>, such as:</p>
+<ul>
+<li>Templating languages such as ERB, Jade or Handlebars</li>
+<li>Preprocessors like Coffeescript, Sass, Less or Compass</li>
+<li>Build tools like Grunt or Gulp</li>
+</ul>
+<p>which is fine, if you need some more complex stuff - <strong>but I just want to parse some Markdown into HTML and put a static template around that</strong>.</p>
+<h2>Susi, oh Susi...</h2>
+<p>So I got fed up with all those feature-laden tools and decided to figure out what is really essential: <strong>Parsing markdown into HTML and putting it in a template</strong> - the result is <a href="https://github.com/avgp/susi">SuSi</a>.</p>
+<p>I used it to revamp the content on <a href="http://www.geekonaut.de">my website</a> and it <strong>only has two dependencies</strong> which are Node.js (because it's a node.js tool) and <a href="https://github.com/chjj/marked">Marked</a> to parse the markdown files.</p>
+<p>The whole <a href="https://github.com/AVGP/susi/blob/master/susi">source code</a> counts <strong>61 lines</strong>. That's pretty small and simple.</p>
+<p>That's it.</p>
+<p>And here's is how a tiny demo:
+<img src="https://googledrive.com/host/0B9MEoZDi5-peRTF3WE0tQmhIT0U/SuSi.gif" alt="" /></p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

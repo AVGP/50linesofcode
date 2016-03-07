@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: New experiment: Record screen and webcam from your browser</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>New experiment: Record screen and webcam from your browser</h2>
+										<p>February 28th 2014</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#New experiment: Record screen and webcam from your browser
+Thanks to an experimental feature in Google Chrome, you can use <code>getUserMedia</code> to capture your screen - put that together with your webcam stream and record it as a video from within the browser - et voila: An interesting experiment was born.</p>
+<h2>Demo</h2>
+<p>Take a look at my quick demo:</p>
+<iframe width="560" height="315" src="//www.youtube.com/embed/dvoFHovgzjw" frameborder="0" allowfullscreen></iframe>
+<p><a href="https://googledrive.com/host/0B9MEoZDi5-peZVdwT3lDT09iaEE/index.html">You can try it yourself here</a> or <a href="https://github.com/AVGP/webcaster">take a look at the Github repository</a>.</p>
+<h2>A rabbit hole called development</h2>
+<p><img src="https://lh4.googleusercontent.com/-q_CSd6VuGxg/UfeYTp6ci_I/AAAAAAAAgV8/gXy32wVX47A/w480-h360-no/programming.gif" alt="To solve n IT problems, you need to solve n^n other problems first." />
+You know that, right? You face a challenge you want to tackle, only to find out that there's a myriad other, related challenges to be tackled first.</p>
+<p>This is how this experiment came to live...</p>
+<h2>How to capture your screen with web technologies</h2>
+<p>I recently stumbled upon an <a href="https://html5-demos.appspot.com/static/getusermedia/screenshare.html">experimental Chrome feature for capturing your screen with getUserMedia</a> and so I thought: Sweet, that'd give a great screencast recording tool.</p>
+<p>Now for a screencast to be a little more personal and relatable, I find it nice to see the person talking me through something - and the web has me covered!</p>
+<p>I just request the video stream from the web cam and put it together (picture-in-picture) with the video stream from the screen capture.</p>
+<h2>Recording from getUserMedia</h2>
+<p>Alright, now I can see myself and my screen. That's cute but only mildly useful - I'd need to record it.<br />
+Again the web has me covered... sorta...</p>
+<p>The <a href="https://dvcs.w3.org/hg/audio/raw-file/tip/streams/StreamProcessing.html#canvas-recording">StreamProcessing</a> is including a piece for recording video and audio. But I don't know any browser supporting it today.</p>
+<p>There is also the <a href="https://dvcs.w3.org/hg/dap/raw-file/default/media-stream-capture/MediaRecorder.html">MediaRecorder</a> proposal... but documentation is rare for this.</p>
+<p>So I had to look for some other way to get to something quickly.</p>
+<h2>Whammy.js to the rescue</h2>
+<p>For the video bit, I use <a href="https://www.google.ch/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;ved=0CC0QFjAA&amp;url=https://github.com/antimatter15/whammy&amp;ei=skkQU-qzKa3W7QaYsoGYAQ&amp;usg=AFQjCNHnojPKL3RVts0aijCFcY0QaXSF8A&amp;bvm=bv.61965928,d.ZGU">whammy.js</a> now. It allows to take frames from the canvas and put them together as WebM videos.</p>
+<h2>The next steps</h2>
+<p>So I can record video - but no audio. That's pretty bad.<br />
+I will also take a look at <a href="https://github.com/streamproc/MediaStreamRecorder">MediaStreamRecorder</a> which should give me access to video and audio recording.</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

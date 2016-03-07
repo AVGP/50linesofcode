@@ -1,0 +1,49 @@
+{
+  "title": "SPDY - a protocol to make the web faster?",
+  "date": "2012-03-14 16:00:05 GMT"
+}
+
+---
+
+#SPDY - a protocol to make the web faster?
+<p>Today I came across <a href="http://t.co/XaNCgtfA" target="_blank">Google SPDY</a> (via <a href="http://twitter.com/powtac">@powtac</a>), an experimental protocol for faster datatransfer on the web, created in the context of Google's "<a href="http://code.google.com/speed/">Let's make the web faster</a>".</p>&#13;
+<p>The protocol</p>&#13;
+<p>Google looked into Protocols before (see their research regarding TCP Slow Start <a href="https://6541078575799853287-a-chromium-org-s-sites.googlegroups.com/a/chromium.org/dev/spdy/An_Argument_For_Changing_TCP_Slow_Start.pdf?attachauth=ANoY7cpuhxeX5F6JkleD529J7XAScSJbhXWKlbsvZPPbKlN2A3wcly-eNAo4q65LdDnTllFS8x33F3dMi1x6ARtFecyFe6jTuMtT-qqajRIwS62z1DxhaoqS3O52lWD3UAZXbiPUBNrQzsA1S4hfX84TUsGZb2IIalE4LkKfOGThAW4VOnhRAugXg2LSsJsG4wtkKnS6Hl9QHq8_HNVBfK9bqdnVCDiA5BG7iauYwO5DwhzHccHxGXI%3D&amp;attredirects=0">here</a>) and now tries to tackle some problems HTTP has with today's kind of web requests.</p>&#13;
+<p><strong>The goals</strong></p>&#13;
+<p>The goals alltogether sound like this could really be adopted quickly and give especially the - still a bit slow - mobile internet a boost. The key goals are:</p>&#13;
+<blockquote>&#13;
+<ul><li>To target a 50% reduction in page load time. Our preliminary results have come close to this target (see below).</li>&#13;
+<li>To minimize deployment complexity. SPDY uses TCP as the underlying transport layer, so requires no changes to existing networking infrastructure.  </li>&#13;
+<li>To avoid the need for any changes to content by website authors. The only changes required to support SPDY are in the client user agent and web server applications.</li>&#13;
+<li>To bring together like-minded parties interested in exploring protocols as a way of solving the latency problem. We hope to develop this new protocol in partnership with the open-source community and industry specialists.</li>&#13;
+</ul></blockquote>&#13;
+<div><span>The 50% boost in terms of speed has to be evaluated "in the wild" (the blogpost says something about a peak gain of 64% under lab conditions - the results stated in the blogpost vary from 27,93% to 63.53%),</span></div>&#13;
+<div><span>but as its part of the goals to <strong>not</strong> require changes on the content- or network-side, I guess (and hope) that the protocol will not only turn out to be as effective as stated in the blog, but also become widely-adopted quickly.</span></div>&#13;
+<div><span><br /></span></div>&#13;
+<div><span><strong>As of now</strong></span></div>&#13;
+<div>Indicators for a pretty quick adoption and a low bareer of implementation might be, that <a href="http://twitter.com/#!/powtac/status/179916920861114368">Firefox 11</a> and <a href="http://src.chromium.org/viewvc/chrome/trunk/src/net/spdy/">Chromium</a> already have experimental support for SPDY.</div>&#13;
+<div><span><br /></span></div>&#13;
+<div><span>This, of course, depends a bit upon adoption on the server-side, too.</span></div>&#13;
+<div>But also there the hurdles seem not to big, as there is an <a href="http://code.google.com/p/mod-spdy/">Apache-Module</a> and an experimental stand-alone <a href="http://src.chromium.org/viewvc/chrome/trunk/src/net/tools/flip_server/">SPDY-Webserver</a> already plus a bunch of other stuff:</div>&#13;
+<div>&#13;
+<blockquote>&#13;
+<ul><li><span>External work (experimental)</span></li>&#13;
+<ul><li><span>Python implementation of a SPDY server: <span><a href="http://github.com/mnot/nbhttp/tree/spdy" rel="nofollow" target="_blank">http://github.com/mnot/nbhttp/tree/spdy</a></span></span></li>&#13;
+<li><span>Java implementation of SPDY client/server: <span><a href="http://svn.apache.org/repos/asf/tomcat/trunk/modules/tomcat-lite" rel="nofollow" target="_blank">http://svn.apache.org/repos/asf/tomcat/trunk/modules/tomcat-lite</a></span></span></li>&#13;
+<li><span>Apache module for SPDY: <a href="http://code.google.com/p/mod-spdy/" target="_blank">http://code.google.com/p/mod-spdy/</a></span></li>&#13;
+<li><span>Ruby SPDY: <a href="https://github.com/igrigorik/spdy">https://github.com/igrigorik/spdy</a></span></li>&#13;
+<li><span>node.js SPDY: <span><a href="https://github.com/indutny/node-spdy">https://github.com/indutny/node-spdy</a></span></span></li>&#13;
+<li>Ruby wrapper around Chromium SPDY framer: <a href="https://github.com/romanbsd/spdy">https://github.com/romanbsd/spdy</a></li>&#13;
+<li>Go SPDY: <a href="http://golang.org/pkg/http/spdy/">http://golang.org/pkg/http/spdy/</a></li>&#13;
+<li>Erlang SPDY: <a href="https://github.com/RJ/erlang-spdy">https://github.com/RJ/erlang-spdy</a></li>&#13;
+<li>C SPDY (libspdy): <a href="http://libspdy.org/index.html">http://libspdy.org/index.html</a> (to be used by libcurl: <a href="http://daniel.haxx.se/blog/2011/10/18/libspdy/">http://daniel.haxx.se/blog/2011/10/18/libspdy/</a>)</li>&#13;
+<li>Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=528288</li>&#13;
+<li>C SPDY (spindly): https://github.com/bagder/spindly</li>&#13;
+<li>C SPDY (spdylay): https://github.com/tatsuhiro-t/spdylay</li>&#13;
+<li>iPhone SPDY: https://github.com/sorced-jim/SPDY-for-iPhone </li>&#13;
+</ul></ul></blockquote>&#13;
+</div>&#13;
+<div></div>&#13;
+<div>Alltogether this seems very interesting and if the reality backs the results Google found in their experimental setup, we can hope for overcoming the HTTP bottleneck.</div>&#13;
+<div></div>&#13;
+<div>I wonder why this hasn't caught my attention much earlier?</div> 

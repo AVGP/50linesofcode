@@ -1,0 +1,13 @@
+<h1>Twitter API 1.1 responds with status 401, code 32</h1><p>2012-11-29 15:00:38 GMT</p><article><p>For the impatient readers: If you run into this, try sending the POST params in the querystring instead of the body. This does not only apply to node.js twit, but is generally valid.</p>
+
+<p>The longer version:</p>
+<p>I was playing around with <a href="https://github.com/ttezel/twit">twit</a> lately. It&rsquo;s a wonderful node module that allows you to interact either with the Twitter REST or the Streaming API in a very easy way, possibly the easiest way I&rsquo;ve ever seen.</p>
+<p>I tried to post a new Tweet saying &ldquo;Hello World!&rdquo; which didn&rsquo;t work.</p>
+<p>The REST API responded with &ldquo;Status 401, <span>Could not authenticate you&rdquo; and I started googling.</span></p>
+<p><span>The first hint that came up, was trying to use v1 instead of v1.1 of the API. This resolved the issue! But as v1 is going to deprecate soon, I didn&rsquo;t want to go that way, but find the root cause.</span></p>
+<p><span>I ran the tests for twit and found, that it actually <em>was</em> abled to tweet. Even with v1.1.</span></p>
+<p><span>The only difference was the text for the new tweet: The (successful) example from the tests did not contain an exclamation mark, while my (failing) example did.</span></p>
+<p><span>So I removed the exclamation mark from my example - and it worked.</span></p>
+<p><span>I looked through the many discussions of the &ldquo;Code 32&rdquo; issue on the Twitter developer portal and finally found </span><a href="https://dev.twitter.com/discussions/11280">https://dev.twitter.com/discussions/11280</a> that answered this:</p>
+<p>If you, for some reason, send the parameters for the POST via the querystring - instead of the &ldquo;right way&rdquo; for HTTP POST where the parameters go in the HTTP body - it works!</p>
+<p>I changed that and it worked surprisingly well - my <a href="https://github.com/ttezel/twit/pull/26">pull-request</a> to twit is currently pending.</p></article>

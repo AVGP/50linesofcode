@@ -1,0 +1,14 @@
+{
+  "title": "The software development life cycle",
+  "date": "2014-08-28 20:37:33 GMT"
+}
+
+---
+
+#The software development life cycle
+<p><a href="http://devopsreactions.tumblr.com/post/95720939010/the-software-development-life-cycle" class="tumblr_blog">devopsreactions</a>:</p>
+
+<blockquote><p><img src="https://31.media.tumblr.com/acbf30279c41ab2801d3c4f39ea29b0b/tumblr_inline_naubf7fXXN1raprkq.gif" alt="image" /></p>
+
+<p>by starter-life</p></blockquote>
+

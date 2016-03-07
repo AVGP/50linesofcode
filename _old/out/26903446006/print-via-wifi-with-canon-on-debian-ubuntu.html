@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Print via Wifi with Canon on Debian / Ubuntu</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Print via Wifi with Canon on Debian / Ubuntu</h2>
+										<p>July 10th 2012</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Print via Wifi with Canon on Debian / Ubuntu</p>
+<p>Today I got a Canon MP3150 printer/scanner.</p>&#13;
+<p>As we have multiple computers to access the printer from, I set it up for use via Wifi.</p>&#13;
+<p>Setting up the printer for Windows and MacOS worked like a charm - while Linux refused to work at first.</p>&#13;
+<p><strong>CUPS</strong></p>&#13;
+<p>I used CUPS for years now. Back in 2008 I had an HP printer hooked up to the network and it worked flawlessly. I also added a PDF-printer back then, which comes in handy from time to time.</p>&#13;
+<p>CUPS also supports IPP and LPD out of the box.. pretty much.</p>&#13;
+<p>Canon screwed it up</p>&#13;
+<p>I started setting up my linux machine for printing with simply pinging the printer and checking, which protocols are enabled.</p>&#13;
+<p>Besides HTTP (which only gives a rarely useful interface) there was a running LPD on the usual port 515.</p>&#13;
+<p>Well, that looked good!</p>&#13;
+<p>I started setting up the printer. First question: Is there a specific queue name I have to use? After searching for a way to find out (including reading the fucking RFC for LPD) I just gave up and decided to go without a queue name.</p>&#13;
+<p>Next up was the driver selection. No driver seemed to match my model, so I tried a generic Foomatic and Gutenprint. Without success. Shit.</p>&#13;
+<p>This was especially weird, because it worked with MacOS (which is a CUPS system basically) and had dedicated drivers for OSX to download.</p>&#13;
+<p>But no download for linux.</p>&#13;
+<p><strong>Asian style</strong></p>&#13;
+<p>Some folks at Canon thought it was a reasonable decision to put up linux drivers for the printer only on<a href="http://support-sg.canon-asia.com/contents/SG/EN/0100393702.html"> the asia website</a> while it was missing on the useless european download site. </p>&#13;
+<p>Thanks a lot, Canon, for this great idea.</p>&#13;
+<p>Final conclusion: It works. It works pretty well. But the folks at Canon are too lazy or too stupid to properly link their drivers and put a few facts (e.g. the BJNP port number) on their FaQ page to make Linux users happy. So they basically say "Fuck you" to Linux users - and that's why I say: "Fuck you" to Canon and will get my next Printer/Scanner from a more competent company.</p> 
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

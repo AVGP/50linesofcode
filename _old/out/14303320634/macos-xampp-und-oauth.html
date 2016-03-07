@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: MacOS, XAMPP und OAuth</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>MacOS, XAMPP und OAuth</h2>
+										<p>December 16th 2011</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#MacOS, XAMPP und OAuth</p>
+<p>All I needed yesterday was having the pecl OAuth-Extension for PHP running in my XAMPP on my Macbook (Lion).</p>&#13;
+<p>It turned out, that this was pretty hard to get - to preserve you from the pain I went through, here is my advice:</p>&#13;
+<p>First off, don't use the regular pecl from your Mac. It will break the module when compiling, so you need to use /Applications/XAMPP/xamppfiles/bin/pecl. To keep it short, I'll assume you noticed this and refer to it as "pecl".</p>&#13;
+<p>When using this to install via "pecl install oauth" it first did its thing - but the resulting oauth.so could not be loaded by XAMPP with this notice:</p>&#13;
+<blockquote>&#13;
+<p>PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) 'oauth.so' in Unknown on line 0</p>&#13;
+</blockquote>&#13;
+<p>To overcome this, you just need to correct the Architecture for config.</p>&#13;
+<p>To compile it like that, you need to go into /Applications/XAMPP/xamppfiles/temp/pear/download/oauth-&lt;VERSION&gt;/ and type</p>&#13;
+<blockquote>&#13;
+<p>$ sudo ./configure MACOSX_DEPLOYMENT_TARGET=10.7 CFLAGS="-arch x86_64 -g -Os -pipe -no-cpp-precomp" CCFLAGS="-arch x86_64 -g -Os -pipe" CXXFLAGS="-arch x86_64 -g -Os -pipe" LDFLAGS="-arch x86_64 -arch i386 -bind_at_load"</p>&#13;
+&#13;
+</blockquote>&#13;
+<p>Afterwards, you need to run "make". If everything went fine, you now have modules/oauth.so. Now just copy oauth.so into /Applications/XAMPP/xamppfiles/lib/php/php-&lt;VERSION&gt;/extensions/no-debug-&lt;VERSION&gt;/extensions/ and enable it, adding extension=oauth.so in your php.ini.</p>&#13;
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

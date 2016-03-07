@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Flip Ahead browsing and a js polyfill </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Flip Ahead browsing and a js polyfill </h2>
+										<p>January 27th 2014</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Flip Ahead browsing and a js polyfill</p>
+<p dir="ltr">If you haven't heard of *flip ahead browsing* you are like me a few months ago. </p>
+<p dir="ltr">Have you ever read a blog post or a multi page article on a website on a mobile device and felt the urge to just swipe and get to the next or previous post or page? </p>
+<p dir="ltr">No, I don't mean navigating the browser history. I talk about coming to a website for the first time and wanting to get to the next (or previous) logical content, such as the following blog post or page two of the great article you're reading... </p>
+<p dir="ltr">I did feel that urge. It feels natural to "turn the page" by swiping. </p>
+<p dir="ltr">To my surprise, the Internet Explorer has this feature, called "flip ahead browsing". If a website, say your blog, supports it and I swipe on a page, it takes me to the URL the page author deems logically "next" or "previous". </p>
+<p dir="ltr">When I revamped [Geekonaut] (http://geekonaut.de), I implemented flip ahead browsing, so people can swipe to reach the next or previous section, according to main navigation order. </p>
+<p dir="ltr">Implementing it is extremely simple and a no-brainer to me:</p>
+<p dir="ltr">&nbsp;&nbsp;&nbsp; &lt;link rel="next" href="..." /&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;link rel="prev" href="..." /&gt;</p>
+<p dir="ltr">I wonder why Internet Explorer is apparently the only browser that implements this. </p>
+<p dir="ltr">Having tried it on a tablet my only concern is, that it clashes with the normal horizontal scrolling and that may be bad. </p>
+<p dir="ltr">I agree with the idea of a colleague of mine that it would be good to establish a new convention to use a two-Finger swipe to use this form of navigation. </p>
+<p dir="ltr">For this,, I built [a simple Javascript library](http://github.com/AVGP/flipAhead.js) that uses the same link syntax but a two-finger swipe to provide flip ahead browsing. </p>
+<p dir="ltr">I am, still, not sure if the gesture is obvious or natural enough or if the education is worth the hassle. </p>
+<p dir="ltr">I would love your feedback on this. </p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

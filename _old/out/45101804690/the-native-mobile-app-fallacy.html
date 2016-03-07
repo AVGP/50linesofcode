@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: The native mobile app fallacy</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>The native mobile app fallacy</h2>
+										<p>March 11th 2013</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#The native mobile app fallacy
+<strong>Native, web, hybrid?</strong></p>
+<p>When it comes to mobile application development, there’s far too many evangelism out there.</p>
+<p>The web fans sing their</p>
+<blockquote>
+<p>“write once, deploy everywhere”</p>
+</blockquote>
+<p>the native party yells back</p>
+<blockquote>
+<p>“But it’s slow and doesn’t look native!”</p>
+</blockquote>
+<p>but both lack the understanding of the advantages and disadvantages of each approach, as well as the rationalism to re-decide on this matter, based on the project at hand.</p>
+<p><strong>Does <em>native</em> always mean <em>better</em>?</strong><br />
+Certainly <strong>no</strong>.
+Facebook is a great example for this. Their claim was, that the Android app's quirks and issues originated in its hybrid nature.<br />
+The reality is: The new native Android app does not really work any better and Sencha <a href="http://www.sencha.com/blog/the-making-of-fastbook-an-html5-love-story/">gave an impressive proof that a non-native app could do better</a>.</p>
+<p>So a native app is not by definition better.<br />
+If you write inefficient code, the performance will be bad and the development iterations may be longer, as you can't easily test on many different platforms simultaneously without having to repeat modifications in the code for each platform.<br />
+If you also run a web version of your project, the mobile web or the hybrid approach allows you to quickly iterate on both of them.</p>
+<p>As always you should pick the right tool for the job, which can be a native or web app. It can even be a hybrid app.</p>
+<p>The tricky thing is to find out <em>when</em> to use <em>what</em>.</p>
+<p><strong>Quick overview of what's what</strong></p>
+<ul>
+<li><strong>Native</strong>: Requires code tailored to each supported platform but gives you direct access to the native features.</li>
+<li><strong>Mobile web</strong>: The same code runs on many (if not all) platforms. Can also be delivered to desktop browsers, but can not be installed via app stores and can not access all device features. As the code is run in the browser which runs on top of the operating system, some features may be slower than native features.</li>
+<li><strong>Hybrid</strong>: Combination. Same code can run everywhere, all native features can be accessed and native components can be used to get a good performance. Hybrid apps can also be distributed in the app stores.</li>
+</ul>
+<p>If you have a big team of experienced mobile developers for the different platforms at hand, you can of course leverage that.</p>
+<p>But when you have a team of experienced web developers instead and need to quickly get an app out there (maybe even flanked by a web app), mobile web or hybrid apps are a great tool for achieving this.</p>
+<p>The thing many people miss is: It's <strong>not only</strong> good for prototyping and quick iterations - it is a <strong>viable option</strong> for building great apps.<br />
+With modern Javascript frameworks and libraries (such as <a href="http://www.angularjs.org">Angular</a> and <a href="http://lungo.tapquo.com">Lungo</a> in combination with <a href="http://www.phonegap.com">PhoneGap</a>) you can use web technologies to your mobile apps that can play in the same league as native apps.</p>
+<p><strong>It needs to look&amp;feel native, right?</strong><br />
+First of all: If you want to achieve perfectly native look&amp;feel, you’re not going to have a good time with a hybrid approach. But do you really want that?</p>
+<p>Let’s look at the Foursquare app for a second:<br />
+<img src="http://aboutfoursquare.com/wp-content/uploads/2010/09/iphone_app.png" alt="Foursquare app" /> ©<a href="http://www.foursquare.com">Foursquare</a></p>
+<p>and why not take another look at the Facebook app:
+<img src="http://cdn.sixrevisions.com/0274-02_facebook_native_mobile_web_app.jpg" alt="Facebook on Android and iOS" /></p>
+<p>© six revisions, see <a href="http://sixrevisions.com/mobile/native-app-vs-mobile-web-app-comparison/">their great article about native vs. mobile web</a></p>
+<p>It's easy to spot that even the <em>native</em> Facebook-App doesn't really look native.
+And that's no problem! The user doesn't really care, as long as it looks <strong>great</strong> and <strong>feels right</strong>.</p>
+<p>This is something most people get wrong - you can have your very own look in your apps. Stop mimicking the native look and feel and start delivering something great and useful to your users.</p>
+<p><strong>But to get in the stores, you need native, right?</strong><br />
+No you don't.<br />
+You can for example use <a href="http://www.phonegap.com">PhoneGap</a> to package your hybrid app for many different platforms (e.g. iOS, Android, Windows phone, Blackberry).</p>
+<p><strong>Okay, but what if I need the native features, like the camera?</strong><br />
+Again, PhoneGap is the answer.</p>
+<p><strong>But how do you build a great app?</strong><br />
+There are many different ways to build great hybrid apps.
+To achieve the best results, you should focus on the following aspects:</p>
+<ul>
+<li>Responsiveness - the app has to respond quickly to user input</li>
+<li>It has to feel right - don't imitate the perfect native transitions. Use decent transitions that are not giving the impression of &quot;wanna be native&quot;</li>
+<li>Be aware that the user won't always have a good internet connection (or any at all) - leverage local storage whenever you can and minimize the data to transfer</li>
+<li>Use native components (e.g via PhoneGap plugins) whenever needed</li>
+<li>be careful: Not all platforms already support every HTML 5 feature. Provide fallbacks</li>
+<li><strong>test</strong> your app on different devices, especially on older ones</li>
+</ul>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

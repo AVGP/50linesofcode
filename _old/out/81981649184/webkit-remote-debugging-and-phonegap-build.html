@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Webkit Remote Debugging and Phonegap Build</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Webkit Remote Debugging and Phonegap Build</h2>
+										<p>April 7th 2014</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Webkit Remote Debugging and Phonegap Build</p>
+<p>Debugging has been a problem in hybrid app development over the recent years.</p>
+<p>Yes, there has been <a href="http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html">WeinRE</a> or <a href="http://emulate.phonegap.com/">Ripple</a> to ease the test and debug pains or the logs from the device if everything else did not help - but it was no substitution for the debugging tools we have for normale websites and running the application in a normal browser (vs. the embedded web view of Phonegap).</p>
+<h2>Enter Webview Debug</h2>
+<p>As explained on the <a href="https://github.com/phonegap/phonegap/wiki/Debugging-in-PhoneGap">Phonegap Debugging Guide</a> there's a new way to debug Phonegap applications on devices running Android 4.4: <a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging#debugging-webviews">Webkit remote debugging</a>.</p>
+<h2>Setup</h2>
+<h3>Cordova 3.3</h3>
+<p>Cordova 3.3 has the webkit debugging enabled, if you set the debuggable flag in the <code>AndroidManifest.xml</code> and the <code>targetSdkVersion</code> to 19.
+On Phonegap Build you just need to enable debugging and adjust the SDK version, no modifications in the AndroidManifest.xml are needed.</p>
+<h3>Cordova 3.2</h3>
+<p>With Cordova 3.2 you'll need to add some code to make the Web view debuggable or you use <a href="https://github.com/jrstarke/webview-debug">this handy plugin</a>.</p>
+<h2>Using the dev tools</h2>
+<p>You need to connect your device via USB to the computer you want to use the Chrome Dev tools on.</p>
+<p>Then run <code>adb list devices</code> to see if the device is ready for debugging. If it doesn't show up, you <a href="http://developer.android.com/tools/device.html">need to enable USB debugging</a>.</p>
+<p>Open <a href="chrome://inspect">chrome://inspect</a> in the Chrome browser and enable &quot;discover USB devices&quot;.</p>
+<p>When you launch the app on the phone, it should appear in the list.
+By clicking on it, you can start using the full dev tools suite to debug your hybrid app now.</p>
+<p><img src="https://developers.google.com/chrome-developer-tools/docs/remote-debugging/about-inspect-webview.gif" alt="" /></p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

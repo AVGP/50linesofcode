@@ -1,0 +1,17 @@
+<h1>Mounting SFTP on MacOSX</h1><p>2012-09-06 12:50:28 GMT</p><article><p>Linux filebrowsers often are capable of mounting a vast amount of remove filesystems as if they were local folders. That usually works with FTP, SFTP, WebDAV, SMB and others.</p>
+<p>Finder, on the other hand, is capable of doing the same for FTP, WebDAV, SMB and AFP - but not via SSH with SFTP.</p>
+<p>To do so, you could spend some money for CyberDuck - or you go with the solution I will describe here for free.</p>
+<p><strong>Getting all the stuff</strong></p>
+<p>You will need three things: <a href="http://code.google.com/p/macfuse/">MacFuse</a>, <a href="http://osxfuse.github.com/">FUSE for OSX</a> and <a href="http://macfusionapp.org/">Mac Fusion</a>.</p>
+<p>Additionally, you need to install sshfs. This is easily done by running &ldquo;brew install fuse4x sshfs&rdquo;.</p>
+<p><strong>Mounting your first SSHFS</strong></p>
+<p>After installing all of them, open a terminal and enter &ldquo;sshfs &ndash;version&rdquo; which should output something along the following lines:</p>
+<blockquote>
+<p>$ sshfs &ndash;version</p>
+<p>SSHFS version 2.4.0</p>
+<p>fuse4x library version: FUSE 2.8.7 / fuse4x 0.10.0</p>
+<p>fuse: no mount point</p>
+</blockquote>
+<p>Once you have SSHFS installed, you can start MacFusion.</p>
+<p>Click on the little &ldquo;+&rdquo; in the bottom left corner, choose &ldquo;SSHFS&rdquo; and enter the connection details (A descriptive name, host, user, password and optional: path to the initial folder).</p>
+<p>The new mount should show up in the list of the main window now and a click on &ldquo;Mount&rdquo; should bring it up in Finder as well.</p></article>

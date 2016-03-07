@@ -1,0 +1,33 @@
+{
+  "title": "Make an awesome slide deck!",
+  "date": "2012-09-21 13:55:42 GMT"
+}
+
+---
+
+#Make an awesome slide deck!
+<p>How many hours of <a href="http://www.youtube.com/watch?v=KbSPPFYxx3o">PowerPoint torture</a> have you been through in your life?</p>&#13;
+<p>Slide after slide, bullet-point after bullet-point, maybe interrupted by a diagram with far too small labels and incomprehensible bars, lines and dots on it.</p>&#13;
+<p><strong>Booooooring.</strong></p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p>So how do you create a slide deck that kicks ass? I will present a few solutions for this:</p>&#13;
+<ul><li>Prezi</li>&#13;
+<li>impress.js</li>&#13;
+<li>reveal.js / rvl.io</li>&#13;
+</ul><p><strong><br /></strong></p>&#13;
+<p><strong><a href="http://www.prezi.com">Prezi</a></strong></p>&#13;
+<p>Prezi is a web-based presentation tool, that allows you to create neat slides and transitions. You can rotate your "slides", define an individual path between them and all of this in your browser. Prezi has been around for quite a while now, it was one of the first of its kind.</p>&#13;
+<p>The problem though: You have to be online to display your presentation - or pay for the service. If you choose a paid subscription, you can also create and play your presentations using a desktop client.</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong><a href="http://bartaz.github.com/impress.js/">impress.js</a></strong></p>&#13;
+<p>Prezi inspired a lot of people to leverage CSS and Javascript and their growing sets of capabilities to build presentations like Prezi does with Flash.</p>&#13;
+<p>There are a lot of different frameworks - <a href="http://www.impressivewebs.com/html-slidedeck-toolkits/">deck.js, Fathom.js, CSSS, SlideDown, Slippy, and many many more.</a> They have slightly different possibilities and goals - but in the end they all create some kind of presentation. I will just pick two (impress.js and reveal.js in the following section) of them, because I enjoyed working with them the most. If you find you don't like 'em, check the others. Last but not least: All of them are free.</p>&#13;
+<p>Impress.js leverages the full set of CSS awesomeness, including 3D and animation properties. You can get a good impression of it <a href="http://bartaz.github.com/impress.js/">clicking through the slides in the Github Repository</a> of impress.js.</p>&#13;
+<p>The best part: You can create it on your local computer and even older laptops can display it just fine and it is pretty small. It would fit on a floppy disk (you may use images that exceed the volume a floppy disk can take, though). In addition to that, publishing your slides is easy: Put your deck on some webspace. It can even be in a public folder on Dropbox, as there is not "backend" stuff.</p>&#13;
+<p>The downsides are: You have to know at least a little CSS, Javascript and HTML to create your deck and the way it displays and renders needs to be taken care of - you need to take different screen sizes into account for. The last part is not that bad, if you know on which browser and computer you will give your presentation, but for the publication it is nice to have a more or less fluid layout in place.</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong><a href="http://www.rvl.io/">rvl.io</a></strong></p>&#13;
+<p>Another really powerful framework is <a href="http://lab.hakim.se/reveal-js/#/">reveal.js</a>. It has a really fancy transition between the slides and is really easy to use. But the biggest advantage is: Since rvl.io is online, you don't need to know HTML, JavaScript or CSS. You can just click, type and enjoy the ride afterwards. Bonus: It is online and hosted for you automatically, though you can download your deck and use it offline, if you so wish.</p>&#13;
+<p>And of course it's free.</p>&#13;
+&#13;
+<p>So now that you have a toolbox of really lovely tools, start making the presentation slides you always wanted to see. Go!</p> 

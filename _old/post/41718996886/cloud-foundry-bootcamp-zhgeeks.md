@@ -1,0 +1,17 @@
+{
+  "title": "Cloud Foundry Bootcamp @zhgeeks",
+  "date": "2013-01-28 19:55:17 GMT"
+}
+
+---
+
+#Cloud Foundry Bootcamp @zhgeeks
+<p><a class="tumblr_blog" href="http://zurichtechtalks.ch/post/41347982488/cloud-foundry-bootcamp-zhgeeks">zurichtechtalks</a>:</p>
+<blockquote>
+<p><a href="http://twitter.com/old_sound">Alvaro Videla</a> from <a href="http://cloudfoundry.org">Cloud Foundry</a> gives an overview of what Cloud Foundry is and what it solves. Then shows some code for his super webscale Cloudstagram Project which he built using Node.js, Clojure and RabbitMQ.</p>
+<p>Recorded at a <a href="https://twitter.com/zhgeeks">@zhgeeks</a> Meetup in Z&uuml;rich, hosted by <a href="http://www.switch.ch">Switch</a>.</p>
+<p>Thanks to Alvaro for letting me tape his talk.</p>
+<p><strong>Links:</strong> <a href="http://cloudstagram.cloudfoundry.com">Cloudstagram on Cloudfoundry</a> - <a href="http://www.slideshare.net/old_sound/cloud-foundry-bootcamp-15287899">Slides</a></p>
+<div><iframe frameborder="0" height="360" src="http://www.youtube.com/embed/WvurETLow7k" width="640"></iframe></div>
+</blockquote>
+<p></p>

@@ -1,0 +1,75 @@
+<h1>RemoteDOM - a web standard proposal for next gen web apps</h1><p>2013-06-11 11:00:18 GMT</p><article><p>Similarly to how the Shadow DOM paved the way for custom elements using web technologies, a &ldquo;Remote DOM&rdquo; could allow display of portions of the web app to be displayed on &ldquo;remote&rdquo; (i.e. &ldquo;external&rdquo;) devices, such as screens, Smart TVs, etc.</p>
+
+<p>This brings interesting capabilities to web apps, such as leveraging external screens for presentation, supplemental content or second screen experiences.</p>
+
+<h2>Polyfill demo</h2>
+
+<p>I created a <a href="https://github.com/avgp/remotedom">simple proof of concept demo</a> to showcase the possibilities. And to kickoff a possible Polyfill, should <a href="http://www.w3.org/community/groups/proposed/#remotedom">my proposed W3C group be accepted</a>. I need your support there :)</p>
+
+<h3>Install dependencies &amp; requirements</h3>
+
+<p>To run the demo, you need to have node.js (at least version 0.8) and npm installed.
+Please also install <a href="http://gruntjs.com">Grunt.js</a>.
+Run</p>
+
+<pre><code>$ npm install
+</code></pre>
+
+<p>to fetch all other dependencies.</p>
+
+<p><strong>As of June 2013</strong>: To run the demo on a mobile device, make sure you use the Chrome BETA and enable WebRTC.</p>
+
+<p>To run the examples, start a static webserver with</p>
+
+<pre><code>$ grunt server
+</code></pre>
+
+<p>Then visit <a href="http://localhost:3000/display.html">http://localhost:3000/display.html</a> to get a Display-ID.</p>
+
+<p>On another device, visit <a href="http://localhost:3000/index.html">http://localhost:3000/index.html</a>, enter the Display-ID in the popup and see the result.</p>
+
+<p>Clicking the button will add an image to the secondary display page.</p>
+
+<h2>Okay, so what can I do with that?</h2>
+
+<p>It&rsquo;s a very basic proof of concept for a RemoteDOM implementation.
+You basically add some DOM node into your HTML, like this:</p>
+
+<pre><code>&lt;div data-screen="remote"&gt;&lt;/div&gt;
+</code></pre>
+
+<p>and everything that goes in there (even dynamically created content) gets transferred to the &ldquo;remote&rdquo; display but is hidden for the browser displaying this document.
+To initialize the remoteDOM-polyfill, call</p>
+
+<pre><code>remoteDOM.connectDisplay(window.prompt(displayID);
+</code></pre>
+
+<p>where the <code>displayID</code> is the ID you get from a call to</p>
+
+<pre><code>remoteDOM.getId();
+</code></pre>
+
+<p>and finally, you can create a display with</p>
+
+<pre><code>remoteDOM.createDisplay(someDOMElement);
+</code></pre>
+
+<p>where <code>someDOMElement</code> is some DOM node that will contain the remoteDOM stuff it receives.</p>
+
+<p>You&rsquo;ll need a display document as well to make use of this, you can use the <code>display.html</code> as a very basic example how such a &ldquo;display&rdquo; document could look like.</p>
+
+<h2>Okay, but how would a proper implementation look like in the (near) future?</h2>
+
+<p>Well, if this stuff becomes a standard, display devices (think: Apple TVs, Smart TVs, Beamers, …) could provide such a display document for you (or some other means to get your DOM content on them) and browsers could provide display discovery services, so that you can select available displays in your network and &ldquo;beam&rdquo; content there.</p>
+
+<h2>Support the W3 group proposal</h2>
+
+<p>Get a (free!) W3 account and support the <a href="http://www.w3.org/community/groups/proposed/#remotedom">proposed RemoteDOM group @ W3C</a></p>
+
+<h2>Caveats of the polyfill</h2>
+
+<p>Right now the polyfill has two drawbacks:</p>
+
+<ol><li>It uses Peer.js and its public peer broker server to connect the two peers.</li>
+<li>It sends the full <code>innerHTML</code> property of the remoteDOM container on DOM mutations, because DOM nodes can&rsquo;t be easily converted into JSON yet.</li>
+</ol></article>

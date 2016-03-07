@@ -1,0 +1,34 @@
+{
+  "title": "Direct and indirect advice",
+  "date": "2012-09-12 13:00:00 GMT"
+}
+
+---
+
+#Direct and indirect advice
+<p>After reading the <a href="http://the.codepoet.ch/please-dont-follow-advice-from-the-experts/">very interesting blog post about the "Expert's dilemma"</a> from <a href="http://twitter.com/codepoet_ch">Andreas Arnold</a>, I had been thinking a while, if I want to agree or to object there.</p>&#13;
+<p>Reflecting about this and my own role as an expert in our company, my own past and my experience in teaching programming and software engineering, I come to the conclusion, that he is right in many aspects, but I think he may miss one aspect of learning from experts: The indirect advice (at least that is what I call it. I am open for suggestions of a better name).</p>&#13;
+<p><strong>The two faces of expert advice: Direct advice</strong></p>&#13;
+<p>The obvious way of advice from experts is the direct one: Experts come to you and tell you what you can/should/have to improve and what you're doing wrong.</p>&#13;
+<p>Being experts, they may have a point in what they're saying, but it doesn't come natural to you. To stick with his fitness example: Running 5 days a week may just be too much for you to begin with. </p>&#13;
+<p>So, while the expert is right about the facts, these facts may not apply because the skill level does not match the experts assumptions.</p>&#13;
+<p>In this case it is perfectly right for the learner to ignore the suggestions from the expert, because he may have to reach a few more milestones on the journey of personal development before the suggestions apply to him.</p>&#13;
+<p>So should the experts just shut the hell up and let people go on with whatever they're doing?</p>&#13;
+<p>The simple answer is: No. Because without someone pointing you in the right directions, you may get lost. So how can a teacher/expert give the right advice to the learning person, without pouring useless, over-complicated facts over the learner?</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>Indirect advice</strong></p>&#13;
+<p>I was and I still am that kind of expert: I told people what they should do. I suggested things and changes. I wanted to share my experiences and knowledge with them, not acknowledging their experiences and knowledge.</p>&#13;
+<p>That was/is wrong.</p>&#13;
+<p>I am currently learning to approach this topic differently. I try not to push them to the destination I want to see my mentees in, but pulling them to get there on their own.</p>&#13;
+<p>Things should come as <em>natural consequences</em> to them. I try to just trigger the right thinking processes and raise the right questions, to get them into discussing and addressing the right topics on their own.</p>&#13;
+<p>For example: If I want them to account for testing efforts properly, I used to say: "But you know that you haven't seen X and Y, and you need to add time for Z as well.".</p>&#13;
+<p>That is bad, because they didn't have to come to that conclusion on their own and I expect them to learn from my example solution, without showing them how I solved the problem.</p>&#13;
+<p>So instead of that, I asked: "But what happens, if someone does X?" - then they will explain to me, why that is impossible - and during discussing that, they may reach the point where they say: "Oh right, that is possible. And then there is Y, maybe even Z" and the discussion will go on, possibly ending up accounting for X,Y and Z properly. If they don't end up there, they may fail, but they will fail because they decided to go with that way - and it is <em>natural </em>to look at the things missed, so that they don't fail again.</p>&#13;
+<p>Let's look at another example: What if I want to suggest some new technology or technique to them?</p>&#13;
+<p>Instead of mentioning it explicitely, I would rather look for problems that are <em>currently</em> hard to solve for them and raise questions and request things that lead to discovering these problems and finding out, that it is hard to solve. If that problem reoccurs frequently, that is perfect - having something that is tough to do and having to do it often makes it <em>natural </em>to look for a solution. If they ask me for a solution, I would give them the generic hint that there are a few solutions to the problem and what they should look for. Choosing a solution and actually evaluating and/or using it later on is their decision though.</p>&#13;
+<p>If they discard it, they're not at a point where it is the logical consequence for them - which is fine. I will need to raise more questions and ignite more discussions among them.</p>&#13;
+<p><strong>Summary:</strong></p>&#13;
+<p>To sum it up: When I was a beginner or intermediate at something and an expert presented a solution to me, I may have gone with a solution it despite hating it, because I didn't get the bigger picture - even if the reason for that would've been explained to me, I would have wondered, if my own thoughts and opinions on that topic wouldn't have been right (at least to some extent even better?).</p>&#13;
+<p>Whenever someone asked me questions or I came across problems, I was eager to find a solution - and I would've even evaluated a few ones to be sure, I pick the right one.</p>&#13;
+<p>That gave me the valuable insight of what is best to do just by having had some pain that made me go look for a better way of doing something. And that - in the long run - lead to understanding of the problem and the possible solutions and when and why to pick one or another.</p>&#13;
+<p>We should all try to allow and assist people in taking their own steps towards a solution to given problems - and only hint on problems they may not have seen, by asking questions and starting discussions. Let people develop as you may have been developing by doing things (and sometimes failing).</p> 

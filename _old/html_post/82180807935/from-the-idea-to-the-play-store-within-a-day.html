@@ -1,0 +1,78 @@
+<h1>From the idea to the play store within a day</h1><p>2014-04-09 10:00:00 GMT</p><article><p>Thanks to @IonicFramework, @PhonegapBuild and @Cloud9IDE and @OpenDataZH I was able to bring an idea fully to live within one day.</p>
+
+<p>Here&rsquo;s what and how.</p>
+
+<h2>The idea</h2>
+
+<p>In November 2013 at the <a href="http://make.opendata.ch/wiki/event:2013-10">Open Data Hacknights</a> in Zurich an idea was presented: Using the data on trees in public space to create an app for people with pollen allergy in Zurich.</p>
+
+<p>The application should be designed for use on a mobile device and should also include a prognosis report and current pollen and weather data to give affected people a single point of contact to get all relevant information.</p>
+
+<p>I got a very, very basic prototype working which was just a map with the tree locations marked in different colors.</p>
+
+<p><img src="http://blog.tagesanzeiger.ch/datenblog/wp-content/uploads/sites/32/2014/02/Bildschirmfoto-2014-02-16-um-15.39.00.png" alt="The old prototype was neither beauti- nor useful"/></p>
+
+<p>Unfortunately, I didn&rsquo;t really come around moving forward with it until this weekend.</p>
+
+<h2>Getting started</h2>
+
+<h3>Ionic Framework</h3>
+
+<p>As the app is envisioned to work well on mobile, I decided to use <a href="http://ionicframework.com">Ionic Framework</a> to build the application.</p>
+
+<p>Getting started with a simple boilerplate is as easy as:</p>
+
+<pre><code>npm install -g cordova ionic  
+ionic start PROJECTNAME tabs
+</code></pre>
+
+<p>At this point I included a Google map and some settings, extracted the data into a JSON file to store within the project and voila: A nice application was ready.</p>
+
+<p><img src="https://lh6.googleusercontent.com/-5GMEiYU-07Q/U0JHbxX1vmI/AAAAAAAAKeg/7KqyQzPcphU/w750-h1250-no/Screenshot_2014-04-07-08-32-34.png" alt="The web version of the application starts looking reasonably usable"/></p>
+
+<p><img src="https://lh3.googleusercontent.com/-ZQTjsL0RJuY/U0JHdPk9oFI/AAAAAAAAKeo/831It2x2v0c/w750-h1250-no/Screenshot_2014-04-07-08-34-59.png" alt="Settings allow to select what trees are displayed on the map"/></p>
+
+<p>At this point I have the web version ready (<a href="http://avgp.github.io/kein-stress-mit-pollen">see it in action here</a>) - it even has basic offline capabilities and allows fullscreen mode if you use Android or iOS and &ldquo;Add to homescreen&rdquo;.</p>
+
+<h3>Cloud9</h3>
+
+<p>As a big fan of the web I value the possibility to work and be independent from the device I am working on - so I often use <a href="https://c9.io">Cloud9</a> as the development environment of choice.
+It connects with Github and gives you a full virtual workspace environment including a static file web server and console.
+For this project I created a new workspace and installed the 2 node modules mentioned above.</p>
+
+<p><img src="http://i.imgur.com/cOw4zaF.png" alt="A Cloud9 workspace has it all: Terminal, Syntax highlightin, preview web server"/></p>
+
+<p>This creates the full Ionic <a href="http://cordova.io">Cordova</a> project - but as I won&rsquo;t build the project for Android directly on Cloud9 and use <a href="http://build.phonegap.com">Phonegap Build</a> (see below) instead, I can delete everything except the <code>www</code> folder.</p>
+
+<p>When I am done, I can use git to get it on Github, ready for building with the Phonegap Build service.</p>
+
+<pre><code>git init  
+git add .  
+git commit -m "Initial commit"  
+git remote add &lt;Github Repo Git URL&gt;  
+git push -u origin master  
+</code></pre>
+
+<h3>Phonegap build</h3>
+
+<p>If you don&rsquo;t want to go through the hassle of setting up the various SDKs for the different platforms or you simply don&rsquo;t have, for instance, any Apple hardware to run XCode on, you can use the build service from Adobe for Phonegap applications.</p>
+
+<p>This service is free for open source projects and you can start by just importing from your Github repository.</p>
+
+<p>You can then scan a QR code to install the application on your device.</p>
+
+<p><img src="http://i.imgur.com/VUGBRo1.png" alt="Phonegap build lets you easily create hybrid apps for the most important platforms"/></p>
+
+<p>If you upload your keys, you can also create the release version of your app and push it to the stores.</p>
+
+<p>This way, I got the app into the <a href="https://play.google.com/store/apps/details?id=de.geekonaut.pollenkarte">Play Store</a> within an hour.</p>
+
+<h2>Summary</h2>
+
+<p>Times are changing fast - and our development habits should adapt to this.</p>
+
+<p>By using a few tools, I was able to get from a rough prototype to a fully-featured app in the Google Playstore.</p>
+
+<p>I think we as developers are experiencing a wonderful era, where the whole supply chain is leaner than ever before.</p>
+
+<p>Use these powers to the benefit of many and yourself.</p></article>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Debian Squeeze and Asus eeepc 1001p</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Debian Squeeze and Asus eeepc 1001p</h2>
+										<p>April 19th 2012</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Debian Squeeze and Asus eeepc 1001p</p>
+<p>Last year I got myself an Asus EEE pc 1001p and wanted to set it up with Debian.</p>&#13;
+<p>After reading the <a href="http://wiki.debian.org/DebianEeePC/Model/1005P">Debian eee Wiki</a>, I was convinced that it would be an easy task.</p>&#13;
+&#13;
+<p>Turns out: It wasn't.</p>&#13;
+<p>The setup itself was nice and smooth. Setting up WiFi, X11 and fluxbox without any hassle. Then the first reboot.</p>&#13;
+<p>After a few lines (up to udev, as it turns out) the screen went black.</p>&#13;
+<p>This made me wonder, if something was wrong with my X11 config. I removed X11. Still: The screen went black.</p>&#13;
+<p>I tried using "nomodeset" and several vga-modes in the boot command in Grub.</p>&#13;
+<p>No effect, screen went black.</p>&#13;
+&#13;
+<p>I also tried the "acpi_os=Linux" hint from the Debian eee Wiki.</p>&#13;
+<p>Does not work.</p>&#13;
+&#13;
+<p><strong>The real solution:</strong></p>&#13;
+<p>Today, by pure incident, I came across the <a href="https://bbs.archlinux.org/viewtopic.php?pid=714406#p714406">working solution</a>:</p>&#13;
+<blockquote>&#13;
+<pre><code>acpi_osi=Linux</code></pre>&#13;
+</blockquote>&#13;
+<p>To have this working, just hit "e" in the Grub menu, go to the "linux .... quiet" line and append the option mentioned above and hit CTRL+X to boot.</p>&#13;
+<p>You'll be just fine.</p>&#13;
+&#13;
+<div></div> 
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

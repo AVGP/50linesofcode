@@ -1,0 +1,44 @@
+<h1>Look ma, no canvas! Server-side 3D rendering with node.js and Three.js</h1><p>2015-09-18 10:00:17 GMT</p><article><p><strong>Sweet surprise: SoftwareRenderer</strong></p>
+
+<p>If you wonder if and how you can render a Three.js 3D scene using node.js on the server, you may have been thinking about using a canvas module, such as <a href="https://www.npmjs.com/package/canvas">Automattic/Canvas</a> or run a headless browser such as Phantom or even a full-blown <a href="http://tobyho.com/2015/01/09/headless-browser-testing-xvfb/">Firefox or Chrome on xvfb</a>.</p>
+
+<p>But you don&rsquo;t need to, thanks to a modified <code>SoftwareRenderer</code>.</p>
+
+<p>The following Gif has been rendered on a server in 1.5 seconds:</p>
+
+<p><img src="http://i.imgur.com/KQOLbGo.gif" alt=""/></p>
+
+<p><strong>Using the new SoftwareRenderer</strong></p>
+
+<p>You find the modified SoftwareRenderer on <a href="https://npmjs.org/package/three-software-renderer">npm</a> and <a href="https://github.com/avgp/three-software-renderer">Github</a> and it&rsquo;s working in the browser as well as on the server with node.js.</p>
+
+<p><a href="https://gist.github.com/AVGP/88dbd972824eb2e0b2a1">Here&rsquo;s an example</a> that renders a spinning cube (or a single frame of the cube, if you&rsquo;re not in a browser) and counts the coloured pixels. This is a simple demonstration of how the renderer is used:</p>
+
+<div class="gist"><a href="https://gist.github.com/AVGP/88dbd972824eb2e0b2a1">https://gist.github.com/AVGP/88dbd972824eb2e0b2a1</a></div>
+
+<p>The difference to other renderers is that <code>render()</code> returns an object similar (but not exactly) <code>ImageData</code>:</p>
+
+<pre><code>{
+  data: Uint8ClampedArray(...), // pixels as RGBARGBARGBA... array
+  width: Number, // width in pixels
+  height: Number // height in pixels
+}
+</code></pre>
+
+<p>The data coming from <code>render</code> can be generated and used both in browser as well as on the server. So it&rsquo;s &ldquo;<a href="http://venturebeat.com/2013/11/08/the-future-of-web-apps-is-ready-isomorphic-javascript/">isomorphic</a>&rdquo; in current lingo (I&rsquo;d prefer &ldquo;universal&rdquo;).</p>
+
+<p><strong>Adventure Time!</strong></p>
+
+<p>With the possibility to render off-GPU and on the server, we get a bunch of interesting possibilities like render in a web worker or&hellip;. <strong>render an animated GIF from a THREE.Scene on the server</strong>:</p>
+
+<div class="gist"><a href="https://gist.github.com/40e545f9e1b793edbb71">https://gist.github.com/40e545f9e1b793edbb71</a></div>
+
+<p><strong>Credits</strong></p>
+
+<p>The original <code>THREE.SoftwareRenderer</code> is part of the Three.js examples but still uses a canvas element.</p>
+
+<p>When going through the sources I found that it actually uses array operations on the pixel array from the canvas context, so I decided to modify it a bit to not create (or use) a canvas and a 2D context from it, but just create and use a ray <code>Uint8ClampedArray</code> which, to my delight, worked just fine.</p>
+
+<p>The original source can be found <a href="https://github.com/mrdoob/three.js/blob/0b07813dc45481f1d16d3b6d2334178664861465/examples/js/renderers/SoftwareRenderer.js">here</a>.</p>
+
+<p>So, yeah, check it out on <a href="https://github.com/avgp/three-software-renderer">Github</a> and <a href="https://npmjs.org/package/three-software-renderer">NPM</a>!</p></article>

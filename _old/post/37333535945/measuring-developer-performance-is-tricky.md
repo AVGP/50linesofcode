@@ -1,0 +1,46 @@
+{
+  "title": "Measuring developer performance is tricky.",
+  "date": "2012-12-06 15:00:20 GMT"
+}
+
+---
+
+#Measuring developer performance is tricky.
+<p>As a manager, you usually want to know, how the performance of your employees is.</p>&#13;
+<p>You want to know, if you need to give them training, if you need to adjust some misbehaviour or if their productivity is simply bad.</p>&#13;
+<p>But how would you do that for a developer (especially, when you're not a developer yourself)?</p>&#13;
+<p>This is a surprisingly difficult thing to do, as there is hardly a good metric to measure the performance without reading their code.</p>&#13;
+<p>Let's take a look at some metrics and their problems:</p>&#13;
+&#13;
+<p><strong>1. Lines of code</strong></p>&#13;
+<p>You simply look at how many lines of code the developer created.</p>&#13;
+<p>This is an obviously bad one for measuring their performance - if a good developer finds an elegant (and still read- and maintainable) solution in just a few lines of code while a not-so-good developer needs pages and pages of code to do the same, the metric will promote the wrong person. That obviously leads to less productivity and possibly less quality.</p>&#13;
+<p><strong>2. Number of commits</strong></p>&#13;
+<p>I've seen this one once and I can't stop shaking my head about it.</p>&#13;
+<p>This metric has nothing to do with the actual work. You can rank good in this metric by simply commiting every single line you changed. It's completely unrelated to the work you actually did. Simple example: Somebody corrects a few typos in a template and commits after every single corrected typo. He may have 40 commits now. Somebody else implemented a big feature in the same time, adding new functionality and lots of potentially tricky code - but he only commits when a block of functionality is done - let's say he committed 10 times during this. According to this "metric" he is performing worse than the person who just corrected typos without adding much value.</p>&#13;
+<p><strong>3. </strong><strong>Number of user stories / tickets / issues</strong></p>&#13;
+<p>This one isn't too bad, but still not good. You're measuring the number of things done.</p>&#13;
+<p>Somebody who resolved 10 tickets is better than somebody, who just resolved 3, right?</p>&#13;
+<p>Wrong.</p>&#13;
+<p>First of all: Tickets may differ in complexity. A ticket that says: "Move the login button from the left to the right" is extremly different from "Implement a real-time video streaming feature". The first one may take 20 minutes, the other one may take some hours.</p>&#13;
+<p><strong>Variation: Taking complexity into account</strong></p>&#13;
+<p>I thought I'd have a solution to that one: You multiply the number of tickets with their complexity. Somebody doing 10 user stories with 1 story point (easy stuff) would then have the same performance as somebody who resolves 1 user story with 10 story points (complex stuff).</p>&#13;
+<p><strong>Anyways, this is flawed as well.</strong></p>&#13;
+<p>Implementing something the right way instead of "quick &amp; dirty" requires additional time. To increase your "productivity" when this metric is applied, you would usually go for "quick &amp; dirty" to raise your throughput. That is a horrible thing, because it punishes the developers who do it right. Quick &amp; dirty solutions are piling up as technical debt and ultimately lead to unmaintainable code, that is pricy to fix.</p>&#13;
+<p><strong>4. Time</strong></p>&#13;
+<p>Time tracking is another option for measuring how somebody performs. But it has the same problem as the "Lines of code" metric: A developer that solves a problem in the right way in 20 minutes is punished, while a developer who takes longer is rewarded.</p>&#13;
+&#13;
+<p><strong>Conclusion: Don't use a naive metric, use communication</strong></p>&#13;
+<p>There simply is no way of just applying some simple ruleset when you want to evaluate the performance of your developers. So, how do you do it then?</p>&#13;
+<p>My suggestion is: Listen to the team, listen to people who work with the developers you want to evaluate and listen to the developers as well.</p>&#13;
+<p><strong>Team</strong></p>&#13;
+<p>Listening to what the team communicates is crucial here.</p>&#13;
+<p>Is somebody always saying something like "I will have to look at this together with X" - the person in question may need training.</p>&#13;
+<p>Is somebody always saying they're working on the same thing, without giving a reason? They may need help to perform better or they may not match the project.</p>&#13;
+<p>Is the team complaining about somebody being unproductive? You should take action.</p>&#13;
+<p>Is the team happy and things move forward? Let them go on with it! Don't get in their way.</p>&#13;
+<p><strong>Others</strong></p>&#13;
+<p>You should also listen to other people, working with the developers. For example the customer support or the product managers.</p>&#13;
+<p>If they are happy with how the developers handle requests and tasks, you shouldn't be worried about their performance.</p>&#13;
+<p>If you hear bad things (such as deadlines not being kept etc.), you should investigate this and resolve the issues.</p>&#13;
+ 

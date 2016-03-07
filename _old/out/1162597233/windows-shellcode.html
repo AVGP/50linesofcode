@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Windows Shellcode</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Windows Shellcode</h2>
+										<p>September 21st 2010</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Windows Shellcode</p>
+<p>Today I'm gonna cover, how exploits get served with payload.</p>&#13;
+<p>To clear the terms:</p>&#13;
+<ul><li><strong>exploit:</strong> Data that, when inserted into a target application, lets the attacker execute some kind of payload-code. The exploit itself just triggers some kind of defect in the target software, to give control to user data and lets the attacker modify the running program. The payload is usually called <em>shellcode.</em></li>&#13;
+<li><strong>shellcode:</strong> The actual "payload", that brings the actual harm of an exploit, by providing the attacker with whatever activity he wants.</li>&#13;
+</ul><p>The name shellcode comes from the fact, that in most cases you'll want to have some kind of remote shell. For this purpose the payload code spawns a shell. Over the years, the term evolved to a generalization for every payload, that is used in an exploit.</p>&#13;
+<p>Shellcodes are a bit special. For example: If you inject them into char-buffers, you'll need to make sure, that there is no 0-char in your binary, because that would cause the shellcode to fail.</p>&#13;
+<p>You should also keep in mind, that you usually have limited amount of memory available for your shellcode, unless you use techniques, so you're not injecting your shellcode directly into the exploited memory area.</p>&#13;
+<p>In the following example, I want to show you, how to create a simple shellcode for Windows. The code will just exec calc.exe, when inserted into an exploit. You don't have an exploit at hand? Then use <a title="Shellcode loader" target="_blank" href="http://gist.github.com/590261">this</a> code to start it without any exploit.</p>&#13;
+<p>I chose this example, because the used WinAPI function "WinExec" resides in kernel32.dll, which is mapped to every process. In any other case, we would've had to call LoadLibraryA and GetProcAddress before we can use the function.</p>&#13;
+<p>For a first introduction to this topic, that'd be too much, I think.</p>&#13;
+<p><a title="calc.exe Shellcode" target="_blank" href="http://gist.github.com/590331">Here</a> you find the documented code. To get the shellcode from it, you might use bin2c or just write yourself a small script, loading the elf and getting the binary part from it.</p>&#13;
+<p>All you need to exec a WinAPI function is to get the address, where its mapped to. Then you push the arguments on the stack and thats it.</p>&#13;
+<p>Would you have thought its that simple?</p>&#13;
+<p>If you wonder, why I come up with this: I refreshed my knowledge today after haven't done things like this for some years now...</p>&#13;
+<p>Hope you liked it - stay tuned.</p>&#13;
+<p>0x86</p> 
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

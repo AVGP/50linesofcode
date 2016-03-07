@@ -1,0 +1,141 @@
+<h1>Painless development environments with VirtualBox, vagrant and puppet</h1><p>2012-05-25 14:39:01 GMT</p><article><h3><strong>Contents</strong></h3>
+<ul><li><strong>The problem</strong> - Dev/Prod Parity, multiple development environments and troubles</li>
+<li><strong>Enter Virtualization</strong> - How to solve the problem</li>
+<li><strong>The solution - </strong>Vagrant and Puppet</li>
+<li><strong>An example scenario - </strong>Complete example</li>
+<li><strong>Sharing your VM -</strong> Distributing VMs between developers and deployment to the production environment</li>
+</ul><div><strong><br/></strong></div>
+<div><strong><br/></strong></div>
+<h3>The problem</h3>
+<p>As a developer you may need to work on multiple customer projects over time.</p>
+<p>This introduces the problem of having to set up a multitude of different development environments: You need different tools, libraries, servers, configurations - sometimes this can get really nasty for instance when it comes down to running a specific version of a library or tool, which conflicts with other tools running on your system.</p>
+<p>Aside of that, there is the aspect of disc space: You can&rsquo;t always throw away such a local development environment when the first version of the project is launched. What if the customer wants changes? What if there are bugs that have to be fixed? What if we need that environment to demonstrate or evaluate something with it?</p>
+<p>Thus, these environments start to pile up and clutter your system.</p>
+<div><strong><br/></strong></div>
+<div><strong><br/></strong></div>
+<h3>Enter: Virtualization</h3>
+<p>Nowadays system virtualization is easy. You can choose between Vmware, Xen, KVM, VirtualBox, HyperVisor et. al. to find the easiest and most suitable solution for your virtualization needs. But still: These machines have to be kept somewhere - and you have to copy around large files, including the box-configuratons, the virtual disk images - or large ova-packages.</p>
+<p>This is where <strong><a href="http://vagrantup.com/">Vagrant</a> </strong>and <strong><a href="http://puppetlabs.com/">Puppet</a></strong> jump in - and they&rsquo;re free!</p>
+<div><strong><br/></strong></div>
+<div><strong><br/></strong></div>
+<h3>The solution</h3>
+<p>Imagine this: Someone creates a virtual machine with everything on board, the project needs. This way you can start testing by just starting the VM - and he can package this in a few small and structured config files and send these around in seconds. Some smart tools then recreate the VM to be just the same as the original. Additionally you can tear down VMs with a single command and build them up to be completely the same with another command.</p>
+<p><strong><br/></strong>That sounds cool, right? No more sending around large VM-images</p>
+<div><strong><br/></strong></div>
+<div><strong><br/></strong></div>
+<h3>An example scenario: LAMP stack with a web project</h3>
+<p>Imagine you have a git repository with a project leveraging PHP and MySQL in your company and you are now asked to fix a few issues on that project.</p>
+<p>The Vagrant box for this should include everything that is necessary to run PHPUnit and the LAMP-Stack, hosting the web project.</p>
+<p>After having installed Vagrant you need to add the first basebox like that:</p>
+<blockquote>
+<p>vagrant box add base <a href="http://files.vagrantup.com/lucid32.box">http://files.vagrantup.com/lucid32.box</a></p>
+</blockquote>
+<p>Baseboxes are the basis for creating new Boxes. The box mentioned above will set up a Ubuntu Lucid 32-bit VM to start with. You can find different base boxes at <a href="http://vagrantbox.es/">vagrantbox.es</a> </p>
+<p>Let&rsquo;s create our VM!</p>
+<p><strong>Vagrant</strong></p>
+<p>You start by creating an new directory and initialize Vagrant. We will make the two directories called &ldquo;manifests&rdquo; and &ldquo;configs&rdquo; to house config files and puppet manifests:</p>
+<blockquote>
+<p>mkdir lamp-project &amp;&amp; mkdir lamp-project/configs &amp;&amp; mkdir lamp-project/manifests</p>
+<p>cd lamp-project</p>
+<p>vagrant init</p>
+</blockquote>
+<p>That was simple. Okay - now we want to setup some portforwarding to access the website from the host plus we make the first step towards Puppet. Put the following to the Vagrantfile:</p>
+<blockquote>
+<p>config.vm.box = &ldquo;lucid32&rdquo;</p>
+<p>config.vm.provision :puppet do |puppet|</p>
+<p>    puppet.manifests_path = File.expand_path(&ldquo;../manifests&rdquo;, __FILE__)</p>
+<p>end </p>
+<p>config.vm.forward_port 80, 8080</p>
+<p>config.vm.share_folder &ldquo;configs&rdquo;, &ldquo;/configs&rdquo;, File.expand_path(&ldquo;../configs&rdquo;, __FILE__)</p>
+</blockquote>
+<p>This way, the port 80 from the VM is forwarded to Port 8080 on the host.</p>
+<p>On the last line (config.vm.share_folder) we make our configs/ folder be mounted as /configs in the guest VM.</p>
+<p>The &ldquo;config.vm.provision&rdquo; line sets up Puppet for provisioning.</p>
+<p>Nice and fine - but how do we use Puppet and for what?</p>
+<p><strong>Puppet</strong></p>
+<p>Puppet is a provisioning system, that allows you to automatically setup and configure a system to fit your needs. To tell Puppet <em>how </em>to set up the system it uses <em>Manifests.</em></p>
+<p><em><br/></em>Lets create our first basic manifest by creating a manifests/default.pp with the following contents:</p>
+<blockquote>
+<p>$config_path = &ldquo;/configs&rdquo;</p>
+<p>$vagrant_base_path = &ldquo;/vagrant&rdquo;</p>
+<p>Exec { path =&gt; &ldquo;/bin:/usr/bin:/usr/local/bin&quot; }</p>
+<p>group { &quot;puppet&rdquo;: ensure =&gt; present }</p>
+<p>exec { &ldquo;apt-get update&rdquo;: command =&gt; &ldquo;apt-get update&rdquo; }</p>
+<p>class apache {</p>
+<p>    file { &ldquo;/etc/apache2/sites-enabled/000-default&rdquo;:</p>
+<p>        ensure =&gt; file,</p>
+<p>        source =&gt; &ldquo;${config_path}/000-default&rdquo;,</p>
+<p>        before =&gt; Service[&ldquo;apache2&rdquo;],</p>
+<p>    }</p>
+<p>    exec { &ldquo;enable-mod_rewrite&rdquo;:</p>
+<p>        require =&gt; Package[&ldquo;apache2&rdquo;],</p>
+<p>        before =&gt; Service[&ldquo;apache2&rdquo;],</p>
+<p>        command =&gt; &ldquo;/usr/sbin/a2enmod rewrite&rdquo;</p>
+<p>    }</p>
+<div></div>
+<p>    package { &ldquo;apache2&rdquo;:</p>
+<p>        ensure =&gt; present,</p>
+<p>        before =&gt; File[&ldquo;/etc/apache2/sites-enabled/000-default&rdquo;],</p>
+<p>    }</p>
+<p><br/>    service { &ldquo;apache2&rdquo;:</p>
+<p>        ensure =&gt; running,</p>
+<p>        require =&gt; Package[&ldquo;apache2&rdquo;]</p>
+<p>    }</p>
+<p>}</p>
+<p>class php {</p>
+<p>    package { &ldquo;libapache2-mod-php5&rdquo;: ensure =&gt; present }</p>
+<p>    package { &ldquo;php5&rdquo;: ensure =&gt; present }</p>
+<p>    package { &ldquo;php5-cli&rdquo;: ensure =&gt; present }</p>
+<p>    package { &ldquo;php5-dev&rdquo;: ensure =&gt; present }</p>
+<p>    package { &ldquo;php5-mysql&rdquo;: ensure =&gt; present }</p>
+<p>    package { &ldquo;php-pear&rdquo;: ensure =&gt; present }</p>
+<p>    exec { &ldquo;pear upgrade&rdquo;:</p>
+<p>        command =&gt; &ldquo;/usr/bin/pear upgrade&rdquo;,</p>
+<p><span class="Apple-tab-span"> </span>require =&gt; Package[&ldquo;php-pear&rdquo;],</p>
+<p>    }</p>
+<div>}</div>
+<p>class mysql {</p>
+<p>  package { &ldquo;mysql-server&rdquo;:</p>
+<p>    require =&gt; Exec[&ldquo;apt-get update&rdquo;],</p>
+<p>    ensure =&gt; present,</p>
+<p>  }</p>
+<p>  service { &ldquo;mysql&rdquo;:</p>
+<p>    enable =&gt; true,</p>
+<p>    ensure =&gt; running,</p>
+<p>    require =&gt; Package[&ldquo;mysql-server&rdquo;],</p>
+<p>  }</p>
+
+<p>  exec { &ldquo;Set MySQL server root password&rdquo;:</p>
+<p>        require =&gt; Package[&ldquo;mysql-server&rdquo;],</p>
+<p>        unless =&gt; &ldquo;/usr/bin/mysqladmin -uroot -proot status&rdquo;,</p>
+<p>        command =&gt; &ldquo;/usr/bin/mysqladmin -uroot password root&rdquo;,</p>
+<p>  }</p>
+<p>}</p>
+<p>include apache</p>
+<p>include php</p>
+<p>include mysql</p>
+</blockquote>
+<p>This manifest is used by Vagrant to run puppet on the first start of the VM.</p>
+<p>To learn more about Puppet, see <a href="http://docs.puppetlabs.com/learning/">the learning guide</a>.</p>
+<p><strong>Enjoy the ride</strong></p>
+<p>Now it is time to start our VM. Run the command</p>
+<blockquote>
+<p>vagrant up</p>
+</blockquote>
+<p>and watch it happen. When it is finished, visit http://localhost:8080 and enjoy :)</p>
+<p>When you need to do something on the VM, you can do &ldquo;vagrant ssh&rdquo; to connect to the VM and when you&rsquo;re finished testing your work, you can do &ldquo;vagrant halt&rdquo; to stop it.</p>
+<p>One of the big benefits: Whenever you decide to leave the project for a longer period of time, you can do &ldquo;vagrant destroy&rdquo; to kill the VM and whenever you need to get back to it, you just run &ldquo;vagrant up&rdquo; again and you&rsquo;re ready to go.</p>
+<p><strong><br/></strong></p>
+<p><strong><br/></strong></p>
+<h3>Sharing your VM</h3>
+<p>The last step of this journey is about sharing your work. If you work in a team, it would be great to be abled to push the VM around without having to handle large binary files.</p>
+<p>The great news: Sharing your VM is dead-simple: Share the Vagrantfile along with manifests and referenced config files you use and you&rsquo;re done!</p>
+<p>You could also make your VM a base box to be used by others to start from a common ground.</p>
+<p>Let&rsquo;s pretend you&rsquo;re working in a web development agency and you have some projects requiring Ruby on Rails with RSpec, Sass, Capistrano and some other nifty gems, together with Passenger and Apache. On the other hand you still have to maintain PHP-Projects with a classical LAMP-Stack - these configurations are the same for all the projects - why not create two base boxes for that?</p>
+<p>To do this, you just create the two VMs as usual and then export them.</p>
+<p>First, you copy your Vagrantfile to Vagrantfile.pkg, then run</p>
+<blockquote>
+<p>vagrant package &ndash;vagrantfile Vagrantfile.pkg &ndash;include configs,manifests</p>
+</blockquote>
+<p>If you have looked at the tutorial on vagrantup.com you may have noticed the little differences between my Vagrantfile and the Vagrantfile in their example. I made them so that the configs and manifests can be included and properly used and referenced in the packaged box. This way, you do not have to ship around multiple files. Just the box.</p>
+<p>I would be glad to hear your thoughts on this topic.</p></article>

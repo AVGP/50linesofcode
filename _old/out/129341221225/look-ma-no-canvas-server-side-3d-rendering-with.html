@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Look ma, no canvas! Server-side 3D rendering with node.js and Three.js</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Look ma, no canvas! Server-side 3D rendering with node.js and Three.js</h2>
+										<p>September 18th 2015</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Look ma, no canvas! Server-side 3D rendering with node.js and Three.js
+<strong>Sweet surprise: SoftwareRenderer</strong></p>
+<p>If you wonder if and how you can render a Three.js 3D scene using node.js on the server, you may have been thinking about using a canvas module, such as <a href="https://www.npmjs.com/package/canvas">Automattic/Canvas</a> or run a headless browser such as Phantom or even a full-blown <a href="http://tobyho.com/2015/01/09/headless-browser-testing-xvfb/">Firefox or Chrome on xvfb</a>.</p>
+<p>But you don't need to, thanks to a modified <code>SoftwareRenderer</code>.</p>
+<p>The following Gif has been rendered on a server in 1.5 seconds:</p>
+<p><img src="http://i.imgur.com/KQOLbGo.gif" alt="" /></p>
+<p><strong>Using the new SoftwareRenderer</strong></p>
+<p>You find the modified SoftwareRenderer on <a href="https://npmjs.org/package/three-software-renderer">npm</a> and <a href="https://github.com/avgp/three-software-renderer">Github</a> and it's working in the browser as well as on the server with node.js.</p>
+<p><a href="https://gist.github.com/AVGP/88dbd972824eb2e0b2a1">Here's an example</a> that renders a spinning cube (or a single frame of the cube, if you're not in a browser) and counts the coloured pixels. This is a simple demonstration of how the renderer is used:</p>
+<div class="gist">https://gist.github.com/AVGP/88dbd972824eb2e0b2a1</div>
+<p>The difference to other renderers is that <code>render()</code> returns an object similar (but not exactly) <code>ImageData</code>:</p>
+<pre><code>{
+  data: Uint8ClampedArray(...), // pixels as RGBARGBARGBA... array
+  width: Number, // width in pixels
+  height: Number // height in pixels
+}
+</code></pre>
+<p>The data coming from <code>render</code> can be generated and used both in browser as well as on the server. So it's &quot;<a href="http://venturebeat.com/2013/11/08/the-future-of-web-apps-is-ready-isomorphic-javascript/">isomorphic</a>&quot; in current lingo (I'd prefer &quot;universal&quot;).</p>
+<p><strong>Adventure Time!</strong></p>
+<p>With the possibility to render off-GPU and on the server, we get a bunch of interesting possibilities like render in a web worker or.... <strong>render an animated GIF from a THREE.Scene on the server</strong>:</p>
+<div class="gist">https://gist.github.com/40e545f9e1b793edbb71</div>
+<p><strong>Credits</strong></p>
+<p>The original <code>THREE.SoftwareRenderer</code> is part of the Three.js examples but still uses a canvas element.</p>
+<p>When going through the sources I found that it actually uses array operations on the pixel array from the canvas context, so I decided to modify it a bit to not create (or use) a canvas and a 2D context from it, but just create and use a ray <code>Uint8ClampedArray</code> which, to my delight, worked just fine.</p>
+<p>The original source can be found <a href="https://github.com/mrdoob/three.js/blob/0b07813dc45481f1d16d3b6d2334178664861465/examples/js/renderers/SoftwareRenderer.js">here</a>.</p>
+<p>So, yeah, check it out on <a href="https://github.com/avgp/three-software-renderer">Github</a> and <a href="https://npmjs.org/package/three-software-renderer">NPM</a>!</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

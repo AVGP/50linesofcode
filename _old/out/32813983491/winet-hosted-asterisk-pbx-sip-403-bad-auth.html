@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Winet hosted Asterisk PBX SIP 403: Bad auth</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Winet hosted Asterisk PBX SIP 403: Bad auth</h2>
+										<p>October 3rd 2012</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Winet hosted Asterisk PBX SIP 403: Bad auth</p>
+<p>Today I encountered a problem that is common to some GUIs for Asterisk: Problems with synchronizing Asterisk with the Configuration from the GUI.</p>&#13;
+&#13;
+<p>In my case, I was confronted with a hosted Asterisk instance that I can only access through a web gui.</p>&#13;
+<p>A user complained, that he got a "403: Bad auth" and he was totally sure that he got the password and username right. I checked and he got them right.</p>&#13;
+<p>So I checked if it was his softphone that fucked things up - it turned out to happen on my softphone as well when I tried to connect with his credentials.</p>&#13;
+<p>It even happened with a second user account but not with a third one.</p>&#13;
+<p>As it turned out: The common factor of the two accounts that failed was a previous password change.</p>&#13;
+<p>The Winet GUI offers you a console via "System" &gt; "Console" where you can use pretty much all the <a href="http://www.voip-info.org/wiki/view/Asterisk+CLI">Asterisk CLI commands</a>.</p>&#13;
+<p>In that particular case you can do the following:</p>&#13;
+<ol><li>Enter "sip show users" - the "Secret" column shows the beginning of the password of a user.</li>&#13;
+<li>Enter "sip reload".</li>&#13;
+<li>Enter "sip show users" again and check if the password is now refreshed.</li>&#13;
+</ol><p>Now your users should be abled to connect properly.</p>&#13;
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

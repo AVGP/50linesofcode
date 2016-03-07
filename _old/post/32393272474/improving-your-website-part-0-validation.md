@@ -1,0 +1,26 @@
+{
+  "title": "Improving your website - Part 0: Validation",
+  "date": "2012-09-27 13:55:53 GMT"
+}
+
+---
+
+#Improving your website - Part 0: Validation
+<p>You have a website? You want to make it better?</p>&#13;
+<p>In this series I will give you some tips, starting from really basic to advanced, on how to improve your website in many ways.</p>&#13;
+<p>First step: <strong>Validate your code.</strong></p>&#13;
+<p><strong>Why should you?</strong></p>&#13;
+<p>Well, first of all it makes your life a lot easier when it comes to making sure your website displays correctly in all (real) browsers. Some quirks may have to be applied (such es vendor-prefixed CSS), but standard compliant code makes this stuff much easier.</p>&#13;
+<p>Additionally it helps search engines (such as Google, Bing or Yahoo) making sense of your content by using the structure defined by your HTML.</p>&#13;
+<p>You can also include tools like WAVE to make sure visitors with special needs can access your site - proper structuring, well chosen contrast, image alt texts and meaningful link texts are more important than you may think.</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>How can you do that?</strong></p>&#13;
+<p>There is a large set of tools. Most widely known are the Validators from the W3C.</p>&#13;
+<p>Besides the <a href="http://jigsaw.w3.org">CSS Validator</a> and the <a href="http://validator.w3.org/">HTML Validator</a> they have an <a href="http://validator.w3.org/unicorn/">allround validator called Unicorn</a> in their toolset.</p>&#13;
+<p>If you want to check your accessibility, you can use <a href="http://wave.webaim.org">WAVE</a> as mentioned above or the <a href="http://achecker.ca/checker/index.php">AChecker</a>. There is a lot more of these tools, <a href="http://www.w3.org/WAI/RC/tools/complete">you find a pretty long list of tools at the W3C</a>.</p>&#13;
+<p><strong>Summary</strong></p>&#13;
+<p>You should validate your code to make sure it is standards-compliant as much as possible.</p>&#13;
+<p>Some of the cool things you can do may still be non-standartized or experimental. It is okay to use them, but you should only do so where necessary or when you take additional efforts to keep your site cross-browser compatible. CSS Gradients are such an example, where the Validators will be unhappy but the standard way is not implemented in browsers nowadays.</p>&#13;
+<p>Valid code helps you find out, if your content structure can be properly parsed by search engine spiders and humans. Additional, easy and quicky-done changes to your website code can make the experience for disabled people (e.g. colorblind) much better and help to make the website more accessible.</p>&#13;
+<p>These things should be the first steps you take when starting to optimize your website.</p>&#13;
+<p><strong>Next Up: Analytics</strong></p> 

@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Running your meteor.js application on your own server</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Running your meteor.js application on your own server</h2>
+										<p>March 12th 2013</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Running your meteor.js application on your own server
+During the course of the weekend two weeks ago, I created the **<a href="http://quantified.geekonaut.de">Quantified Geekonaut</a> to gather some data about my internet activities (such as Twitter, Last.FM [Spotify really], Foursquare, Github, my blog and a few others) and experiment with graphing and such.</p>
+<p>I decided to build it with <a href="http://www.meteor.com"><strong>Meteor.js</strong></a> - primarily because I needed a reason to play around with it again.</p>
+<p>One thing I found (without being too surprised about it) about hosting your app on the <strong>free meteor.com cloud hosting</strong> is, that it gets restarted whenever somebody accesses your website.</p>
+<p>Which isn't a problem normally is an issue for the <em>Quantified Geekonaut</em> application, because it gathers data periodically and saves it to be able to graph and query historical data points. That's obviously impossible, if it only collects data when accessed by a visitor.</p>
+<p>As Meteor gives you the possibility to <strong>bundle your app</strong> as a (more or less) self-contained node.js app, you could as well <strong>run it on your own server</strong>.</p>
+<p>In this article I'll give a quick run-through on how to do that.</p>
+<p><strong>Step 1: Bundle your app</strong></p>
+<p>To bundle your meteor app, run</p>
+<pre><code>meteor bundle app.tar.gz
+</code></pre>
+<p>and copy the app.tar.gz on your server.</p>
+<p><strong>Optional: Install nvm and node.js v0.8</strong></p>
+<p>To run a meteor.js application you need to have at least node.js version 0.8.<br />
+Optionally, if you want to use different node.js versions in parallel, you could install nvm, the Node Version Manager (pretty much &quot;RVM&quot; for node).
+To install nvm on your server, you just run</p>
+<pre><code>cd ~
+curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+</code></pre>
+<p>to make bash always load nvm on startup, use</p>
+<pre><code>echo &quot;source ~/.nvm/nvm.sh&quot; &gt;&gt; .bash_rc
+</code></pre>
+<p>on your server. If you're not using bash as your shell, adjust that accordingly.</p>
+<p>To install node 0.8 on your server you just run</p>
+<pre><code>nvm install v0.8
+</code></pre>
+<p>which gets you the latest stable version of the 0.8 branch. To make node 0.8 your default node.js version (if you have more than just this one), run</p>
+<pre><code>nvm alias default 0.8
+</code></pre>
+<p><strong>Step 2: Unpack the bundle on your server</strong></p>
+<p>Pretty straight forward: Copy the bundle from Step 1 to your server and run</p>
+<pre><code>tar xvf app.tar.gz
+cd bundle
+</code></pre>
+<p>** If you bundled your app on a different architecture than your servers' (e.g. you bundled the app on OSX and run your server on Linux or your server is a 64bit system and your computer is a 32bit system) you need to reinstall fibers:</p>
+<pre><code>cd server
+rm -rf node_modules/fibers
+npm install fibers@1.0.0
+cd ..
+</code></pre>
+<p><strong>Step 3: Install forever</strong></p>
+<p>If you have your app running, you want to make sure it keeps running.
+<a href="https://github.com/nodejitsu/forever">Forever</a> is a great tool for that.<br />
+It runs a node.js app in the background, monitors it and restarts it when needed.
+To install forever, run</p>
+<pre><code>npm install -g forever
+</code></pre>
+<p><strong>Optional: Get a MongoHQ database</strong></p>
+<p>If you don't want to setup and install your own MongoDB instance, check out <a href="https://www.mongohq.com/home">MongoHQ</a>. You can use their free sandbox DB, if you wish. Copy the Mongo-URL to use it with meteor.</p>
+<p><strong>Step 4: Set the environment and start the app</strong></p>
+<p>For this you need a connection URL to a mongo db. You can either set it up manually or you can use MongoHQ as described above.
+The app needs the URL of a MongoDB and a port to run on. To specify these run</p>
+<pre><code>export PORT=8080
+export MONGO_URL=mongodb://&lt;user&gt;:&lt;password&gt;@&lt;db_host&gt;:&lt;db_port&gt;/&lt;db_name&gt;
+</code></pre>
+<p>Please substitute <code>user</code>,<code>password</code>,<code>db_host</code>,<code>db_port</code> and <code>db_name</code> with values for your Mongo instance.<br />
+Now you can start the app with</p>
+<pre><code>forever start main.js
+</code></pre>
+<p>Your app should now be reachable on Port 8080 on your server's address!</p>
+<p><strong>Optional: Setup reverse proxy with Apache</strong><br />
+If you want to run the app on a subdomain of your server, let's say
+<code>meteorapp.example.com</code> and you already have an Apache running for the main domain and/or some VirtualHosts, you can create a reverse proxy to serve the meteor app with something like this in your apache <code>sites</code> folder (for Debian that is <code>/etc/apache2/sites-enabled</code>).<br />
+Create a new vhost file with the following contents:</p>
+<pre><code>&lt;VirtualHost *:80&gt;
+  ServerName meteorapp.example.com
+  ProxyRequests off
+  &lt;Proxy *&gt;
+    Order deny,allow
+    Allow from all
+  &lt;/Proxy&gt;
+
+  &lt;Location /&gt;
+    ProxyPass http://localhost:8080/
+    ProxyPassReverse http://localhost:8080/
+  &lt;/Location&gt;
+&lt;/VirtualHost&gt;
+</code></pre>
+<p>and you're ready to go. Reload apache with</p>
+<pre><code>/etc/init.d/apache2 reload
+</code></pre>
+<p>or similar for your server OS and you're ready to enjoy meteor running on a subdomain.</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,13 @@
+<h1>Winet hosted Asterisk PBX SIP 403: Bad auth</h1><p>2012-10-03 18:10:53 GMT</p><article><p>Today I encountered a problem that is common to some GUIs for Asterisk: Problems with synchronizing Asterisk with the Configuration from the GUI.</p>
+
+<p>In my case, I was confronted with a hosted Asterisk instance that I can only access through a web gui.</p>
+<p>A user complained, that he got a &ldquo;403: Bad auth&rdquo; and he was totally sure that he got the password and username right. I checked and he got them right.</p>
+<p>So I checked if it was his softphone that fucked things up - it turned out to happen on my softphone as well when I tried to connect with his credentials.</p>
+<p>It even happened with a second user account but not with a third one.</p>
+<p>As it turned out: The common factor of the two accounts that failed was a previous password change.</p>
+<p>The Winet GUI offers you a console via &ldquo;System&rdquo; &gt; &ldquo;Console&rdquo; where you can use pretty much all the <a href="http://www.voip-info.org/wiki/view/Asterisk+CLI">Asterisk CLI commands</a>.</p>
+<p>In that particular case you can do the following:</p>
+<ol><li>Enter &ldquo;sip show users&rdquo; - the &ldquo;Secret&rdquo; column shows the beginning of the password of a user.</li>
+<li>Enter &ldquo;sip reload&rdquo;.</li>
+<li>Enter &ldquo;sip show users&rdquo; again and check if the password is now refreshed.</li>
+</ol><p>Now your users should be abled to connect properly.</p></article>

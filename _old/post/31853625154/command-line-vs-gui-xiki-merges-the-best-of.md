@@ -1,0 +1,24 @@
+{
+  "title": "Command line vs. GUI - Xiki merges the best of both worlds",
+  "date": "2012-09-19 10:00:30 GMT"
+}
+
+---
+
+#Command line vs. GUI - Xiki merges the best of both worlds
+<p>I often hear people say "The console is so much faster and much better than any graphical interface in the world!" and as frequently as that I hear people say "You can't do that on the command line, this graphical interface is much easier and more comfortable!".</p>&#13;
+<p>Personally, I switch a lot between graphical interfaces and the command line. Why? Because I don't evangelize about it - I need to get a job done. Sometimes getting something done is faster on the console, sometimes it is easier to use a GUI.</p>&#13;
+<p>Here is an example: I am perfectly fine with SSHing to a server and use vim there to edit some configuration files, updating the system, searching logs, debugging things, etc.</p>&#13;
+<p>But on the other hand IDEs such as Eclipse, Netbeans, Springsource are more comfortable for a lot of other tasks- they offer me a huge number of tools comfortably at my fingertips. Refactoring? Easy. Rename a whole package and any references to it? Easy!</p>&#13;
+<p>Doing that with the command line is not impossible, but it is a little more tricky than clicking a button.</p>&#13;
+<p><strong><br /></strong></p>&#13;
+<p><strong>Here comes Xiki!</strong></p>&#13;
+<p><a href="http://www.xiki.org">Xiki</a> is a project to merge best of both worlds. You can use it from your favourite text editor - supported at the moment are Emacs, Vim, Textmate and CodeMirror. Others may be added through extensions.</p>&#13;
+<p>Installing is easy, as long as you have Ruby on your system - you can install it using Gem:</p>&#13;
+<blockquote>&#13;
+<p>$ gem install xiki</p>&#13;
+</blockquote>&#13;
+<p>or you can get it from <a href="https://github.com/trogdoro/xiki">GitHub</a>. </p>&#13;
+<p>It allows you to do awesome things - you can run command line commands, expand and fold the output, run ruby code,work with databases, connect to remote systems, try HTML and CSS in your browser, create a rails project and many many more.</p>&#13;
+<p>See it in action below:</p>&#13;
+<p><iframe frameborder="0" height="315" src="http://www.youtube.com/embed/bUR_eUVcABg" width="560"></iframe></p> 

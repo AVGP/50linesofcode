@@ -1,0 +1,188 @@
+<h1>Write a simple parser in Bison</h1><p>2014-06-13 10:00:19 GMT</p><article><p>Ever wondered how to write a simple parser? Let&rsquo;s write a simple math parser then!</p>
+
+<p>You will need to have <a href="http://www.gnu.org/software/bison/">Bison</a> and a C compiler installed on your system. On a debian-like linux system you can do that by running</p>
+
+<pre><code>$ apt-get install bison gcc
+</code></pre>
+
+<h2>The skeleton of our parser file</h2>
+
+<p>Now create a new file, called <code>calc.y</code>. This file is laid out like this:</p>
+
+<pre><code>%{
+  /* Prologue with C declarations */
+%}
+
+/* Bison declarations */
+
+%%
+  /* Bison grammar definition */
+%%
+/* C code */
+</code></pre>
+
+<p>Now we want to write a simple parser that can parse mathematical expressions like this:</p>
+
+<pre><code>20 - (3 * 4) / 2
+&gt;  14
+</code></pre>
+
+<p>so let&rsquo;s start with our grammar.</p>
+
+<h2>Our parsing grammar</h2>
+
+<p>Before we think closely about our actual grammar, we need to identify what tokens we have that don&rsquo;t need further parsing - that&rsquo;ll be numbers for our case.</p>
+
+<ol><li>Our grammar should work on a single line as well as a file containing multiple lines, one expression per line.</li>
+<li>A line can be empty and so can be the whole input.</li>
+<li>We will print out the result of the parsed expression for each line</li>
+<li>An expression is either
+a. A number
+b. Another expression in brackets
+c. Two expressions combined by one of the basic mathematical operations (addition, subtraction, multiplication, division).</li>
+</ol><p>In our Bison file it looks like this:</p>
+
+<pre><code>input:  | input line;
+line: '\n' | exp '\n' { printf ("&gt; %.10g\n", $1); };
+exp:   NUM         { $$ = $1;         }
+     | exp '+' exp   { $$ = $1 + $3; }
+     | exp '-' exp    { $$ = $1 - $3;  }
+     | exp '/' exp    { $$ = $1 / $3;  }
+     | exp '*' exp    { $$ = $1 * $3; }
+     | '(' exp ')'       { $$ = $2;         };
+</code></pre>
+
+<p>Each type of node in our grammar is defined by a list of statements.
+For example:</p>
+
+<pre><code>input: | input line;
+</code></pre>
+
+<p>means: The input can be empty or some more input and a line.
+Besides simply defining a node type by recursion over other node types, you can also give rules for the evaluation.</p>
+
+<p>For instance:</p>
+
+<pre><code>exp '+' exp { $$ = $1 + $3; }
+</code></pre>
+
+<p>means that this will evaluate to the first token (&ldquo;exp&rdquo;) plus the third token (the second &ldquo;exp&rdquo;).</p>
+
+<p>Now we need to also tell Bison that <code>NUM</code> is a token.</p>
+
+<h2>Declarations</h2>
+
+<p>In the Bison declarations section add:</p>
+
+<pre><code>%token NUM
+</code></pre>
+
+<p>Now we will load some C headers and declare the default data type in the C declarations:</p>
+
+<pre><code>#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define YYSTYPE double
+</code></pre>
+
+<h2>Some parsing code</h2>
+
+<pre><code>yylex ()
+{
+  int c;
+
+  /* skip white space  */
+  while ((c = getchar ()) == ' ' || c == '\t');
+  /* process numbers   */
+  if (c == '.' || isdigit (c)) {
+      ungetc (c, stdin);
+      scanf ("%lf", &amp;yylval);
+      return NUM;
+  }
+
+  /* return end-of-file  */
+  if (c == EOF)  return 0;
+  /* return single chars */
+  return c;                                
+}
+
+yyerror (char *s) {
+  printf ("%s\n", s);
+}
+
+main ()
+{
+  yyparse ();
+}
+</code></pre>
+
+<p>This code provides the <code>yylex</code> function for Bison that reads the input, the yyerror function that is called when something went wrong while parsing and a main function that just calls the yyparse function.</p>
+
+<p>Bison provides the <code>yyparse</code> function and will call our <code>yylex</code> function to get data for parsing.</p>
+
+<p>Let&rsquo;s look at our whole Bison file:</p>
+
+<pre><code>%{
+#define YYSTYPE double
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+%}
+
+%token NUM
+
+%%
+input:  | input line;
+line: '\n' | exp '\n' { printf ("&gt; %.10g\n", $1); };
+exp:   NUM                  { $$ = $1;      }
+     | exp '+' exp          { $$ = $1 + $3; }
+     | exp '-' exp          { $$ = $1 - $3; }
+     | exp '/' exp          { $$ = $1 / $3; }
+     | exp '*' exp          { $$ = $1 * $3; }
+     | '(' exp ')'          { $$ = $2;      };
+%%
+
+yylex ()
+{
+  int c;
+
+  /* skip white space  */
+  while ((c = getchar ()) == ' ' || c == '\t')  
+    ;
+  /* process numbers   */
+  if (c == '.' || isdigit (c))                
+    {
+      ungetc (c, stdin);
+      scanf ("%lf", &amp;yylval);
+      return NUM;
+    }
+
+
+  /* return end-of-file  */
+  if (c == EOF)                            
+    return 0;
+  /* return single chars */
+  return c;                                
+}
+
+yyerror (char *s) {
+  printf ("%s\n", s);
+}
+
+main ()
+{
+  yyparse ();
+}
+</code></pre>
+
+<p>Save this file as <code>calc.y</code> and run <code>bison calc.y</code>. This should have generated a new file called <code>calc.tab.c</code>, containing the C code for our parser - to make this an executable call <code>gcc -o calc calc.tab.c</code> and you should now have a file called <code>calc</code>.</p>
+
+<p>You can run this file like this:</p>
+
+<pre><code>$ chmod +x calc
+$ echo "2*3" | ./calc
+&gt; 6
+$
+</code></pre></article>

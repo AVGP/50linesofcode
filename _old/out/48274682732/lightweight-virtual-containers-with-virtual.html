@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Lightweight virtual containers with virtual networking</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Lightweight virtual containers with virtual networking</h2>
+										<p>April 18th 2013</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Lightweight virtual containers with virtual networking
+#What and why?</p>
+<p>Sometimes you want to have a quick &amp; cheap way of isolating a few processes in a lightweight, para-virtualized environment.</p>
+<p>When full-blown virtualization, for instance with Xen or KVM, is just too much (or not suitable, because you're already running in a virtual environment) and process-level isolation (what for example <a href="http://www.docker.io/">docker.io</a> provides) isn't enough, <strong><a href="http://user-mode-linux.sourceforge.net/">user mode linux</a></strong> is for you.</p>
+<h1>Example:</h1>
+<h2>Multiple isolated build environments for Continuous Integration</h2>
+<p>One scenario is running integration tests between multiple components on a shared CI server (e.g. Jenkins).</p>
+<p>Let's elaborate this scenario a little more:</p>
+<p>Say, we have a Jenkins instance that is used to build multiple projects, say an API and a &quot;frontend webapp&quot; (I'll reference it as &quot;Frontend&quot; from now on).
+The API can be build and tested independently, but that requires the installation of a bunch of libraries, gems and other fun things.</p>
+<p>The Frontend is a little more complex: In addition to the need of its own dependencies (gems, libs, modules, ...) it also needs a running instance of the latest stable API and a running API also needs a database and other components (let's say a message queue).</p>
+<p>The safest bet is to have every system under test (API stand-alone, Frontend instance + API instance + database + message queue) isolated, always freshly created when the tests start and torn down when done.</p>
+<p>Our goal is to setup a virtual container in which we can build the API and another virtual container in which we will setup the database, the message queue, the API and a third one for the frontend, with a virtual network between the second and third container.</p>
+<p>With user-mode linux you can achieve this goal pretty fast&amp;easily:</p>
+<h2>Install user-mode-linux and the utilities needed:</h2>
+<pre><code>$ apt-get install wget user-mode-linux uml-utilities bridge-utils debootstrap realpath
+</code></pre>
+<h2>Setup a new machine</h2>
+<p><a href="https://gist.github.com/AVGP/5410903">You can use my create_machine script</a> which is based on <a href="http://eggdrop.ch/texts/uml/">this article</a>:</p>
+<pre><code>$ wget https://gist.github.com/AVGP/5412047/raw/ee9057124fa32edbf5c427955cc0be4012015ec5/create_machine_switched.sh
+$ chmod +x create_machine_switched.sh
+$ ./create_machine_switched.sh
+</code></pre>
+<p>The script will ask you for a few things:</p>
+<ul>
+<li>The hostname of the container (we'll use &quot;API-build&quot;, &quot;API-run&quot; and &quot;Frontend&quot;)</li>
+<li>If you want SSH to be installed (&quot;y&quot; for our example)</li>
+<li>If you want to configure the network (&quot;y&quot; for our example)</li>
+<li>Couple of network settings. For this example we're using the following settings:
+<ul>
+<li>IP-Address: 10.10.10.2 for API-build, 10.10.10.3 for API-run, 10.10.10.4 for Frontend build</li>
+<li>Network: 10.10.10.0</li>
+<li>Broadcast: 10.10.10.255</li>
+<li>Subnet: 255.255.255.0</li>
+<li>Gateway: 10.10.10.1</li>
+</ul></li>
+<li>Root password for the container</li>
+</ul>
+<h2>Setting up the host-side networking</h2>
+<p>Before starting the container, we need to set up the host and the network switching on the host machine.</p>
+<p>First of all add the following to <code>/etc/network/interfaces</code>:</p>
+<pre><code>    auto tap0
+    iface tap0 inet static
+            address 10.1.0.1
+            netmask 255.255.255.0
+            tunctl_user uml-net
+</code></pre>
+<p>Then edit <code>/etc/default/uml-utilities</code> by uncommenting the line with the <code>UML_SWITCH_OPTIONS</code> and, if needed, change it to look like this:</p>
+<pre><code>UML_SWITCH_OPTIONS=&quot;-tap tap0&quot;
+</code></pre>
+<p>Then stop the uml-utilities daemon, bring up <code>tap0</code> and start uml-utilities again:</p>
+<pre><code>$ /etc/init.d/uml-utilities stop
+$ ifup tap0
+$ /etc/init.d/uml-utilities start
+</code></pre>
+<p>Afterwards, you can start the container by changing in their directories and execute <code>./run</code>, preferably do this in a screen (or tmux) session:</p>
+<h2>Start the containers</h2>
+<pre><code>$ cd API-run
+$ ./run
+</code></pre>
+<p>and the same for the other two machines.
+You should be abled to login as root on all running instances and ping to the internet as well as to the other instances.</p>
+<pre><code>root@API-run # ifconfig eth0
+    eth0   Link encap:Ethernet  HWaddr d2:45:9b:1f:ba:c6
+              inet addr:10.10.10.3  Bcast:10.10.10.255  Mask:255.255.255.0
+              UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+              RX packets:25 errors:0 dropped:0 overruns:0 frame:0
+              TX packets:43 errors:0 dropped:0 overruns:0 carrier:0
+              collisions:0 txqueuelen:1000
+              RX bytes:1092 (1.0 KiB)  TX bytes:2198 (2.1 KiB)
+              Interrupt:5
+root@API-run # ping -c1 10.10.10.4
+PING 10.10.10.4 (10.10.10.4) 56(84) bytes of data.
+64 bytes from 10.10.10.4: icmp_req=1 ttl=64 time=0.192 ms
+</code></pre>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

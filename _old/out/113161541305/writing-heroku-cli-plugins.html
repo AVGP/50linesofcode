@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Writing Heroku CLI plugins</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Writing Heroku CLI plugins</h2>
+										<p>March 9th 2015</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Writing Heroku CLI plugins
+Heroku's toolbelt is great. It allows you to access all of Herokus important features conveniently from the command line.</p>
+<p>But there may be situations where you would like to use the toolbelt but can't, because it doesn't have the desired feature.</p>
+<p>That's where the plugins come into play.</p>
+<h2>Plugins?</h2>
+<p>The toolbelt has a plugin architecture which allows you to install plugins via</p>
+<pre><code>$ heroku plugins:install &lt;Git URL&gt;
+</code></pre>
+<p>for example:</p>
+<pre><code>$ heroku plugins:install https://github.com/AVGP/heroku-build.git
+</code></pre>
+<p>The plugins will then behave exactly like built-in commands, for instance:</p>
+<pre><code>$ heroku build deploy.tar.gz v1.2.3
+</code></pre>
+<p>The <code>heroku build</code> command does not exist in the toolbelt itself, but in a plugin.</p>
+<h2>Our first plugin: Hello World</h2>
+<p>Medias in res - let's build a simple plugin that outputs the infamous &quot;Hello World!&quot; when we run <code>heroku hello</code> in a terminal.</p>
+<p>First of all, we need to create a new directory with a Ruby file (convention seems to be <code>init.rb</code> as the file name).</p>
+<p>The content of our plugin looks like this:</p>
+<pre><code>require 'heroku/command/base'
+
+class Heroku::Command::Hello &lt; Heroku::Command::Base
+  def index
+    display &quot;Hello World!&quot;
+  end
+end
+</code></pre>
+<p>There's not much going on so far:</p>
+<ol>
+<li>We include the Heroku Command namespace</li>
+<li>We create a new class <code>Hello</code> within that namespace</li>
+<li>We inherit from <code>Heroku::Command:Base</code> for that class</li>
+<li>We have a <code>index</code> method that <code>display</code>s the words &quot;Hello World&quot;</li>
+</ol>
+<p>Cool. Now we can put it on Github and run</p>
+<pre><code>heroku plugins:install https://github.com/YOUR_USERNAME/YOUR_REPO.git
+</code></pre>
+<p>and then</p>
+<pre><code>$ heroku hello
+Hello World
+$
+</code></pre>
+<p>Yay!</p>
+<p>Okay, but that isn't terribly useful so far. Let's do something for real!</p>
+<h1>A real plugin: List Dynos for an application</h1>
+<p>Now we want to use our newly-gained plugin developer skills to build a plugin that lists the state (&quot;up&quot; or &quot;idle&quot;), name (e.g. &quot;web.1&quot;) and application version for each <a href="https://devcenter.heroku.com/articles/dynos">Dyno</a> of a given app.</p>
+<p>So we'll be doing this:</p>
+<ol>
+<li>Create a new &quot;heroku-dynos&quot; plugin</li>
+<li>Have it carry out an API call to the <code>/dynos</code> endpoint (with authentication)</li>
+<li>List the dynos of the given application with name, state and code version</li>
+</ol>
+<p>To begin, create a new directory <code>heroku-dynos</code> with a fresh, empty <code>init.rb</code>. We'll use that as our clean slate for the new plugin.</p>
+<p>First of all, we need to inherit from <code>Heroku::Command::BaseWithApp</code> to get the <code>app</code> variable that is either the name of the current application we're in or uses the <code>--app</code> (or <code>-a</code> for short) parameter to set that name manually.</p>
+<p>Let's start with the - adjusted - basics:</p>
+<pre><code>require 'heroku/command/base'
+
+class Heroku::Command::Dynos &lt; Heroku::Command::BaseWithApp
+  def index
+    display &quot;Hello #{app}!&quot;
+  end
+end
+</code></pre>
+<p>Notice the <em>2</em> changes we've made? Good. Try running it from the directory of a Heroku application or use</p>
+<pre><code>$ heroku dynos -a &lt;Name&gt;
+</code></pre>
+<p>Great. Now on to using the <a href="https://devcenter.heroku.com/articles/platform-api-reference">Heroku Platform API</a> that has an endpoint to <a href="https://devcenter.heroku.com/articles/platform-api-reference#dyno-list">get all the Dynos for an application</a>. Cool.</p>
+<p>So we'll need to fetch the list of Dynos via HTTP and parse the JSON response. We create a <code>make_api_request</code> method for that:</p>
+<pre><code>require 'heroku/command/base'
+
+class Heroku::Command::Dynos &lt; Heroku::Command::BaseWithApp
+  def index
+    display &quot;Dynos for #{app}...&quot;
+  end
+
+  private
+
+  def make_api_request(url)
+    url = URI.parse(url)
+
+    req = Net::HTTP::Get.new(url.request_uri)
+    req.add_field(&quot;Accept&quot;, &quot;application/vnd.heroku+json; version=3&quot;)
+    req.add_field(&quot;Authorization&quot;, &quot;Bearer #{Heroku::Auth.password}&quot;)
+
+    res = Net::HTTP.start(url.host, url.port, nil, nil, nil, nil, {use_ssl: true}) { |http|
+      http.request(req)
+    }
+
+    JSON.parse(res.body)
+  end
+</code></pre>
+<p>The new method does not only contain the HTTP request for the API but also another handy detail: <code>Heroku::Auth.password</code> gives us access to the API token that is needed to carry out authenticated API calls.</p>
+<p>Now we'll write one more method that actually calls the <code>make_api_request</code> method and displays the Dynos as we wanted - with name, status and version of the code they run:</p>
+<pre><code>require 'heroku/command/base'
+
+class Heroku::Command::Dynos &lt; Heroku::Command::BaseWithApp
+  def index
+    display &quot;Dynos for #{app}...&quot;
+    list_dynos_for(app)
+  end
+
+  private
+
+  def make_api_request(url)
+    url = URI.parse(url)
+
+    req = Net::HTTP::Get.new(url.request_uri)
+    req.add_field(&quot;Accept&quot;, &quot;application/vnd.heroku+json; version=3&quot;)
+    req.add_field(&quot;Authorization&quot;, &quot;Bearer #{Heroku::Auth.password}&quot;)
+
+    res = Net::HTTP.start(url.host, url.port, nil, nil, nil, nil, {use_ssl: true}) { |http|
+      http.request(req)
+    }
+
+    JSON.parse(res.body)
+  end
+
+  def list_dynos_for(app)
+    dynos = make_api_request(&quot;https://api.heroku.com/apps/#{app}/dynos&quot;)
+    dynos.each do |dyno|
+      name    = dyno[&quot;name&quot;]
+      state   = dyno[&quot;state&quot;]
+      version = if dyno[&quot;release&quot;].nil?
+        &quot;unkown&quot;
+      else
+        dyno[&quot;release&quot;][&quot;version&quot;].to_s
+      end
+
+      display &quot;#{name} is #{state} and running version #{version}&quot;
+    end
+  end
+end
+</code></pre>
+<p>And with that, we have a fresh plugin that gives us a list of the dynos for any of our applications on Heroku:</p>
+<pre><code>$ heroku dynos -a some-app
+Dynos for some-app...
+web.1 is up and running version 6
+web.2 is up and running version 6
+</code></pre>
+<p>Have fun and I'm looking forward to the plugins you create with this! :)</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

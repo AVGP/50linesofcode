@@ -1,0 +1,14 @@
+<h1>MacOS, XAMPP und OAuth</h1><p>2011-12-16 09:18:47 GMT</p><article><p>All I needed yesterday was having the pecl OAuth-Extension for PHP running in my XAMPP on my Macbook (Lion).</p>
+<p>It turned out, that this was pretty hard to get - to preserve you from the pain I went through, here is my advice:</p>
+<p>First off, don&rsquo;t use the regular pecl from your Mac. It will break the module when compiling, so you need to use /Applications/XAMPP/xamppfiles/bin/pecl. To keep it short, I&rsquo;ll assume you noticed this and refer to it as &ldquo;pecl&rdquo;.</p>
+<p>When using this to install via &ldquo;pecl install oauth&rdquo; it first did its thing - but the resulting oauth.so could not be loaded by XAMPP with this notice:</p>
+<blockquote>
+<p>PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) &lsquo;oauth.so&rsquo; in Unknown on line 0</p>
+</blockquote>
+<p>To overcome this, you just need to correct the Architecture for config.</p>
+<p>To compile it like that, you need to go into /Applications/XAMPP/xamppfiles/temp/pear/download/oauth-&lt;VERSION&gt;/ and type</p>
+<blockquote>
+<p>$ sudo ./configure MACOSX_DEPLOYMENT_TARGET=10.7 CFLAGS=&ldquo;-arch x86_64 -g -Os -pipe -no-cpp-precomp&rdquo; CCFLAGS=&ldquo;-arch x86_64 -g -Os -pipe&rdquo; CXXFLAGS=&ldquo;-arch x86_64 -g -Os -pipe&rdquo; LDFLAGS=&ldquo;-arch x86_64 -arch i386 -bind_at_load&rdquo;</p>
+
+</blockquote>
+<p>Afterwards, you need to run &ldquo;make&rdquo;. If everything went fine, you now have modules/oauth.so. Now just copy oauth.so into /Applications/XAMPP/xamppfiles/lib/php/php-&lt;VERSION&gt;/extensions/no-debug-&lt;VERSION&gt;/extensions/ and enable it, adding extension=oauth.so in your php.ini.</p></article>

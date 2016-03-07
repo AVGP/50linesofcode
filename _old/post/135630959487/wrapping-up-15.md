@@ -1,0 +1,52 @@
+{
+  "title": "Wrapping up ‘15",
+  "date": "2015-12-21 09:00:34 GMT"
+}
+
+---
+
+#Wrapping up ‘15
+
+Now that I am winding down a bit, I get to take a look back at what's been a wonderful, crazy year. I would like to take this opportunity to share with you, chronologically, the many people I got to meet or meet again, the things that happened and left their impression on me and take a glimpse into 2016. So if you wonder what's been on my mind: read on.
+
+![](http://i.imgur.com/mCIRX7r.gif)
+
+At [Archilogic](http://beta.archilogic.com) we've made a range of big leaps forward. 
+* We've rolled out Virtual Reality support for Google Cardboard and Oculus Rift
+* We improved our realistic lighting pipeline, which is now faster, easily scalable and much more flexible.
+* We have and still constantly do improve on our user experience, giving it faster loading times, more intuitive controls and better visual quality
+* Besides OBJ we can now also export to DXF
+* We have improved our image recognition to create 3D models from 2D floorplans
+* We are about to launch a few amazing features that I can't talk about yet ;-)
+* We contributed back to open source, for instance to jQuery and Three.js
+
+I got to play with the [LEAP Motion](https://www.youtube.com/watch?v=0mxAVD8n_P8), the Myo, the Oculus Rift and [Google Tango](https://www.youtube.com/watch?v=XIslXPfvrlE) as well.
+
+I also had the humbling experience of visiting the LHC at CERN and go inside this impossible structure.
+
+![](http://i.imgur.com/8onJq3d.jpg)
+
+Also, we've grown our amazing team with great new members - it's a pleasure working with each and every one of our team members for me!
+
+As a bonus, I got to play around with Open Data from Zurich:
+
+![](http://i.imgur.com/zyrnPW7.gif)
+
+I am also so absolutely blown away and grateful to have a chance to meet so many bright, kind and amazing people and talk to so many different communities all over the world.
+
+It's been a dazzling **21 events** in **17 different countries** I got to visit this year! I am out of words for how humbled I am by this - I really hope that I could provide something insightful, useful and fun for each of these. I also met a lot of old and new friends and have been inspired in many surprising and different ways.
+
+I'd like to highlight a few events that stand out for me personally, but that doesn't mean the others aren't extraordinary and great, just a few stood out a bit more: RSConf in Minsk, DaFED, JSConf UY, MediterraneaJS and JSConf US (Last Call).
+
+* RSConf was well-done, full of great talks and workshops and speakers, organisers and attendees where great, bright folks and it was a pleasure being among them
+* DaFED is an exceptional regular meetup run by amazing and lovely folks that gave me an incredibly warm welcome and I am proud to have been part of this incredible event where great minds and enthusiasm come together to create a better future for their local community
+* JSConf Uruguay had been so supportive to me and managed to balance feeding our brains with inspiring content and making everybody mingle and chat - it has been a blast!
+* Mediterranea JS was a well-crafted meeting of a lovely bunch of people in Barcelona to discuss tech and community matters that took the best of many other events and combined it in a fruitful gathering that felt like a family meeting, despite the broad range of topics covered
+* JSConf US, the last call, had all the feels. The brilliant content that pushed things to the edge combined with what matters most in all our lives: Lovely people. It's been a very special event in that it discussed a lot of issues that are bigger than tech. It was focused on enabling people to unfold their full potential, together, as a community. And last but not least: It was a farewell to Laura and Chris, who made all this happen and inspired so many other events and communities to come up and prosper.
+
+So all in all, it's been a blast!
+
+![](https://scontent-frt3-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10408560_1813524935539207_6155732412690686496_n.jpg?oh=b9d7e6d9c3cc71a96c774624050ea46e&oe=570F0DAF)
+
+I wish you all a calm and joyful time and a good start to a great 2016!
+Martin

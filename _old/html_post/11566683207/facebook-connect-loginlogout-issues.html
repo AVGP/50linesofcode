@@ -1,0 +1,37 @@
+<h1>Facebook-Connect Login/Logout Issues?</h1><p>2011-10-17 10:00:05 GMT</p><article><p><strong>Facebook-pwned</strong></p>
+<p>After having fought with incomplete docs, outdated tutorials (ironically, this article will become outdated eventually) and weird behavior, I decided to give a kickstart to those, trying to get this (basically simple) thing done.</p>
+<p><strong>Create a login</strong></p>
+<p>First step after having followed the docs is to get the Login done via PHP-SDK.</p>
+<p>Believe me, you don&rsquo;t want the JS-Shit. Why? Because it will fuck up your logout.</p>
+<p>For some magical reason, having JS log me in while PHP logs the user out, the Javascript started some asynchronous black-magic and logged the user right back in.</p>
+<p>For whatever reason that is.</p>
+<p>So to get started, somewhere in your PHP init Facebook-SDK:</p>
+<blockquote>
+<p>$facebook = new Facebook(&lsquo;AppId&rsquo;,'AppSecret&rsquo;);</p>
+</blockquote>
+<p>Of course, you need to replace AppId and AppSecret with those of your app. In the template just create a link for login with facebook like this:</p>
+<blockquote>
+<p>&lt;a href=&ldquo;&lt;?php echo $facebook-&gt;getLoginUrl(); ?&gt;&rdquo;&gt;Login via Facebook&lt;/a&gt;</p>
+</blockquote>
+<p>You are done for login.</p>
+<p><strong>Create a logout</strong></p>
+<p>Now to logout. I assume you have some &ldquo;native&rdquo;-mechanism for login/logout in your web-application. For example, you log users out of the system by directing them to /logout.php.</p>
+<p>Reading the docs from Facebook, you&rsquo;ll easily figure out, that logout via Facebook goes like this:</p>
+<blockquote>
+<p>header('Location: &rsquo;.$facebook-&gt;getLogoutUrl());</p>
+<p>exit;</p>
+</blockquote>
+<p>Thats close. You might want to set a &ldquo;next&rdquo;-Param to that method call to get back onto the landing page. If you&rsquo;re lucky and have a framework, where you check for a Facebook-Session with every request coming in without login-credentials, you are fucked now.</p>
+<p>Because the before mentioned mechanism is not done properly. You will encounter the weird phenomenon, that you&rsquo;ll be logged in AGAIN after being logged out.</p>
+<p>After some freaking out, I found that to be caused by a remaining cookie, set from Facebook for my domain. So I deleted the cookie using</p>
+<blockquote>
+<p>setcookie('fbrs_&rsquo;.APP_ID,false,time()-10);</p>
+</blockquote>
+<p>with perfectly no result.</p>
+<p>After having tried a number of ways, googled for the problem (others had it too, but the cookie-stuff seems to have changed from the older SDK versions to 3.1) I saw Chrome telling me its a &ldquo;host-only&rdquo; cookie.</p>
+<p>Whatever that was supposed to be. After googling again, I found <em>its a cookie with no domain set.</em> And thats the trick: You need to call</p>
+<blockquote>
+<p>setcookie('fbrs_&rsquo;.APP_ID,false,time()-10,&rsquo;/&rsquo;,&ldquo;);</p>
+</blockquote>
+<p><span>which is </span>necessary<span>, because the default param is setting the current domain, not an empty string.</span></p>
+<p>I hope this post is helping at least some soul out there, struggling with that issue.</p></article>

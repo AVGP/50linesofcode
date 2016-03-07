@@ -1,0 +1,22 @@
+<h1>Debian Squeeze and Asus eeepc 1001p</h1><p>2012-04-19 10:00:56 GMT</p><article><p>Last year I got myself an Asus EEE pc 1001p and wanted to set it up with Debian.</p>
+<p>After reading the <a href="http://wiki.debian.org/DebianEeePC/Model/1005P">Debian eee Wiki</a>, I was convinced that it would be an easy task.</p>
+
+<p>Turns out: It wasn&rsquo;t.</p>
+<p>The setup itself was nice and smooth. Setting up WiFi, X11 and fluxbox without any hassle. Then the first reboot.</p>
+<p>After a few lines (up to udev, as it turns out) the screen went black.</p>
+<p>This made me wonder, if something was wrong with my X11 config. I removed X11. Still: The screen went black.</p>
+<p>I tried using &ldquo;nomodeset&rdquo; and several vga-modes in the boot command in Grub.</p>
+<p>No effect, screen went black.</p>
+
+<p>I also tried the &ldquo;acpi_os=Linux&rdquo; hint from the Debian eee Wiki.</p>
+<p>Does not work.</p>
+
+<p><strong>The real solution:</strong></p>
+<p>Today, by pure incident, I came across the <a href="https://bbs.archlinux.org/viewtopic.php?pid=714406#p714406">working solution</a>:</p>
+<blockquote>
+<pre><code>acpi_osi=Linux</code></pre>
+</blockquote>
+<p>To have this working, just hit &ldquo;e&rdquo; in the Grub menu, go to the &ldquo;linux &hellip;. quiet&rdquo; line and append the option mentioned above and hit CTRL+X to boot.</p>
+<p>You&rsquo;ll be just fine.</p>
+
+<div></div></article>

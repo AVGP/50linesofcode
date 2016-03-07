@@ -1,0 +1,124 @@
+<h1>Do you know the difference between Queue, MQ, ESB etc.?</h1><p>2014-02-11 11:00:44 GMT</p><article><p>Because I wasn&rsquo;t fully aware of it until today. This whole topic in that much detail is new to me - and this is a discussion start, so feel free to engage here.</p>
+
+<h2>TL;DR</h2>
+
+<p>The quick rundown:
+- Message Queues for asynchronous communication in your system
+- Message Brokers for loosely coupled components
+- Integration frameworks if you need to make them understand each other first
+- ESBs if you&rsquo;re facing a zoo of services and tricky requirements (e.g. governance)
+- Integration suites if you need BPM or MDM in the picture</p>
+
+<p>If you have input - I want to learn more!
+If you never heard most of those words from above - read on!</p>
+
+<h2>Naming things is hard!</h2>
+
+<blockquote>
+  <p>&ldquo;There are 2 hard problems in computer science: 
+   caching, naming, and off-by-1 errors&rdquo;</p>
+  
+  <p>&ndash; Phil Karlton</p>
+</blockquote>
+
+<p>This topic is a wonderful proof for the saying from above.<br/>
+Naming things is tricky - differentiation isn&rsquo;t always straight forward and there are grey areas everywhere.</p>
+
+<p>I think it is fundamentally important to know what you&rsquo;re talking about when the buzzwords start falling like raindrops on a rainy afternoon in autumn&hellip; and you should make sure everybody in the discussion has a cristal clear idea what you mean when you use them.<br/>
+If anybody is not on the same page with you on that, solution finding is going to be horrible.</p>
+
+<h2>Who&rsquo;s who?</h2>
+
+<p>We&rsquo;re gonna encounter the following players in the naming game:</p>
+
+<ul><li>Message transports / Queues</li>
+<li>Message brokers / Message queues</li>
+<li>Integration frameworks</li>
+<li>Enterprise Service Buses</li>
+<li>Integration Suites</li>
+</ul><p>So if you&rsquo;re thinking about using any of these terms read on!</p>
+
+<h2>Transports / Queues</h2>
+
+<p>Let&rsquo;s start with the simplest thing first: The message transports and queues.</p>
+
+<p>Those are relatively dumb.<br/>
+In the case of transports they&rsquo;re just pushing data around from A to B, generically speaking. Examples are Thrift, ICE, CORBA or ZeroMQ (0mq being a bit special, as it has some features of the next higher layer).</p>
+
+<p>Queues are dumb too. You push stuff in and take stuff out eventually. That&rsquo;s it. Examples are Pipes, ring-buffers, stacks or even DBs (e.g. Redis) can be used for this.</p>
+
+<p>These are primitive building blocks to implement interesting services on top of them. Those services may be able to masquerade the type of data structure they operate on, but choosing the solution with the proper data structure for your use case is important.<br/>
+Queues are great for asynchronous operations, where the time between pushing and removing doesn&rsquo;t matter so much, but messages should never be lost (as queues can be implemented as persistent storage), while message transport are great when the delay should be minimal or you want to fan out to a large audience - guarantees for delivery may be available, too - to a certain extent.</p>
+
+<h2>Message queues / Message brokers</h2>
+
+<p>A message queue uses a queue (well, duh!) to establish asynchronous communication between different parties (services for example) while adding a few features on top of the queue implementation, such as:</p>
+
+<ol><li>Durability (resilience)</li>
+<li>Policies (e.g. message TTL, terms of delivery, batching, etc)</li>
+<li>Security (access control)</li>
+<li>Routing (pub/sub, point-to-point, etc.)</li>
+</ol><p>Message brokers, on the other hand, provide loose coupling between components without necessarily being asynchronous or queue-based at all. They, too, provide a few additional services on top of their lower layer:</p>
+
+<ol><li>Routing</li>
+<li>Multiplexing / De-multiplexing (i.e. aggregation and decomposition of messages from/into multiple messages to different receipients)</li>
+<li>Security</li>
+<li>Policies</li>
+<li>Durability (resilience)</li>
+<li>Transformation (translation of messages between formats)</li>
+</ol><p>Here things usually get blurry - many solutions are both (message queue and message broker) - for example RabbitMQ or QDB.<br/>
+Samples for message queues are Gearman, IronMQ, JMS, SQS or MSMQ.<br/>
+Message broker examples are Qpid, Open AMQ or ActiveMQ.</p>
+
+<p>Again, things are hard to tell apart&hellip; especially with popular tools like RabbitMQ being citizen of both worlds it is tricky to make sure everybody is on the same page&hellip;</p>
+
+<p>So now we had a look at this layer, it becomes clear that message queues are great if you&rsquo;re just after making some components asynchronous - but there&rsquo;s a gradient into the world of message brokers, which can also be asynchronous, but provide more sophisticated communication patterns.<br/>
+Message brokers aim primarily for decoupling and help integrating different components, without having to know too much about your communication partners. For this to work, they provide the transformation functionality to make sure the peers can understand each other.</p>
+
+<p>If you ever find yourself implementing message transformation on top of a message queue, you know have a way to avoid that!</p>
+
+<h2>Integration frameworks</h2>
+
+<p>This is often meant when people bring &ldquo;Enterprise Service Bus&rdquo; to the table, but it isn&rsquo;t as powerful as one, yet more powerful than message brokers.</p>
+
+<p>Integration frameworks are basically specialized message brokers for integrating different pieces of software with each other.<br/>
+They usually ship with a selection of connectors (e.g. FTP, HTTP, AMQP, SMTP and what not). They may also support some enterprise application integration patterns (<a href="http://www.eaipatterns.com/">EAI patterns</a>).</p>
+
+<p>Examples for those beasts are Spring Integration Framework or Apache Camel.</p>
+
+<p>These are great if you&rsquo;re going to make different systems talk to and understand each other. If you&rsquo;re building something that speaks the same language anyway, you may be better off with a message queue or message broker, I guess.</p>
+
+<h2>Enterprise Service Buses</h2>
+
+<p>This is a widely-used buzzword. So what&rsquo;s this thing about, then?</p>
+
+<p>This is the go-to solution for service-oriented architectures - it&rsquo;s basically a really smart and resilient integration framework.</p>
+
+<p>In addition to the integration framework it provides:</p>
+
+<ul><li>Monitoring of the services and the messages passed between them</li>
+<li>Deployment and service version controlling</li>
+<li>Scheduling, mapping, QoS management, error handling and more</li>
+<li>load balancing between services of the same type and concurrency control</li>
+</ul><p>The twist is, that most functionality is actually provided as a service on the bus - routing for example or transformations.</p>
+
+<p>ESBs come with a host of tools for Monitoring, Auditing, managing routes and service bindings, etc. That&rsquo;s really handy for critical messaging between a large number of components within one system.</p>
+
+<p>Samples for ESBs are Apache ServiceMix or Synapse, BizTalk, JBoss ESB, Open ESB or Mule.</p>
+
+<h2>Integration Suites</h2>
+
+<p>Last but not least: Integration Suites.<br/>
+Those add even more on top of the ESBs, such as:</p>
+
+<ul><li>BPM integration</li>
+<li><a href="http://en.wikipedia.org/wiki/Master_data_management">MDM</a> services</li>
+</ul><p>So the integration suites are basically ESBs with business process logic on top.</p>
+
+<h2>Wrap-up</h2>
+
+<p>Phew. What a ride. I am pretty sure I missed something, maybe I even misunderstood bits and pieces - but one thing is clear: It&rsquo;s important to figure out what exactly you want and how it&rsquo;s actually called.</p>
+
+<p>If you just want to decouple components of a small system, an ESB may be overkill but if you need to take data quality or governance into account, it may not even be enough for you.</p>
+
+<p>I&rsquo;m looking forward to hear your input :)</p></article>

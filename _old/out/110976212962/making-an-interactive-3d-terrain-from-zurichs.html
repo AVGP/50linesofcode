@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Making an interactive 3D terrain from Zurich's open geo data with Three.js</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Making an interactive 3D terrain from Zurich's open geo data with Three.js</h2>
+										<p>February 14th 2015</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Making an interactive 3D terrain from Zurich's open geo data with Three.js</p>
+<h1>Preface</h1>
+<p>A few days ago I stumbled upon <a href="https://twitter.com/OpenDataZurich/status/565201408077856769">this tweet</a> from  <a href="https://twitter.com/opendatazurich">@OpenDataZurich</a>:</p>
+<blockquote>
+<p>Hochaufgelöste Höhendaten des @kantonzuerich neu als #opendata verfügbar! are.zh.ch/internet/baudi… by @GISZentrumZH ^si</p>
+</blockquote>
+<p>So I checked them out in the <a href="http://maps.zh.ch/mobile?topic=LidarZH&amp;offlayers=dom2014hillshade&amp;over=UpBackgroundZH">GIS browser</a> and was hit by the possibilities this meant.</p>
+<p>The data contains three interesting things:</p>
+<ul>
+<li>the output files of the actual measurement done with the <a href="http://en.m.wikipedia.org/wiki/Lidar">LIDAR</a></li>
+<li>the Digital Terrain Model (i.e. the pure terrain without buildings or vegetation) data</li>
+<li>the digital surface model (in German &quot;Digitales Oberflächen Modell, DOM)</li>
+</ul>
+<p>I am particularly interested in the latter, as it allows for a number of ideas to become possible!</p>
+<p>Some of the things that came to my mind:</p>
+<ul>
+<li>make an interactively explorable model from the data to allow getting a 3D look at Zurich</li>
+<li>hook it up to a physics engine and do a few neat simulations</li>
+<li>pair it with VR (e.g. the Oculus Rift or the Google Cardboard) and make it walkable</li>
+</ul>
+<h1>There's the data. Now what?</h1>
+<p>Alright, enough ideas, let's go!
+So first of all, I navigated into <a href="http://maps.zh.ch/download/hoehen/2014/dom/tif/">the directory that holds all the surface model data</a> and hunted for the tile that I identified using the GIS browser beforehand - in my case the tile <code>6830_2470.tif</code> that holds part of the city center. <a href="http://maps.zh.ch/download/hoehen/2014/dom/tif/6830_2470.tif">This is the one I'm talking about</a>.</p>
+<p>Okay, now I have a TIFF image that contains geo data. Now what?
+Googling brought me to <a href="http://trac.osgeo.org/geotiff/">the GeoTIFF website</a> with a lot of information on the format, but I wondered if I really have to parse it myself.</p>
+<p>Obviously, I didn't have to. As nearly always <a href="https://www.npmjs.com/package/geo-pixel-stream">npm got me covered with geo-pixel-stream</a> from the folks at <a href="https://www.mapbox.com/">MapBox</a>!
+<a href="https://github.com/rclark">Ryan Clark</a>, if you read this: Thanks man!</p>
+<p>Okay, so I wrote a small script to do some evaluation of what the heck I will get from the file:</p>
+<pre><code>var ps = require('geo-pixel-stream'),
+    readers = ps.createReadStreams('data.tif');
+
+console.log(readers.length);
+console.log(readers[0].metadata);
+
+readers[0].on('data', function(data) {
+  console.log(&quot;
+</code></pre>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

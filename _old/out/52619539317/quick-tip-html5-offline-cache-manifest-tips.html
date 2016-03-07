@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Quick tip: HTML5 offline cache manifest tips</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Quick tip: HTML5 offline cache manifest tips</h2>
+										<p>June 10th 2013</p>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<p>#Quick tip: HTML5 offline cache manifest tips
+If you want to leverage the power of the HTML5 offline caching, together with Cross Origin AJAX, you may see failing requests.</p>
+<p>In addition you should specify a timestamp and/or a version number to easily give browsers a possibility to update their cache.</p>
+<p>The trick is, to specify your &quot;local&quot; (i.e. &quot;belonging to your app&quot;) assets, such as HTML, CSS, JS and image files) explicitely in the caching section of your cache manifest and mark everthing else explicitely as &quot;always download&quot;. In my example the file looks like this:</p>
+<pre><code>CACHE MANIFEST
+# 2013-06-07v3
+
+index.html
+img/icon.png
+img/loader.gif
+css/app.css
+js/app.js
+js/controller.js
+js/directives.js
+js/services.js
+components/quojs/quo.debug.js
+components/lungo.brownie/lungo.js
+components/moment/min/moment.min.js
+components/lungo.brownie/lungo.theme.css
+components/lungo/lungo.icon.css
+components/lungo/lungo.css
+components/lungo-angular-bridge/dist/lungo-angular-bridge.js
+components/angular/angular.js
+
+NETWORK:
+*
+</code></pre>
+<p>The last section, captioned &quot;NETWORK&quot; lets the browser download everything that is <em>not</em> mentioned in the previous section of the manifest.</p>
+<p>I saw failing requests in my Chrome Webapp without specifying the other requests as non-cached.</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

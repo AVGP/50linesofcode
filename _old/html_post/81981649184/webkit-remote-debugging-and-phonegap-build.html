@@ -1,0 +1,31 @@
+<h1>Webkit Remote Debugging and Phonegap Build</h1><p>2014-04-07 11:00:27 GMT</p><article><p>Debugging has been a problem in hybrid app development over the recent years.</p>
+
+<p>Yes, there has been <a href="http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html">WeinRE</a> or <a href="http://emulate.phonegap.com/">Ripple</a> to ease the test and debug pains or the logs from the device if everything else did not help - but it was no substitution for the debugging tools we have for normale websites and running the application in a normal browser (vs. the embedded web view of Phonegap).</p>
+
+<h2>Enter Webview Debug</h2>
+
+<p>As explained on the <a href="https://github.com/phonegap/phonegap/wiki/Debugging-in-PhoneGap">Phonegap Debugging Guide</a> there&rsquo;s a new way to debug Phonegap applications on devices running Android 4.4: <a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging#debugging-webviews">Webkit remote debugging</a>.</p>
+
+<h2>Setup</h2>
+
+<h3>Cordova 3.3</h3>
+
+<p>Cordova 3.3 has the webkit debugging enabled, if you set the debuggable flag in the <code>AndroidManifest.xml</code> and the <code>targetSdkVersion</code> to 19.
+On Phonegap Build you just need to enable debugging and adjust the SDK version, no modifications in the AndroidManifest.xml are needed.</p>
+
+<h3>Cordova 3.2</h3>
+
+<p>With Cordova 3.2 you&rsquo;ll need to add some code to make the Web view debuggable or you use <a href="https://github.com/jrstarke/webview-debug">this handy plugin</a>.</p>
+
+<h2>Using the dev tools</h2>
+
+<p>You need to connect your device via USB to the computer you want to use the Chrome Dev tools on.</p>
+
+<p>Then run <code>adb list devices</code> to see if the device is ready for debugging. If it doesn&rsquo;t show up, you <a href="http://developer.android.com/tools/device.html">need to enable USB debugging</a>.</p>
+
+<p>Open <a href="chrome://inspect">chrome://inspect</a> in the Chrome browser and enable &ldquo;discover USB devices&rdquo;.</p>
+
+<p>When you launch the app on the phone, it should appear in the list. 
+By clicking on it, you can start using the full dev tools suite to debug your hybrid app now.</p>
+
+<p><img src="https://developers.google.com/chrome-developer-tools/docs/remote-debugging/about-inspect-webview.gif" alt=""/></p></article>

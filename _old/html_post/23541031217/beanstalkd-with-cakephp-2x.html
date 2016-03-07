@@ -1,0 +1,63 @@
+<h1>Beanstalkd with CakePHP 2.x</h1><p>2012-05-22 12:25:13 GMT</p><article><p><strong>Beanstalkd? What? Why?</strong></p>
+<p>When you need to carry out background tasks (e.g. processing a video file, fetching RSS feeds or sending a huge amount of emails) with PHP, it&rsquo;s usually a good idea to use an independent daemon to do the work.</p>
+<p>This way, the user does not have to wait until the task is done and there is no risk of aborting the task because the user leaves or something goes wrong between server and client.</p>
+<p>The use of a separate process handling the task brings up the problem of communicating the task between the handling script run by the webserver (taking the request from the user) and the processing script, performing the task with given parameters. For this purpose, there are many different message queue systems: Memcache, <a href="http://activemq.apache.org/amq-message-store.html">AMQ</a> and <a href="http://kr.github.com/beanstalkd/">Beanstalkd</a>.</p>
+
+<p><strong>Setup Beanstalk and the CakePHP Plugin</strong></p>
+<p>When you are on a Debian system, you have it simple: </p>
+<blockquote>
+<p>apt-get install beanstalkd</p>
+</blockquote>
+<p>Then edit /etc/defaults/beanstalkd and run</p>
+<blockquote>
+<p>/etc/init.d/beanstalkd start</p>
+</blockquote>
+<p>And you&rsquo;re ready.</p>
+<p>There are client libraries for a lot of different programming languages and with CakePHP you can take advantage of a plugin, which makes it really simple.</p>
+<p><a href="https://github.com/davidpersson/queue">The plugin</a> was originally written for CakePHP 1.x, but there is a fork for <a href="https://github.com/carlipa/cakephp-queue">2.x</a>.</p>
+<p>To use it, just go to your app/Plugin directory and run</p>
+<blockquote>
+<p>git clone <a href="https://github.com/carlipa/cakephp-queue">https://github.com/carlipa/cakephp-queue</a> Queue</p>
+</blockquote>
+<p>and edit your bootstrap.php to have the line</p>
+<blockquote>
+<p> CakePlugin::loadAll(); // Loads all plugins at once</p>
+</blockquote>
+<p>and finally include in your database.php</p>
+<blockquote>
+<p>    public $queue = array(&lsquo;datasource&rsquo; =&gt; 'Queue.BeanstalkdSource&rsquo;);</p>
+</blockquote>
+<p>This is not well-documented in the plugin&rsquo;s README.</p>
+
+<p><strong>The Producer: Beanstalkd in the Controller</strong></p>
+<p>The script that should trigger the daemon to do something (i.e. an action in a controller, called by the user visiting a URL) is called the &ldquo;Producer&rdquo; from Beanstalkd&rsquo;s perspective.</p>
+<p>To create a job in the Beanstalkd &ldquo;default&rdquo; tube have this in your controller:</p>
+<blockquote>
+<p>    public $uses = array('SomeModel&rsquo;, 'Queue.Job&rsquo;);</p>
+<p>    public $tube = 'default&rsquo;;</p>
+</blockquote>
+<p>That allows you to use Beanstalkd on the &ldquo;default&rdquo; tube from the controller.</p>
+<p>To finally put a Job to the Queue do this:</p>
+<blockquote>
+<p>public function someAction() {</p>
+<p>    $this-&gt;Job-&gt;put(array(</p>
+<p>        'body&rsquo; =&gt; array(&hellip;)</p>
+<p>    ));</p>
+<p>&hellip; </p>
+</blockquote>
+<p>This puts the values of &ldquo;body&rdquo; into the job in the &ldquo;default&rdquo; tube.</p>
+
+<p><strong>The Daemon - A worker</strong></p>
+<p>To process the jobs and perform the actual tasks (with the data passed in throught the job&rsquo;s body) you could for example write your own CakePHP shell. The Shell itself should contain:</p>
+<blockquote>
+<p>public $uses = array('Queue.Job&rsquo;, 'Repository&rsquo;, 'Testdrive&rsquo;);</p>
+<p>public $tubes = array('default&rsquo;);</p>
+</blockquote>
+<div>And to fetch (and delete) the job from the tube:</div>
+<blockquote>
+<div>
+<div>$job = $this-&gt;Job-&gt;reserve(array('tube&rsquo; =&gt; $this-&gt;tubes));</div>
+</div>
+<div>$this-&gt;Job-&gt;delete();</div>
+</blockquote>
+<div>All the parameters you passed through &ldquo;body&rdquo; in the producing action is now in $job['body&rsquo;] and can be used to do whatever you need.</div></article>
