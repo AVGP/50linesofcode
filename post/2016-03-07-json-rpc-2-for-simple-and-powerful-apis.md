@@ -48,10 +48,71 @@ JSON-RPC is an RPC-mechanism that uses JSON to encode the procedure call.
 [The specification](http://www.jsonrpc.org/specification) is rather short and easy to digest.
 It outlines how to call an operation on the server, how messages should look like and how to handle errors.
 
-Here's the basics:
+### Message content
 
+Each message has to be valid JSON, containing the following elements:
 
+* `jsonrpc` with a value of `2.0` to mark this as a valid JSON-RPC 2.0 message
+* `method` with any string that identifies a valid procedure on the server
+
+In addition to these two mandatory fields, there's two more optional ones:
+
+* `id` that can be any string or integer (theoretically also `null` but that's discouraged)
+* `params` which can be a dictionary with parameter names and corresponding values or an array of unnamed parameters
+
+### Notifications
+
+The fact that `id` is optional might be surprising at first, but the reason is rather simple:
+If you need to call a procedure but you do not care about the result, you can send a so-called *notification*, which is a JSON-RPC message without the `id`.
+
+The result of a JSON-RPC call with an ID will be answered by the server with a response containing the same ID.
+A *notification* on the other hand (JSON-RPC call without ID) must never be getting a response from the server.
+
+### Response: Result or error
+
+#### The response message format
+
+Any response has two mandatory fields:
+
+* `jsonrpc` with the value "2.0" to indicate a JSON-RPC v2.0 message
+* `id` which has the same value as the corresponding procedure call message
+
+#### Success or error
+
+Success or error responses are defined by two simple parameters in the response message:
+
+* `result` for successful calls
+* `error` for anything else
+
+Only one of the two can be present in the response - it's either an error or a result.
+
+#### Results
+
+The `result` field can contain any data, including a dictionary, like the `params` field. This holds the result of the called procedure.
+
+#### Errors
+
+Errors have a predefined format, but still allow for free-form data along the predefined fields.
+
+The contents of the `error` field should look like this:
+
+* `code` is an (usually negative) integer (see below for reserved error codes)
+* `message` a short (usually a single sentence) human-readable error message
+* `data` is a free-form field that can contain any data you'd like to pass along with the error response
+
+#### Error codes
+
+There are predefined, reserved values for the `code` field:
+
+| Value | Meaning | Description |
+| ----- | ------- | ----------- |
+| -32700 | Parse error | The message could not be parsed as JSON |
+| -32600 | Invalid message | The message is not a valid JSON-RPC request |
+| -32601 | Invalid method | The requested method does not exist or isn't available |
+| -32602 | Invalid params | The specified parameters are invalid or do not fit this method |
+| -32603 | Internal error | An internal server error has happened |
+| -32000 to -32099 | Implementation-defined | The JSON-RPC implementation can define these freely |
+
+All other error codes can be used as application-specific error codes.
 
 ## Implementations
-
-## The good, the bad, the ugly
