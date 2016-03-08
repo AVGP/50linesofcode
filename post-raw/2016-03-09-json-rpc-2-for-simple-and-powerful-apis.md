@@ -1,12 +1,20 @@
 {
-  "title": "JSON RPC 2.0 - for simple and powerful APIs"
-  "date": "2016-03-07 16:25:00 GMT"
+  "title": "JSON RPC 2.0 - for simple and powerful APIs",
+  "date": "2016-03-09"
 }
+
+---
 
 # JSON RPC 2.0
 ## For simple and powerful APIs
 
 ## TL;DR
+
+JSON-RPC 2.0 is a *operation-oriented*, *transport-agnostic* way to call methods on a server by using JSON-messages.
+It supports *batching of operations* as well as so-called notifications aka "fire &amp; forget".
+The specification is rather short (921 words, including sample code and tables) and easy to implement and there's a variety of implementations available to choose from.
+
+![](/images/post-images/json_rpc_omit.gif)
 
 ## REST or RPC
 
@@ -47,6 +55,11 @@ Also, depending on the implementation of RPC, you may not fully leverage the tra
 JSON-RPC is an RPC-mechanism that uses JSON to encode the procedure call.
 [The specification](http://www.jsonrpc.org/specification) is rather short and easy to digest.
 It outlines how to call an operation on the server, how messages should look like and how to handle errors.
+
+JSON-RPC is also transport-agnostic so you can transmit these messages by any means of your liking, e.g. HTTP, Web Sockets or messenger pidgeon depending [on what's the fastest in your region](http://news.bbc.co.uk/2/hi/africa/8248056.stm).
+
+It also allows another nice thing: Batch requests.
+Batch requests means that a single message can contain multiple procedure calls in one batch and the response will contain the results for each of the calls, again as one batch. This really comes to shine, if all methods can work in parallel and thus the time until the response can be generated is limited to the slowest procedure.
 
 ### Message content
 
@@ -115,4 +128,12 @@ There are predefined, reserved values for the `code` field:
 
 All other error codes can be used as application-specific error codes.
 
-## Implementations
+### Implementations
+
+If this all sounded promising, you might be happy to find that not only the specification is [rather short and comprehensible](http://www.jsonrpc.org/specification), but there's also many implementations to pick from.
+
+Alternatively, especially when you use a subset of JSON-RPC 2.0 for internal purposes, implementing a custom client isn't that much effort.
+
+[The npm module for server and client, including websocket and raw socket support](https://www.npmjs.com/package/json-rpc2) for instance has ~43k lines of code, but the simplistic client I am using in an internal project has 50 lines of javascript.
+
+[The incomplete list of implementations](https://en.wikipedia.org/wiki/JSON-RPC#Implementations) covers you for most of the programming languages and use cases, so go ahead and try it out!
