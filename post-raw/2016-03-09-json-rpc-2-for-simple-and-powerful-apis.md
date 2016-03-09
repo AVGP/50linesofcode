@@ -1,10 +1,4 @@
-{
-  "title": "JSON RPC 2.0 - for simple and powerful APIs",
-  "date": "2016-03-09"
-}
-
----
-
+<!-- JSON RPC 2.0 - for simple and powerful APIs -->
 # JSON RPC 2.0
 ## For simple and powerful APIs
 
@@ -33,7 +27,7 @@ It's also worth mentioning that many people conflate "REST" with the HTTP implem
 But now, without further ado, let's see how different common tasks look like when implemented as REST or RPC:
 
 | Purpose | (HTTP-)REST | RPC |
-| ------- | ----------- | --- |
+| --- | --- | --- |
 | Get list of users | GET /users | users.list |
 | Add new user | POST /users | users.create |
 | Edit user | PUT /users/id | users.edit(id) |

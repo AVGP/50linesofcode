@@ -47,7 +47,6 @@
 								<div class="container">
 									<header class="major">
 										<h2>JSON RPC 2.0 - for simple and powerful APIs</h2>
-										<p>March 9th 2016</p>
 									</header>
 								</div>
 							</section>
@@ -55,23 +54,155 @@
 						<!-- Top articles -->
 							<section id="main">
 								<div class="container">
-								<h1>JSON RPC 2.0</h1>
-<h2>For simple and powerful APIs</h2>
-<h2>TL;DR</h2>
-<p>JSON-RPC 2.0 is a <em>operation-oriented</em>, <em>transport-agnostic</em> way to call methods on a server by using JSON-messages.
-It supports <em>batching of operations</em> as well as so-called notifications aka &quot;fire &amp; forget&quot;.
-The specification is rather short (921 words, including sample code and tables) and easy to implement and there's a variety of implementations available to choose from.</p>
-<p><img src="/images/post-images/json_rpc_omit.gif" alt="" /></p>
-<h2>REST or RPC</h2>
-<p>In the recent years, we've made <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> the gold standard of APIs.</p>
-<p>It's nice in many cases, because the web is fundamentally about transferring and modifying resources. However, this is not always a good fit for an application.</p>
-<p>Generally speaking, REST is an architecture pattern that defines a few constraints. These constraints aren't per se incompatible with <a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>.</p>
+								<h1 id="json-rpc-2-0">JSON RPC 2.0</h1>
+<h2 id="for-simple-and-powerful-apis">For simple and powerful APIs</h2>
+<h2 id="tl-dr">TL;DR</h2>
+<p>JSON-RPC 2.0 is a <em>operation-oriented</em>, <em>transport-agnostic</em> way to call methods on a server by using JSON-messages.<br>It supports <em>batching of operations</em> as well as so-called notifications aka &quot;fire &amp; forget&quot;.<br>The specification is rather short (921 words, including sample code and tables) and easy to implement and there&#39;s a variety of implementations available to choose from.</p>
+<p><img src="/images/post-images/json_rpc_omit.gif" alt=""></p>
+<h2 id="rest-or-rpc">REST or RPC</h2>
+<p>In the recent years, we&#39;ve made <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> the gold standard of APIs.</p>
+<p>It&#39;s nice in many cases, because the web is fundamentally about transferring and modifying resources. However, this is not always a good fit for an application.</p>
+<p>Generally speaking, REST is an architecture pattern that defines a few constraints. These constraints aren&#39;t per se incompatible with <a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a>.</p>
 <p>The big difference between the two styles is in the way you think and communicate between client and server:</p>
 <p>In REST architectures you are concerned with <strong>resources</strong> and how to represent and modify them, while in RPC you are concerned with <strong>operations</strong>.</p>
-<p>It's also worth mentioning that many people conflate &quot;REST&quot; with the HTTP implementation of REST, which isn't the only way to implement a REST-API.</p>
-<p>But now, without further ado, let's see how different common tasks look like when implemented as REST or RPC:</p>
-<p>| Purpose | (HTTP-)REST | RPC |
-|</p>
+<p>It&#39;s also worth mentioning that many people conflate &quot;REST&quot; with the HTTP implementation of REST, which isn&#39;t the only way to implement a REST-API.</p>
+<p>But now, without further ado, let&#39;s see how different common tasks look like when implemented as REST or RPC:</p>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>(HTTP-)REST</th>
+<th>RPC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Get list of users</td>
+<td>GET /users</td>
+<td>users.list</td>
+</tr>
+<tr>
+<td>Add new user</td>
+<td>POST /users</td>
+<td>users.create</td>
+</tr>
+<tr>
+<td>Edit user</td>
+<td>PUT /users/id</td>
+<td>users.edit(id)</td>
+</tr>
+<tr>
+<td>Delete user</td>
+<td>DELETE /users/id</td>
+<td>users.delete(id)</td>
+</tr>
+<tr>
+<td>Login</td>
+<td>POST /users/login</td>
+<td>users.login</td>
+</tr>
+<tr>
+<td>Calculate shipping fee</td>
+<td>GET /orders/shipping/fee</td>
+<td>orders.calculateShipping</td>
+</tr>
+</tbody>
+</table>
+<p>While one might choose to implement the last two rows differently in REST, it comes to show that for <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> operations REST, especially HTTP-REST, is very obvious.<br>However when there is operations beyond those basic operations, REST isn&#39;t as obvious (is &quot;login&quot; a <code>POST</code> to <code>/sessions</code> or rather a separate operation on <code>/users</code>?).</p>
+<p>For RPC, on the other hand, the freedom in how you name and structure your API might be overwhelming and can easily lead to inconsistency.</p>
+<p>Also, depending on the implementation of RPC, you may not fully leverage the transport mechanism - but if you have to serve different transport mechanisms at the same time, this may not be a big downside either.</p>
+<p><strong>In short: REST is concerned with resources, RPC with operations</strong> - pick what suits your application and domain best.</p>
+<h2 id="json-rpc">JSON-RPC</h2>
+<p>JSON-RPC is an RPC-mechanism that uses JSON to encode the procedure call.<br><a href="http://www.jsonrpc.org/specification">The specification</a> is rather short and easy to digest.<br>It outlines how to call an operation on the server, how messages should look like and how to handle errors.</p>
+<p>JSON-RPC is also transport-agnostic so you can transmit these messages by any means of your liking, e.g. HTTP, Web Sockets or messenger pidgeon depending <a href="http://news.bbc.co.uk/2/hi/africa/8248056.stm">on what&#39;s the fastest in your region</a>.</p>
+<p>It also allows another nice thing: Batch requests.<br>Batch requests means that a single message can contain multiple procedure calls in one batch and the response will contain the results for each of the calls, again as one batch. This really comes to shine, if all methods can work in parallel and thus the time until the response can be generated is limited to the slowest procedure.</p>
+<h3 id="message-content">Message content</h3>
+<p>Each message has to be valid JSON, containing the following elements:</p>
+<ul>
+<li><code>jsonrpc</code> with a value of <code>2.0</code> to mark this as a valid JSON-RPC 2.0 message</li>
+<li><code>method</code> with any string that identifies a valid procedure on the server</li>
+</ul>
+<p>In addition to these two mandatory fields, there&#39;s two more optional ones:</p>
+<ul>
+<li><code>id</code> that can be any string or integer (theoretically also <code>null</code> but that&#39;s discouraged)</li>
+<li><code>params</code> which can be a dictionary with parameter names and corresponding values or an array of unnamed parameters</li>
+</ul>
+<h3 id="notifications">Notifications</h3>
+<p>The fact that <code>id</code> is optional might be surprising at first, but the reason is rather simple:<br>If you need to call a procedure but you do not care about the result, you can send a so-called <em>notification</em>, which is a JSON-RPC message without the <code>id</code>.</p>
+<p>The result of a JSON-RPC call with an ID will be answered by the server with a response containing the same ID.<br>A <em>notification</em> on the other hand (JSON-RPC call without ID) must never be getting a response from the server.</p>
+<h3 id="response-result-or-error">Response: Result or error</h3>
+<h4 id="the-response-message-format">The response message format</h4>
+<p>Any response has two mandatory fields:</p>
+<ul>
+<li><code>jsonrpc</code> with the value &quot;2.0&quot; to indicate a JSON-RPC v2.0 message</li>
+<li><code>id</code> which has the same value as the corresponding procedure call message</li>
+</ul>
+<h4 id="success-or-error">Success or error</h4>
+<p>Success or error responses are defined by two simple parameters in the response message:</p>
+<ul>
+<li><code>result</code> for successful calls</li>
+<li><code>error</code> for anything else</li>
+</ul>
+<p>Only one of the two can be present in the response - it&#39;s either an error or a result.</p>
+<h4 id="results">Results</h4>
+<p>The <code>result</code> field can contain any data, including a dictionary, like the <code>params</code> field. This holds the result of the called procedure.</p>
+<h4 id="errors">Errors</h4>
+<p>Errors have a predefined format, but still allow for free-form data along the predefined fields.</p>
+<p>The contents of the <code>error</code> field should look like this:</p>
+<ul>
+<li><code>code</code> is an (usually negative) integer (see below for reserved error codes)</li>
+<li><code>message</code> a short (usually a single sentence) human-readable error message</li>
+<li><code>data</code> is a free-form field that can contain any data you&#39;d like to pass along with the error response</li>
+</ul>
+<h4 id="error-codes">Error codes</h4>
+<p>There are predefined, reserved values for the <code>code</code> field:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-32700</td>
+<td>Parse error</td>
+<td>The message could not be parsed as JSON</td>
+</tr>
+<tr>
+<td>-32600</td>
+<td>Invalid message</td>
+<td>The message is not a valid JSON-RPC request</td>
+</tr>
+<tr>
+<td>-32601</td>
+<td>Invalid method</td>
+<td>The requested method does not exist or isn&#39;t available</td>
+</tr>
+<tr>
+<td>-32602</td>
+<td>Invalid params</td>
+<td>The specified parameters are invalid or do not fit this method</td>
+</tr>
+<tr>
+<td>-32603</td>
+<td>Internal error</td>
+<td>An internal server error has happened</td>
+</tr>
+<tr>
+<td>-32000 to -32099</td>
+<td>Implementation-defined</td>
+<td>The JSON-RPC implementation can define these freely</td>
+</tr>
+</tbody>
+</table>
+<p>All other error codes can be used as application-specific error codes.</p>
+<h3 id="implementations">Implementations</h3>
+<p>If this all sounded promising, you might be happy to find that not only the specification is <a href="http://www.jsonrpc.org/specification">rather short and comprehensible</a>, but there&#39;s also many implementations to pick from.</p>
+<p>Alternatively, especially when you use a subset of JSON-RPC 2.0 for internal purposes, implementing a custom client isn&#39;t that much effort.</p>
+<p><a href="https://www.npmjs.com/package/json-rpc2">The npm module for server and client, including websocket and raw socket support</a> for instance has ~43k lines of code, but the simplistic client I am using in an internal project has 50 lines of javascript.</p>
+<p><a href="https://en.wikipedia.org/wiki/JSON-RPC#Implementations">The incomplete list of implementations</a> covers you for most of the programming languages and use cases, so go ahead and try it out!</p>
 
 								</div>
 							</section>
