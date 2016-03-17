@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Five rules to stay sane and efficient when handling downtimes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Naumann</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#top">The greatest</a></li>
+						<li><a href="#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Five rules to stay sane and efficient when handling downtimes</h2>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<h1 id="five-rules-to-stay-sane-and-efficient-when-handling-downtimes">Five rules to stay sane and efficient when handling downtimes</h1>
+<h2 id="best-practices-for-handling-incidents">Best practices for handling incidents</h2>
+<p>Downtimes, Crashes, Incidents, System Failures - they have many names, but most people involved with technology to some degree have experienced at least one at some point in their career.</p>
+<p>I&#39;ve seen many different teams and many different incarnations of the above-mentioned situations. I&#39;ve been on the different sides of them: The user, the developer, the system administrator, the site reliability engineer and the consultant.</p>
+<p>Some of them I have caused, some of them I helped to resolve and in some of them I was a mere bystander.</p>
+<p>This post is the distilled essence on how different teams that I had the pleasure of being a member, dealt and deal with the stress and the specific characteristics of these tense situations to ensure timely and proper resolution.</p>
+<h2 id="tl-dr">TL;DR</h2>
+<p>Your primary goal is to end the incident and restore normal operations as quickly as possible while being under a lot of stress and sometimes in front of an audience of not-very-helpful onlookers. This article describes five rules I extracted from my personal observations of past incidents and that turned out to be helpful when trying to resolve those situations quickly and without losing your mind.</p>
+<p><img src="/images/post-images/this-is-fine.png" alt=""></p>
+<h2 id="when-fecal-matter-hits-the-rotary-air-impeller">When fecal matter hits the rotary air impeller</h2>
+<ol>
+<li>Stay calm (no, <strong>really</strong>)</li>
+<li>Think out loud and be precise</li>
+<li>Remove noise &amp; distractions</li>
+<li>Bundle up external communication</li>
+<li>Keep a paper trail for later</li>
+</ol>
+<p>Let&#39;s look at those rules in more detail:</p>
+<h3 id="1-stay-calm">1. Stay calm</h3>
+<p>This seems obvious and is definitely easier said than done, but it&#39;s crucial.<br>Yes, your systems may be down and all phones in the office may ring - but you know what? That&#39;s the reality now, so stop worrying and get busy changing this reality.</p>
+<p>There&#39;s literally nothing else that makes sense - if people yell at you or stress you out in other ways, look them dead in the eye and say &quot;Do you want me to sit down and fix this or do you wanna continue like this, which is a guarantee to prolong this situation. You choose.&quot;.</p>
+<p>Also: Unless you work in rocket science, medicine or industrial control it&#39;s unlikely that the situation you find yourself in will cost lifes or hurt people. Finances can be figured out, so keep perspective: Even if it feels like it, this is not the end of the civilised world.</p>
+<p>All those &quot;What if&quot; things in your head? Screw &#39;em, you have stuff to tend to right now. Breath in, breath out.</p>
+<h3 id="2-think-out-loud-and-be-precise">2. Think out loud and be precise</h3>
+<p>Chances are, that you are not alone in this.</p>
+<p>Even if you are alone, it may actually help to talk things out loud, as that gives you a little more time to reflect on the actions you want to take.</p>
+<p>This rule is about keeping you and your team in sync about what you all are about to do and what you did already. The goal of this is to reduce confusion, avoid doing things multiple times and straight up messing with actions of each other.</p>
+<p>So you should <strong>clearly</strong> say what you are about to do <em>before</em> you do it, what you do <em>when you do it</em> and what you did <em>once you did it</em></p>
+<p>Be sure to be precise in the terms you use to avoid confusion. If anyone isn&#39;t sure what is meant by an expression, <strong>ask and clarify</strong>!</p>
+<h3 id="3-remove-noise-distractions">3. Remove noise &amp; distractions</h3>
+<p>Disaster attracts onlookers.</p>
+<p>Onlookers bring distraction and often noise - and that&#39;s the last thing you want around you, when you are trying to fix a live system.</p>
+<p>To allow maximal concentration and clear communication between the people working to resolve the situation, remove anyone and anything that is not part of the troubleshooting process.</p>
+<p>Yes, Marketing / PR and customer support need to know what&#39;s happening, but you&#39;ll keep them posted in an efficiant, non-disruptive way (see rule #4 for this). But they won&#39;t be part of the &quot;problem solvers&quot;, so they should leave that to you and go somewhere else.</p>
+<h3 id="4-bundle-up-external-communications">4. Bundle up external communications</h3>
+<p>While you and your team are in the middle of fixing the problem, you are very concentrated. That&#39;s good. But don&#39;t forget the world outside of the room...</p>
+<p>It can take pressure and anxiety away to know that people outside your &quot;inner circle of troubleshooters&quot; know what&#39;s happening - but it&#39;s not very helpful if people stop by every 5 minutes to ask for updates. The same for everybody typing into chat tools or email programs to keep people updated.</p>
+<p>That&#39;s why you should bundle up your communication with the &quot;outside world&quot;, be it your colleagues from other teams, your management or your users.</p>
+<p>Have a single, pre-defined channel to communicate updates and have a designated person among the troubleshooters keep this channel updated. This channel does not have to be bidirectional, but it helps to get feedback from the other side.</p>
+<p>The updates should be short and relatively regular (say, every 15 minutes) and be posted even if they say &quot;We are still investigating the situation.&quot; if no new details are available.</p>
+<p>It helps to keep the recipients calm and keep them posted on new developments.<br>Refrain from giving ETAs, however, as it&#39;s usually nearly impossible to guess those.</p>
+<p>Once you are confident the situation is resolved, tell them via the defined channel, too.</p>
+<h3 id="5-keep-a-paper-trail-for-later">5. Keep a paper trail for later</h3>
+<p>Things are on fire, so your focus is absolutely on fixing things. And that&#39;s correct!</p>
+<p>If you have a little capacity left, you should spend this with taking notes in written form.</p>
+<p>Those notes are absolutely invaluable when the smoke clears and you have time to look back and ask questions like:</p>
+<ul>
+<li>What exactly happened?</li>
+<li>Why did this happen?</li>
+<li>What did we do to fix the issue?</li>
+<li>What can we do to prevent this situation in the future?</li>
+</ul>
+<p>Having written notes on how the situation unfolded and what you and your team have been doing about it - along with hypotheses at the time - is very useful to find answers to these questions.</p>
+<p>Answering these questions helps to learn from the problems that lead to the situation, how to spot and prevent them and what to do, if a similar event happens.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>Keep the five rules in mind and try to keep as calm as possible.<br>It&#39;s fine to be nervous, but don&#39;t freak out.</p>
+<p>Things are on fire, but it&#39;s not the end of the world.<br>Focus on resolving the issue and remove all distractions - any big talks should happen <em>after</em> the issue is resolved.</p>
+<p>With this in mind, next time things go sideways: Take a deep breath and get busy fixin&#39;!</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+			<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-33444478-2', 'auto');
+			  ga('send', 'pageview');
+
+			</script>
+
+	</body>
+</html>
