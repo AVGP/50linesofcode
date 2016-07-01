@@ -5,7 +5,7 @@
     <link>https://50linesofco.de/</link>
     <description>The /var/log of Martin Naumann</description>
     <language>en-us</language>
-    <pubDate>Sat, 26 Mar 2016 11:43:24 GMT</pubDate>
+    <pubDate>Fri, 01 Jul 2016 06:08:56 GMT</pubDate>
     <item>
 	<title>JSON RPC 2.0 - for simple and powerful APIs</title>
 	<link>https://50linesofco.de/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</link>
@@ -37,6 +37,43 @@ Some of them I have caused, some of them I helped to resolve and in some of them
 
 This post is the distilled essence on how different teams that I had the pleasure of being a member, dealt and deal with the stress and the specific characteristics of these tense situations to ensure timely and proper resolution.</description>
 	<guid isPermaLink="true">https://50linesofco.de/2016-03-17-five-rules-to-stay-sane-and-efficient-when-handling-downtimes.html</guid>
+</item>
+<item>
+	<title>Slick and slf4j MDC logging in Scala</title>
+	<link>https://50linesofco.de/2016-07-01-slick-and-slf4j-mdc-logging-in-scala.html</link>
+	<description>Imagine you are having a web server. It gets an HTTP request, calls a few functions and serves a response.
+Now if you are having some logs, you may see something like this in them:
+
+```
+2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] : Login for user: bob
+2016-07-01 06:55:01 (DEBUG) [DATABASE-1] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:02 (ERROR) [DATABASE-1] : Invalid query
+...
+```
+
+That's not too bad for a logging setup: We've got log levels, so we can toggle a setting to decide how much info we wanna have logged, we have a precise date info and we've even got the threads that were involved. Nice.
+
+But this might not be enough for useful debugging... imagine we're seeing multiple logins at the same time and try to find out which user saw the "Invalid query" error:
+
+```
+2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] : Login for user: alice
+2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] : Login for user: bob
+2016-07-01 06:55:01 (DEBUG) [DATABASE-1] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [DATABASE-2] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] : Login for user: clarissa
+2016-07-01 06:55:01 (DEBUG) [DATABASE-3] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:02 (ERROR) [DATABASE-2] : Invalid query
+...
+```
+
+Who saw the invalid query? Well, as long as these messages are that close together it is possible to make an assumption that's very likely to be true: It might be bob, if we assume that `DATABASE-1` corresponds to the first login call (from alice) and `DATABASE-2` corresponds to the second one from bob.
+
+Now that becomes impossibly hard to spot, if these logs aren't close together in a real scenario, where there's more things going on in the system at the same time.</description>
+	<guid isPermaLink="true">https://50linesofco.de/2016-07-01-slick-and-slf4j-mdc-logging-in-scala.html</guid>
 </item>
   </channel>
 </rss>
