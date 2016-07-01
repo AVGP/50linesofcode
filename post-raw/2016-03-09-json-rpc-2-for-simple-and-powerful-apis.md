@@ -1,6 +1,11 @@
 <!-- JSON RPC 2.0 - for simple and powerful APIs -->
 # JSON RPC 2.0
+
 ## For simple and powerful APIs
+
+To my surprise a contender in the field of API protocols is yet unknown: JSON-RPC 2.0.
+A standard since 2010, it is simple yet powerful but barely known amongst developers.
+This article explains what it is, what makes it different and nice to work with and how to use it.
 
 ## TL;DR
 

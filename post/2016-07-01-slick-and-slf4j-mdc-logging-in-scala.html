@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: Slick and slf4j MDC logging in Scala</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="/">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Splitt</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="/#one" class="active">About</a></li>
+						<li><a href="/#top">The greatest</a></li>
+						<li><a href="/#latest">The latest</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="https://50linesofco.de/rss.xml" class="icon fa-rss"><span class="label">RSS</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Slick and slf4j MDC logging in Scala</h2>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<h1 id="slick-and-slf4j-mdc-logging-in-scala">Slick and slf4j MDC logging in Scala</h1>
+<h2 id="tl-dr">TL;DR</h2>
+<h2 id="wait-what-is-mdc-logging-">Wait, what is MDC logging?</h2>
+<p>Imagine you are having a web server. It gets an HTTP request, calls a few functions and serves a response.<br>Now if you are having some logs, you may see something like this in them:</p>
+<pre><code>2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] : Login for user: bob
+2016-07-01 06:55:01 (DEBUG) [DATABASE-1] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:02 (ERROR) [DATABASE-1] : Invalid query
+...
+</code></pre><p>That&#39;s not too bad for a logging setup: We&#39;ve got log levels, so we can toggle a setting to decide how much info we wanna have logged, we have a precise date info and we&#39;ve even got the threads that were involved. Nice.</p>
+<p>But this might not be enough for useful debugging... imagine we&#39;re seeing multiple logins at the same time and try to find out which user saw the &quot;Invalid query&quot; error:</p>
+<pre><code>2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] : Login for user: alice
+2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] : Login for user: bob
+2016-07-01 06:55:01 (DEBUG) [DATABASE-1] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [DATABASE-2] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] : Login for user: clarissa
+2016-07-01 06:55:01 (DEBUG) [DATABASE-3] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:02 (ERROR) [DATABASE-2] : Invalid query
+...
+</code></pre><p>Who saw the invalid query? Well, as long as these messages are that close together it is possible to make an assumption that&#39;s very likely to be true: It might be bob, if we assume that <code>DATABASE-1</code> corresponds to the first login call (from alice) and <code>DATABASE-2</code> corresponds to the second one from bob.</p>
+<p>Now that becomes impossibly hard to spot, if these logs aren&#39;t close together in a real scenario, where there&#39;s more things going on in the system at the same time.</p>
+<h2 id="context-to-the-rescue">Context to the rescue</h2>
+<p>Okay, so we need a way to put the log messages into context, like this:</p>
+<pre><code>2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1]  [req-1] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] [req-1] : Login for user: alice
+2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1]  [req-2] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] [req-2] : Login for user: bob
+2016-07-01 06:55:01 (DEBUG) [DATABASE-1]   [req-1] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1]  [req-3] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [DATABASE-2]   [req-2] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] [req-3] : Login for user: clarissa
+2016-07-01 06:55:01 (DEBUG) [DATABASE-3]   [req-3] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:02 (ERROR) [DATABASE-2]   [req-2] : Invalid query
+...
+</code></pre><p>We now have a &quot;req-&quot; followed by some sort of ID for each request in our logs. With this we can search and filter our logs for the request we&#39;re interested in.</p>
+<p>So if all we&#39;ve got is the log message:</p>
+<pre><code>2016-07-01 06:55:02 (ERROR) [DATABASE-2] : Invalid query
+</code></pre><p>This will be hard to trace back to the login from bob, but if we&#39;ve got:</p>
+<pre><code>2016-07-01 06:55:02 (ERROR) [DATABASE-2] [req-2] : Invalid query
+</code></pre><p>We can filter the logs for &quot;req-2&quot; and get:</p>
+<pre><code>2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1]  [req-2] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] [req-2] : Login for user: bob
+2016-07-01 06:55:01 (DEBUG) [DATABASE-2]   [req-2] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:02 (ERROR) [DATABASE-2]   [req-2] : Invalid query
+...
+</code></pre><p>Much better!</p>
+<h2 id="the-mapped-diagnostic-context">The Mapped Diagnostic Context</h2>
+<p>But how can we do that without having to write this context out on every logging call?</p>
+<p>After all, this isn&#39;t very appealing and error-prone:</p>
+<pre><code class="lang-scala">def postLogin(...): Unit = {
+  logger.info(s&quot;[req-${params.requestId}] Got request for /login&quot;)
+  login(params.userName, params.password, params.requestId)
+}
+
+def login(userName:String, password:String, requestId): Unit = {
+  logger.debug(s&quot;[req-${requestId}] Login for user: $userName&quot;)
+  // ...
+}
+</code></pre>
+<p>Not only would we have to add the request ID to every function along the way, but also would we not be able to get this information into logs coming from external, third-party libraries that we use.</p>
+<p>Luckily, there&#39;s a better way: The <strong>Mapped Diagnostic Context</strong> or <strong>MDC</strong> in short.</p>
+<p>If you are using <code>slf4j</code> it is exposed via <code>org.slf4j.MDC</code> but other logging systems (such as log4j and logback) have similar concepts that slf4j wraps.</p>
+<p>Here we go again, this time with the MDC:</p>
+<pre><code class="lang-scala">def postLogin(...): Unit = {
+  MDC.put(&quot;requestId&quot;, UUID.randomUUID().toString())
+  logger.info(&quot;Got request for /login&quot;)
+  login(params.userName, params.password)
+}
+
+def login(userName:String, password:String): Unit = {
+  logger.debug(s&quot;Login for user: $userName&quot;)
+  // ...
+}
+</code></pre>
+<p>With this, everything that is in the current thread will use the same MDC and we can configure our log system to use content from the MDC in its patterns.</p>
+<p>For example, our <code>logback.xml</code> might contain the following pattern:</p>
+<pre><code class="lang-xml">
+&lt;property name=&quot;defaultPattern&quot; value=&quot;%date \(%level\) [%thread] [%X{requestId}]: %message&quot; /&gt;
+</code></pre>
+<p>With <code>%X{requestId}</code> we get whatever we&#39;ve put into the MDC as <code>requestId</code>.</p>
+<h2 id="mdc-across-threads-and-execution-context">MDC across threads and execution context</h2>
+<p>Now there&#39;s a little spot on our logging: <strong>It only works if the thread doesn&#39;t change</strong>, so our logs look like this right now:</p>
+<pre><code>2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1]  [req-2] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [XNIO-1 I/O-1] [req-2] : Login for user: bob
+2016-07-01 06:55:01 (DEBUG) [DATABASE-2]   [] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:02 (ERROR) [DATABASE-2]   [] : Invalid query
+...
+</code></pre><p>So if we use a <code>Thread</code> or a <code>Future</code> or a library like <a href="http://slick.lightbend.com/">Slick</a> we are losing our precious MDC!</p>
+<p>Now let&#39;s assume that we&#39;re running <code>login</code> in a Future, to get a feeling for what we&#39;ll need to do to fix this:</p>
+<pre><code>2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1]  [req-2] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [ForkJoinPool-1-worker-12] [] : Login for user: bob
+...
+</code></pre><p>So with the default global execution context, the <code>Future</code> is run in a separate thread of a <code>ForkJoin</code> threadpool.</p>
+<p>To get the MDC across that new thread, we&#39;ll need to <strong>provide our own <code>ExecutionContext</code></strong>.</p>
+<p>This new execution context will subclass <code>ExecutionContext</code> and override its <code>execute</code> method.<br>The method takes a <code>Runnable</code> and executes it, but instead we will create our own runnable around it, copy the MDC into the new Thread and submit it to the super method instead:</p>
+<pre><code class="lang-scala">import org.slf4j.MDC
+import scala.concurrent.ExecutionContext
+
+/**
+  * Execution context proxy for propagating SLF4J diagnostic context from caller thread to execution thread.
+  */
+class MdcExecutionContext(executionContext: ExecutionContext) extends ExecutionContext {
+  override def execute(runnable: Runnable): Unit =  {
+    val callerMdc = MDC.getCopyOfContextMap // get a copy of the MDC data
+    executionContext.execute(new Runnable {
+      def run(): Unit = {
+        // copy caller thread MDC to the new execution thread
+        if(callerMdc != null) MDC.setContextMap(callerMdc)
+        try {
+          runnable.run
+        } finally {
+          // the thread might be reused, so we clean up for the next use
+          MDC.clear
+        }
+      }
+    })
+  }
+
+  override def reportFailure(cause: Throwable): Unit = executionContext.reportFailure(cause)
+}
+</code></pre>
+<p>You can see how the &quot;copy MDC into the new Thread&quot; works in detail:</p>
+<ol>
+<li>We obtain a copy of the MDC contents with <code>MDC.getCopyOfContextMap</code></li>
+<li>If that copy worked, we put it into the MDC of the new Thread by calling <code>MDC.setContextMap</code></li>
+<li>Once we are done executing the original <code>Runnable</code>, we clear the MDC (this is only affects the cloned MDC inside the new Thread)</li>
+</ol>
+<p>The <code>MDC.clear</code> is a good idea, because we&#39;d get misleading logs if a Thread is reused without having an MDC.</p>
+<p>Now all we need to do is create a new <code>MdcExecutionContext</code> and use it as our execution context:</p>
+<pre><code class="lang-scala">
+import scala.concurrent.ExecutionContext
+import java.util.concurrent.Executors
+
+//...
+
+implicit lazy val executionContext = = new MdcExecutionContext(
+    ExecutionContext.fromExecutor(      // this gives us an ExecutionContext we piggyback on in MdcExecutionContext
+      Executors.newWorkStealingPool(10) // this creates the ForkJoinPool with a maximum of 10 threads
+    )
+  )
+
+//...
+
+def postLogin(...): Unit = {
+  MDC.put(&quot;requestId&quot;, UUID.randomUUID().toString())
+  logger.info(&quot;Got request for /login&quot;)
+  login(params.userName, params.password)
+}
+
+def login(userName:String, password:String): Unit = {
+  logger.debug(s&quot;Login for user: $userName&quot;)
+  // ...
+}
+</code></pre>
+<p>Okay, cool - now we&#39;re good right? Almost...</p>
+<h2 id="slick-and-its-asyncexecutor">Slick and its AsyncExecutor</h2>
+<p>Here is where we stand right now with our logs:</p>
+<pre><code>2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1]  [req-2] : Got request for /login
+2016-07-01 06:55:01 (DEBUG) [ForkJoinPool-1-worker-12] [req-2] : Login for user: bob
+2016-07-01 06:55:01 (DEBUG) [DATABASE-2]   [] : Preparing statement SELECT * FROM users WHERE name=? AND password=?
+2016-07-01 06:55:02 (ERROR) [DATABASE-2]   [] : Invalid query
+...
+</code></pre><p>So we <strong>now have the MDC in the ForkJoinPool for Futures</strong> but we still <strong>don&#39;t have it for the Thread that Slick uses</strong>.<br>That&#39;s because Slick has its own <code>Executor</code>, the <code>AsyncExecutor</code> as <a href="https://github.com/slick/slick/blob/3.1/slick/src/main/scala/slick/util/AsyncExecutor.scala">defined here</a>.</p>
+<p>This <code>AsyncExecutor</code> is responsible for creating a new threadpool using a custom <code>ThreadFactory</code> and it sets the ExecutionContext.<br>So we need our own <code>Executor</code>: The <code>MdcAsyncExecutor</code>!</p>
+<pre><code class="lang-scala">import java.util.concurrent._
+import java.util.concurrent.atomic.AtomicInteger
+
+import scala.concurrent._
+import com.typesafe.scalalogging.StrictLogging
+import slick.util.AsyncExecutor
+
+/** Taken from the original Slick AsyncExecutor and simplified
+  * @see https://github.com/slick/slick/blob/3.1/slick/src/main/scala/slick/util/AsyncExecutor.scala
+  */
+
+object MdcAsyncExecutor extends StrictLogging {
+  /** Create an [[AsyncExecutor]] with a fixed-size thread pool.
+    *
+    * @param name The name for the thread pool.
+    * @param numThreads The number of threads in the pool.
+    */
+
+  def apply(name:String, numThreads: Int): AsyncExecutor = {
+    new AsyncExecutor {
+      // We use a custom ThreadFactory to be able to:
+      // 1. Set the thread name as we like
+      // 2. Set the daemon option on threads (i.e. threads get killed, when all non-daemon threads terminate, i.e. they get killed when the app shuts down)
+      // 3. Set the priority to normal priority for each thread
+      val tf = new DaemonThreadFactory(name + &quot;-&quot;)
+
+      lazy val executionContext = {
+        // We create a threadpool with a fixed size, which can be specified as an argument to this method
+        new MdcExecutionContext(ExecutionContext.fromExecutor(Executors.newFixedThreadPool(numThreads, tf)))
+      }
+
+      def close(): Unit = {}
+    }
+  }
+
+  def default(name: String = &quot;AsyncExecutor.default&quot;): AsyncExecutor = apply(name, 20)
+
+  private class DaemonThreadFactory(namePrefix: String) extends ThreadFactory {
+    private[this] val group = Option(System.getSecurityManager).fold(Thread.currentThread.getThreadGroup)(_.getThreadGroup)
+    private[this] val threadNumber = new AtomicInteger(1)
+
+    def newThread(r: Runnable): Thread = {
+      val t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement, 0)
+      if(!t.isDaemon) t.setDaemon(true)
+      if(t.getPriority != Thread.NORM_PRIORITY) t.setPriority(Thread.NORM_PRIORITY)
+      t
+    }
+  }
+}
+</code></pre>
+<p>Now to use our fresh <code>MdcAsyncExecutor</code>, we&#39;ll supply it when creating the <code>Database</code> instance:</p>
+<pre><code class="lang-scala">// Threads are named &quot;Database-X&quot; where &quot;X&quot; is the thread number &amp; there will be 10 threads in the pool.
+val db = Database.forDataSource(connectionPool, MdcAsyncExecutor.apply(&quot;Database&quot;, 10))
+</code></pre>
+<h2 id="introducing-de-geekonaut-slickmdc">Introducing de.geekonaut.slickmdc</h2>
+<p>Now, you don&#39;t need to create your own <code>MdcAsyncExecutor</code> and <code>MdcExecutionContext</code> all the time, because I created a handy little package for you: <code>de.geekonaut.slickmdc</code> that contains both classes.</p>
+<p>In your <code>build.sbt</code> you can add the dependency by adding:</p>
+<pre><code class="lang-scala">libraryDependencies ++= &quot;de.geekonaut&quot; %% &quot;slickmdc&quot;  % &quot;1.0.0&quot;
+</code></pre>
+<p>Then, whenever needed, import the library with</p>
+<pre><code class="lang-scala">import de.geekonaut.slickmdc._
+</code></pre>
+<h2 id="sample-project">Sample project</h2>
+<p>There is a sample project available that starts a web server and reads from a SQLite database file using slick.<br>The sample <a href="https://github.com/avgp/slick-mdc-sample">can be found here</a>.</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+			<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-33444478-2', 'auto');
+			  ga('send', 'pageview');
+
+			</script>
+
+	</body>
+</html>
