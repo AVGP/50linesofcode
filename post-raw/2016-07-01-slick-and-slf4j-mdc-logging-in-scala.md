@@ -3,6 +3,12 @@
 
 ## TL;DR
 
+* Multi-user applications need log messages to retain **context**, so the situation can be examined on a transaction-basis
+* The **mapped diagnostic context**, short `MDC`, allows to put context to all log statements for a single thread
+* Scala allows us to build an `ExecutionContext` where we can copy the `MDC` to any new thread that is being used giving us **multi-thread MDC logging**
+* Slick requires us to also provide an `Executor` that uses this `ExecutionContext`
+* There's a package for that: `de.geekonaut.slickmdc`
+
 ## Wait, what is MDC logging?
 
 Imagine you are having a web server. It gets an HTTP request, calls a few functions and serves a response.

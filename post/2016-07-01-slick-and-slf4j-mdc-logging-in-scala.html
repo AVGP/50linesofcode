@@ -57,6 +57,13 @@
 								<div class="container">
 								<h1 id="slick-and-slf4j-mdc-logging-in-scala">Slick and slf4j MDC logging in Scala</h1>
 <h2 id="tl-dr">TL;DR</h2>
+<ul>
+<li>Multi-user applications need log messages to retain <strong>context</strong>, so the situation can be examined on a transaction-basis</li>
+<li>The <strong>mapped diagnostic context</strong>, short <code>MDC</code>, allows to put context to all log statements for a single thread</li>
+<li>Scala allows us to build an <code>ExecutionContext</code> where we can copy the <code>MDC</code> to any new thread that is being used giving us <strong>multi-thread MDC logging</strong></li>
+<li>Slick requires us to also provide an <code>Executor</code> that uses this <code>ExecutionContext</code></li>
+<li>There&#39;s a package for that: <code>de.geekonaut.slickmdc</code></li>
+</ul>
 <h2 id="wait-what-is-mdc-logging-">Wait, what is MDC logging?</h2>
 <p>Imagine you are having a web server. It gets an HTTP request, calls a few functions and serves a response.<br>Now if you are having some logs, you may see something like this in them:</p>
 <pre><code>2016-07-01 06:55:01 (INFO) [XNIO-1 I/O-1] : Got request for /login
