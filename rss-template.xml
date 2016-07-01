@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>50 Lines of Code</title>
+    <link>https://50linesofco.de/</link>
+    <description>The /var/log of Martin Naumann</description>
+    <language>en-us</language>
+    <pubDate>{{date}}</pubDate>
+    {{items}}
+  </channel>
+</rss>

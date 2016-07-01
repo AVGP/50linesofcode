@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>50 Lines of Code</title>
+    <link>https://50linesofco.de/</link>
+    <description>The /var/log of Martin Naumann</description>
+    <language>en-us</language>
+    <pubDate>Sat, 26 Mar 2016 11:43:24 GMT</pubDate>
+    <item>
+	<title>JSON RPC 2.0 - for simple and powerful APIs</title>
+	<link>https://50linesofco.de/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</link>
+	<description>To my surprise a contender in the field of API protocols is yet unknown: JSON-RPC 2.0.
+A standard since 2010, it is simple yet powerful but barely known amongst developers.
+This article explains what it is, what makes it different and nice to work with and how to use it.</description>
+	<guid isPermaLink="true">https://50linesofco.de/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</guid>
+</item>
+<item>
+	<title>Five rules to stay levelheaded and efficient when handling downtimes</title>
+	<link>https://50linesofco.de/2016-03-17-five-rules-to-stay-levelheaded-and-efficient-when-handling-downtimes.html</link>
+	<description>Downtimes, Crashes, Incidents, System Failures - they have many names, but most people involved with technology to some degree have experienced at least one at some point in their career.
+
+I've seen many different teams and many different incarnations of the above-mentioned situations. I've been on the different sides of them: The user, the developer, the system administrator, the site reliability engineer and the consultant.
+
+Some of them I have caused, some of them I helped to resolve and in some of them I was a mere bystander.
+
+This post is the distilled essence on how different teams that I had the pleasure of being a member, dealt and deal with the stress and the specific characteristics of these tense situations to ensure timely and proper resolution.</description>
+	<guid isPermaLink="true">https://50linesofco.de/2016-03-17-five-rules-to-stay-levelheaded-and-efficient-when-handling-downtimes.html</guid>
+</item>
+<item>
+	<title>Five rules to stay sane and efficient when handling downtimes</title>
+	<link>https://50linesofco.de/2016-03-17-five-rules-to-stay-sane-and-efficient-when-handling-downtimes.html</link>
+	<description>Downtimes, Crashes, Incidents, System Failures - they have many names, but most people involved with technology to some degree have experienced at least one at some point in their career.
+
+I've seen many different teams and many different incarnations of the above-mentioned situations. I've been on the different sides of them: The user, the developer, the system administrator, the site reliability engineer and the consultant.
+
+Some of them I have caused, some of them I helped to resolve and in some of them I was a mere bystander.
+
+This post is the distilled essence on how different teams that I had the pleasure of being a member, dealt and deal with the stress and the specific characteristics of these tense situations to ensure timely and proper resolution.</description>
+	<guid isPermaLink="true">https://50linesofco.de/2016-03-17-five-rules-to-stay-sane-and-efficient-when-handling-downtimes.html</guid>
+</item>
+  </channel>
+</rss>
