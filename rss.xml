@@ -5,7 +5,7 @@
     <link>https://50linesofco.de/</link>
     <description>The /var/log of Martin Naumann</description>
     <language>en-us</language>
-    <pubDate>Fri, 01 Jul 2016 06:20:51 GMT</pubDate>
+    <pubDate>Mon, 04 Jul 2016 12:43:23 GMT</pubDate>
     <item>
 	<title>JSON RPC 2.0 - for simple and powerful APIs</title>
 	<link>https://50linesofco.de/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</link>
@@ -47,6 +47,23 @@ This post is the distilled essence on how different teams that I had the pleasur
 * Slick requires us to also provide an `Executor` that uses this `ExecutionContext`
 * There's a package for that: `de.geekonaut.slickmdc`</description>
 	<guid isPermaLink="true">https://50linesofco.de/2016-07-01-slick-and-slf4j-mdc-logging-in-scala.html</guid>
+</item>
+<item>
+	<title>The overwhelming web</title>
+	<link>https://50linesofco.de/2016-07-04-the-overwhelming-web.html</link>
+	<description>Web Development can be pretty strange these days.
+
+On the one hand we tell beginners that they need ALL the things:
+build tools, task runners, package managers, frameworks, polyfills, libraries, runtimes and
+deployment systems.
+
+On the other hand some are airing their concerns about some flavour of "fatigue",
+be it a framework, library, JavaScript or even frontend fatigue.
+
+I also noticed a sense of urgency for *everything*. Mobile-first, Offline-first, Accessibility-first, Content-first and the list goes on. It starts to feel like "everything-first", which of course really would mean: Nothing first.
+
+Where are the olden days, where all you needed to build websites was a text editor and some space online to put it?</description>
+	<guid isPermaLink="true">https://50linesofco.de/2016-07-04-the-overwhelming-web.html</guid>
 </item>
   </channel>
 </rss>
