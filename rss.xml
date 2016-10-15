@@ -5,7 +5,7 @@
     <link>https://50linesofco.de/</link>
     <description>The /var/log of Martin Naumann</description>
     <language>en-us</language>
-    <pubDate>Mon, 04 Jul 2016 12:43:23 GMT</pubDate>
+    <pubDate>Sat, 15 Oct 2016 23:35:24 GMT</pubDate>
     <item>
 	<title>JSON RPC 2.0 - for simple and powerful APIs</title>
 	<link>https://50linesofco.de/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</link>
@@ -64,6 +64,25 @@ I also noticed a sense of urgency for *everything*. Mobile-first, Offline-first,
 
 Where are the olden days, where all you needed to build websites was a text editor and some space online to put it?</description>
 	<guid isPermaLink="true">https://50linesofco.de/2016-07-04-the-overwhelming-web.html</guid>
+</item>
+<item>
+	<title>HTML, DOM and JavaScript unraveled</title>
+	<link>https://50linesofco.de/2016-10-16-html-dom-and-javascript-unraveled.html</link>
+	<description>The web platform has started out with HTML to allow users to share documents
+and link them in a user friendly and standardised way.
+
+HTML alone was lacking the possibility to influence the way things looked, so
+a new standard came about ([after other alternatives have been proposed](https://eager.io/blog/the-languages-which-almost-were-css/)), CSS.
+
+Around the same time (depending on what you consider the beginning of CSS's existence)
+[JavaScript was created by Brendan Eich](https://www.w3.org/community/webed/wiki/A_Short_History_of_JavaScript)
+and a few years later a way to interact with the HTML document from JavaScript was created, the [DOM](https://en.wikipedia.org/wiki/Document_Object_Model).
+
+Today, the different technologies may be a little too much to take in at first
+and it won't get easier as things such as the Shadow DOM is added and frameworks and libraries may bring a Virtual DOM along.
+
+So let's dive right in an have a look at the different bits and pieces that are at play here.</description>
+	<guid isPermaLink="true">https://50linesofco.de/2016-10-16-html-dom-and-javascript-unraveled.html</guid>
 </item>
   </channel>
 </rss>

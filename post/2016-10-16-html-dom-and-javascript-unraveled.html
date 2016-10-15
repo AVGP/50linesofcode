@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>50 Lines of Code: HTML, DOM and JavaScript unraveled</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="/images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="/">50 lines of code</a></h1>
+					<p>The /var/log of <a href="http://geekonaut.de">Martin Splitt</a></p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="/#one" class="active">About</a></li>
+						<li><a href="/#top">The greatest</a></li>
+						<li><a href="/#latest">The latest</a></li>
+						<li><a href="/articles">All articles</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+            <li><a href="https://twitter.com/g33konaut" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/avgp" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="https://50linesofco.de/rss.xml" class="icon fa-rss"><span class="label">RSS</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>HTML, DOM and JavaScript unraveled</h2>
+									</header>
+								</div>
+							</section>
+
+						<!-- Top articles -->
+							<section id="main">
+								<div class="container">
+								<h1 id="html-dom-and-javascript-unraveled">HTML, DOM and JavaScript - unraveled</h1>
+<h2 id="the-web-stack">The web stack</h2>
+<p>The web platform has started out with HTML to allow users to share documents<br>and link them in a user friendly and standardised way.</p>
+<p>HTML alone was lacking the possibility to influence the way things looked, so<br>a new standard came about (<a href="https://eager.io/blog/the-languages-which-almost-were-css/">after other alternatives have been proposed</a>), CSS.</p>
+<p>Around the same time (depending on what you consider the beginning of CSS&#39;s existence)<br><a href="https://www.w3.org/community/webed/wiki/A_Short_History_of_JavaScript">JavaScript was created by Brendan Eich</a><br>and a few years later a way to interact with the HTML document from JavaScript was created, the <a href="https://en.wikipedia.org/wiki/Document_Object_Model">DOM</a>.</p>
+<p>Today, the different technologies may be a little too much to take in at first<br>and it won&#39;t get easier as things such as the Shadow DOM is added and frameworks and libraries may bring a Virtual DOM along.</p>
+<p>So let&#39;s dive right in an have a look at the different bits and pieces that are at play here.</p>
+<h2 id="more-than-just-text-html">More than just text: HTML</h2>
+<p>The web was designed to exchange information over the internet in an open, standardised way.<br>Tim Berners-Lee designed it as a hypertext system, i.e. to be text along with semantic information (such as &quot;this is an address&quot; or &quot;this is a listing&quot;).</p>
+<p>The <a href="http://info.cern.ch/hypertext/WWW/MarkUp/Tags.html">original version</a> was very limited (images, for example, were only introduced in <a href="https://tools.ietf.org/html/rfc1866#section-5.10">version 2</a>), yet it paved the way for websites to be structured text which encoded structure and meaning along with text content.</p>
+<p>HTML is basically the way we encode the way for the browser to make the website show up, such as an SVG is a file that contains instructions for the computer for drawing an image.</p>
+<h2 id="the-dom-from-hypertext-to-a-tree">The DOM: From hypertext to a tree</h2>
+<p>So assuming you are opening an HTML file with your browser, it will be opened as a bunch of text.<br>This text is not what is displayed by your browser - at least not directly.</p>
+<p>Instead, the browser is figuring out the structure of the web page by turning the text into a hierarchy, usually visualised as a tree structure.</p>
+<p>The markup is turned into a bunch of nodes with attributes and text content, which is used by the browser to show the page as we expect it.</p>
+<p>The following HTML would be turned into the following tree structure:</p>
+<pre><code class="lang-html">&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello world!&lt;/h1&gt;
+    &lt;p&gt;
+      &lt;a href=&quot;b.html&quot;&gt;Click here&lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><img src="/images/post-images/DOM.png" alt="The browser turns the HTML into a tree structure of elements, attributes and text"></p>
+<p>So, in order to display an HTML file, the browser creates a tree of the elements (such as &quot;link&quot; or &quot;image&quot;) along with their attributes (such as &quot;where does the link go?&quot; or &quot;which image to display&quot;) and text content (e.g. &quot;Click here&quot;).</p>
+<h2 id="javascript">JavaScript</h2>
+<p>Until now, our website has been static and could not change after being loaded.</p>
+<p>JavaScript, after being added into Netscape Navigator 2.0 and Internet Explorer 3 (named &quot;JScript&quot; there for trademark reasons),<br>became a way to interact with websites. These interactions, however, were browser-specific and worked very differently between different browsers. This is usually referred to as <em>dynamic HTML</em> or short &quot;DHTML&quot;</p>
+<p>So JavaScript is a generic programming language that had access to APIs which allowed it to change the content and appearance of a web site.</p>
+<p>Now this wasn&#39;t a very pleasant situation for developers and users. Some websites would only work correctly in one browser and others only in another. Unless developers took the effort to make it work in all browsers.</p>
+<p>Luckily, the <a href="https://w3.org">W3C</a> worked on a standardised API that should work across the different browsers, giving developers a unified way to access the DOM programmatically from JavaScript and make websites dynamic.</p>
+<p>So we&#39;ve got a programming language that, nowadays, is also available outside of the browser, but commonly uses the DOM-API to show results in a website by changing the DOM tree that the browser in turn uses to display content to the user.</p>
+<h2 id="summary-html-javascript-and-dom">Summary: HTML, JavaScript and DOM</h2>
+<p>So we&#39;ve got <strong>HTML</strong> to define structure and content of a website in text form.<br>This is a human-readable form that allows editing and transmitting the information, but not ready for displaying in a browser yet.</p>
+<p>The browser then takes this text data and turns it into a tree structure called <em>*DOM</em>.<br>This tree is useful for the browser to display the data to the user, using the elements, their attributes and text content.</p>
+<p>To do things programmatically on a website, the browsers added a programming language called <strong>JavaScript</strong>.<br>As JavaScript runs in the browser, the most obvious way for it to display anything or get inputs from the user would be to change the DOM, so an API to the DOM was created. In the beginning each browser had their own API (usually referred to as DHTML) but later the W3C specified a shared standard API we usually refer to as the DOM when writing JavaScript.</p>
+<h2 id="bonus-round-shadow-dom-and-shady-dom">Bonus round: Shadow DOM and Shady DOM</h2>
+<p>The DOM and its API is nice to give us the power to change things around in an HTML document.<br>Unfortunately that can be a bit of an issue when we&#39;re not building a document, but a complex application.</p>
+<p>In modern HTML applications, the HTML might look like this:</p>
+<pre><code class="lang-html">&lt;html&gt;
+  &lt;body&gt;
+    &lt;user-profile&gt;
+      &lt;user-data username=&quot;Martin&quot; avatar=&quot;avatars/123_martin.png&quot; is-online=&quot;yes&quot;&gt;&lt;/user-data&gt;
+    &lt;/user-profile&gt;
+    &lt;conversations-list&gt;
+      &lt;conversation-item with=&quot;Alice&quot; is-unread=&quot;yes&quot;&gt;Blog post feedback&lt;/conversation-item&gt;
+      &lt;conversation-item with=&quot;Bob&quot;&gt;Lunch tomorrow?&lt;/conversation-item&gt;
+    &lt;/conversations-list&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>&quot;Wait&quot;, you may say, &quot;those aren&#39;t HTML elements!&quot;. You are right, but frameworks such as Angular, Vue.js or Polymer enable this way of creating applications by implementing the <a href="http://w3c.github.io/webcomponents/explainer/">Web Components</a> or their own component system.</p>
+<p>Each of the components in the previous listing would in turn include HTML, CSS and JavaScript to create its own part of the final DOM, so let&#39;s say the <code>&lt;user-profile&gt;</code> component looks like this inside:</p>
+<pre><code class="lang-html">&lt;style&gt;
+h2 {
+  color: darkgreen;
+}
+&lt;/style&gt;
+&lt;div&gt;
+  &lt;h2 id=&quot;username&quot;&gt;&lt;/h2&gt;
+  &lt;img id=&quot;avatar&quot;&gt;&lt;/img&gt;
+&lt;/div&gt;
+&lt;script&gt;
+// JavaScript to pull the avatar and username from the component attributes into this part of the DOM.
+&lt;/script&gt;
+</code></pre>
+<p>The final DOM tree that the browser will use to render the application would then look like this (some bits left out for brevity):</p>
+<p><img src="/images/post-images/DOM2.png" alt="The components are being substituted by their actually DOM content"></p>
+<p>Now, this has a few problems:</p>
+<ul>
+<li>the CSS changes the appear in the DOM, so we will get all <code>&lt;h2&gt;</code> elements to show text in a <code>darkgreen</code> colour.</li>
+<li>if we would use multiple <code>&lt;user-profile&gt;</code> elements, we would have the same IDs multiple times, which is invalid.</li>
+<li>when we access the DOM via the various JavaScript-API methods (e.g. <code>document.querySelector</code> or <code>document.getElementById</code>), we could accidentally reach into the components and change things in parts of the DOM which should be &quot;private&quot; to the component.</li>
+</ul>
+<p>The last point might seem a little odd at first, but imagine this document structure:</p>
+<pre><code class="lang-html">&lt;html&gt;
+&lt;body&gt;
+  &lt;user-profile&gt;&lt;/user-profile&gt;
+  &lt;h1&gt;News&lt;/h1&gt;
+  &lt;p&gt;Currently there are &lt;span id=&quot;newscount&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;h2&gt;Lorem ipsum&lt;/h2&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;h2&gt;Dolorem sit amet&lt;/h2&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Now somebody might to write some JavaScript to show the number of news articles by counting the <code>&lt;h2&gt;</code> elements on the page:</p>
+<pre><code class="lang-javascript">var numNewsHeadlines = document.querySelectorAll(&#39;h2&#39;).length
+document.getElementById(&#39;newscount&#39;).textContent = numNewsHeadlines
+</code></pre>
+<p>And, ladies and gentlemen, we&#39;ve got a bug.<br>What doesn&#39;t meet the eye here is that the <code>&lt;user-profile&gt;</code> component is adding an <code>&lt;h2&gt;</code>-element when turned into its internal DOM. Sure, we can fix this, but should we have to pay attention to this?</p>
+<p>I think it would be better if components could have a boundary that &quot;hides&quot; their guts from the rest of the DOM, so we don&#39;t accidentally peek behind the curtains.</p>
+<p>Luckily there is! This is called the <strong>Shadow DOM</strong>.</p>
+<p>It&#39;s an addition to the DOM-API that allows us to hide some part of the DOM tree from the DOM, so that CSS and the JavaScript-APIs are confined to a small part of the DOM tree.</p>
+<p><img src="/images/post-images/ShadowDOM.png" alt="The Shadow DOM allows to hide parts of the DOM tree"></p>
+<p>How that works in detail can be read in <a href="https://w3c.github.io/webcomponents/spec/shadow/">the W3C specification</a>.</p>
+
+								</div>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Geekonaut. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollzer.min.js"></script>
+			<script src="/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/assets/js/main.js"></script>
+
+			<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-33444478-2', 'auto');
+			  ga('send', 'pageview');
+
+			</script>
+
+	</body>
+</html>
