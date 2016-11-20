@@ -1,0 +1,46 @@
+The mysterious world of HTTP 301
+
+* Demo code
+* Random shit:
+** Recommendation of max. 5 redirects in RFC 2616
+** Redirects defined for GET & HEAD
+
+## The classical scenario
+
+ Chrome and Firefox behave like this:
+
+1. First request hits `/origin` and then `/destination`
+2. Repeated requests hit `/destination` right away
+
+This will also happen in an incognito window, even if the regular window already goes straight to `/destination`.
+
+Firefox, unlike Chrome, does save the information across browser restarts.
+Let me repeat that: If you restart Firefox, you will still go straight to `/destination`. It remembers!
+
+Clearing the cache (Using "Settings" > "Advanced" > "Network" > "Cached Web Content" > "Clear now") does work to have Firefox hit `/origin` again.
+
+## What if there's an error at the destination?
+
+Okay, now we know how the browser respond in the simple case: They get a success response at the destination.
+But what happens when the server fails on the destination? Particularily: Does the kind of error influence the caching decisions?
+
+We'll look at the following statuses: 400 (we screwed up and sent a bad request), 403 (it's forbidden to access this location), 404 (this location was not found) and 500 (the server screwed up and failed to give us a success response).
+
+Chrome and Firefox still cache the permanent redirect and goes straight to the destination.
+Firefox also still persists this across a browser restart.
+
+So even if I thought "well, if it's a 404 or a 400 - so why not try the original location before" that's not what happens.
+The browser *still* caches the redirect, which is correct as that redirect is explicitely *permanent* - no take-backs!
+
+## What does the standard have to say?
+
+> The requested resource has been assigned a new permanent URI and any
+> future references to this resource SHOULD use one of the returned
+> URIs.  Clients with link editing capabilities ought to automatically
+> re-link references to the Request-URI to one or more of the new
+> references returned by the server, where possible. *This response is
+> cacheable unless indicated otherwise*."
+
+The first and the last sentences are the key here: The browser should use the destination URL and cache this choice.
+The caching may be turned off by explicitely saying so (using "Expires" and "Cache-Control" headers) but the default is to cache it.
+Also: That statement is not limited to the kind of response from the server, so caching is always the default choice.
