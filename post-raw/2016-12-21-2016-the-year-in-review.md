@@ -59,7 +59,7 @@ With communities come a lot of people and friendships.
 
 I am really grateful for the warmth and welcoming attitude of the communities I was invited to in the past and look forward to meeting more lovely folks around the globe in the future.
 
-![These two made and make me smile so often - I'm very happy to have them in my life](../images/post-images/friends.jpg)
+<img src="../images/post-images/friends.jpg" width="300" alt="These two made and make me smile so often - I'm very happy to have them in my life">
 
 I'd like to highlight two especially amazing people: [Carmen](https://twitter.com/carmenpopoviciu) and [Myriam](https://twitter.com/myriamjessier) who are very nice, supportive, energetic and lovely folks - I am very happy to have them in my life!
 
@@ -92,7 +92,7 @@ It's been an amazing year with lots of learnings, successes and mistakes - and a
 
 This is probably the most important event of 2016, at least for me it certainly is.
 
-![](../images/post-images/wedding.jpg)
+<img src="../images/post-images/wedding.jpg" alt="What a happy day - one of many!" width="300">
 
 After five years of living, laughing and loving together, I married my wonderful wife Anne. That also marked the turning point of me being "Martin Naumann" and changing my name to Splitt.
 
