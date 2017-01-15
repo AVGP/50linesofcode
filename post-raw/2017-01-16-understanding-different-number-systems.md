@@ -1,4 +1,3 @@
-<!-- Understanding different number systems -->
 # Understanding different number systems
 
 ## TL;DR
@@ -20,7 +19,7 @@ But there's good reason to change the amount of symbols in some cases:
 * in digital systems, it is easier to work with just two states: some electrical current or none. This gives us two symbols "off" (0) and "on" (1)
 * When we define time in hours, we have a base of 60 minutes that we could hypothetically express with 60 different symbols to get easier conversion between hours and minutes
 
-Computers, being digital systems themselves, use 8 of these symbols (aka "bits") grouped together as a byte, which can hold 256 (2^^8^^) different values.
+Computers, being digital systems themselves, use 8 of these symbols (aka "bits") grouped together as a byte, which can hold 256 (2<sup>8</sup>) different values.
 Using decimal numbers it is not easy to spot how many byte a number will take up. In contrast, knowing that the hexadecimal system with 16 symbols 0, ..., 9, A (10), B (11), C (12), D (13), E (14) and F (15) is easier for this purpose. Two digits of any hexadecimal number take up one byte.
 
 Knowing this, finding out how many bytes the number 10895 takes is trivial if this number is written in hexadecimal instead of decimal:
@@ -86,9 +85,9 @@ This works for all numbers in between, e.g. seven:
 
 And indeed, this does have a regularity in it, as the amount of symbols we have for a single digit determines how many numbers we can express. Every time we add a digit to a number, we have all the symbols available again for all previous digits, so the number of things doesn't double, but increase by a power of the number of symbols.
 
-For our three symbols system we can see that a single digit can express three numbers (3^^1^^), two digits can express nine (3^^2^^) and three digits can already express twenty-seven (3^^3^^) numbers.
+For our three symbols system we can see that a single digit can express three combinations (3<sup>1</sup>), two digits can express nine (3<sup>2</sup>) and three digits can already express twenty-seven (3<sup>3</sup>) combinations.
 
-For our decimal numbers it's the same but with a base of ten: One digit can express 10, two digits 100 and three digits 1000 different numbers.
+For our decimal numbers it's the same but with a base of ten: One digit can express 10, two digits 100 and three digits 1000 different combinations.
 
 This holds true for any number system: Each digit adds one to the exponent while the base is the number of symbols the system has available.
 
@@ -117,8 +116,8 @@ It works the other way around as well:
 To find the representation of a decimal number in any other base, you find the largest power of the base to fit into that number, which gives you the left-most digit of the other system, then you repeat that step for the rest until you are done.
 
 Say you want to convert the decimal number 6 into binary.
-The largest power of two that fits into 6 is 2^^2^^=4. So you take a 1 and remember that this will be the left-most number of three digits (we haven't checked if 2^^1^^ and 2^^0^^ fit into the rest yet).
-6-4 gives us a rest of 2. The largest power of two that fits into 2 is 2^^1^^=2. So we now have `1x2^2 + 1x2^1` and `6-4-2=0`, i.e leaves no rest, so we know that 2^^0^^ didn't fit, which means our number in binary is `1x2^2 + 1x2^1 + 0x2^0` or simply `110` (binary).
+The largest power of two that fits into 6 is 2<sup>2</sup>=4. So you take a 1 and remember that this will be the left-most number of three digits (we haven't checked if 2<sup>1</sup> and 2<sup>0</sup> fit into the rest yet).
+6-4 gives us a rest of 2. The largest power of two that fits into 2 is 2<sup>1</sup>=2. So we now have `1x2^2 + 1x2^1` and `6-4-2=0`, i.e leaves no rest, so we know that 2<sup>0</sup> didn't fit, which means our number in binary is `1x2^2 + 1x2^1 + 0x2^0` or simply `110` (binary).
 
 Some other examples:
 
@@ -129,6 +128,6 @@ Some other examples:
 
 Now that we have seen that number systems can use an arbitrary number of symbols to encode any natural number without much trouble and how we can convert between our familiar decimal system and systems with any other number of symbols, we can pick whatever system is convenient for working with different types of data and represent it in a way that is easiest for the task at hand.
 
-For instance, as two hexadecimal digits neatly fit the data in a single byte, we may use a [hex editor]() when looking at binary files when we wish to see the individual bytes.
+For instance, as two hexadecimal digits neatly fit the data in a single byte, we may use a [hex editor](https://en.m.wikipedia.org/wiki/Hex_editor) when looking at binary files when we wish to see the individual bytes.
 
 Equipped with this, we can take on working with binary data of any kind: images, videos, audio files and others.
