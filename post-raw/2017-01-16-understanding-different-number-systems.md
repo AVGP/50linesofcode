@@ -3,6 +3,10 @@
 
 ## TL;DR
 
+<div style="float:right">
+![Leibnitz' notes on the binary system](../images/binary-system.jpg)
+</div>
+
 * The fact that we use a number system with 10 symbols (0-9),aka "Base 10" or decimal is an arbitrary choice
 * Systems with different bases can help us express numbers in specific contexts more intuitively (e.g. hexadecimal or binary when working with digital systems)
 * Reading numbers in any number system can be done by multiplying each digit value with a power of the base, starting with the zero-th power for the right most digit and increasing the exponent by one for each step to the left, e.g. 123 = `3x10^0 + 2x10^1 + 1x10^2` for decimal numbers (base 10)
@@ -20,7 +24,7 @@ But there's good reason to change the amount of symbols in some cases:
 * in digital systems, it is easier to work with just two states: some electrical current or none. This gives us two symbols "off" (0) and "on" (1)
 * When we define time in hours, we have a base of 60 minutes that we could hypothetically express with 60 different symbols to get easier conversion between hours and minutes
 
-Computers, being digital systems themselves, use 8 of these symbols (aka "bits") grouped together as a byte, which can hold 256 (2<sup>8</sup>) different values.
+Computers, being digital systems themselves, use 8 digits of two symbols (aka "bits", wich can take two values each) grouped together as a byte, which can hold 256 (2<sup>8</sup>) different values.
 Using decimal numbers it is not easy to spot how many byte a number will take up. In contrast, knowing that the hexadecimal system with 16 symbols 0, ..., 9, A (10), B (11), C (12), D (13), E (14) and F (15) is easier for this purpose. Two digits of any hexadecimal number take up one byte.
 
 Knowing this, finding out how many bytes the number 10895 takes is trivial if this number is written in hexadecimal instead of decimal:
