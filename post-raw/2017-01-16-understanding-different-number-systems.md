@@ -3,9 +3,7 @@
 
 ## TL;DR
 
-<div style="float:right">
-![Leibnitz' notes on the binary system](../images/binary-system.jpg)
-</div>
+![Leibnitz' notes on the binary system](../images/post-images/binary-system.jpg)
 
 * The fact that we use a number system with 10 symbols (0-9),aka "Base 10" or decimal is an arbitrary choice
 * Systems with different bases can help us express numbers in specific contexts more intuitively (e.g. hexadecimal or binary when working with digital systems)
