@@ -91,7 +91,7 @@ We are using the [User Timing API]() to measure time and add our own information
 
 Now I let the test run on my trusty "old" Nexus 7 (2013):
 
-![](MainThread.jpg)
+![](../images/post-images/parallelism/MainThread.jpg)
 
 Okay, that's not very impressive, is it?
 Making matters worse is that the website stops reacting to anything during these nearly 39 seconds - no scrolling, no clicking, no typing. The page is frozen.
@@ -172,7 +172,7 @@ function isPrime(candidate) {
 
 And here is what we get when run again on my Nexus 7:
 
-![](SimpleWorker.jpg)
+![](../images/post-images/parallelism/SimpleWorker.jpg)
 
 Well, uhm, did all that ceremony give us anything then? After all now it is even *slower*!
 
@@ -192,11 +192,11 @@ I assumed this would total in 30 MB memory usage: 10 in our original ArrayBuffer
 
 Here is the memory usage before starting the test:
 
-![](CloningBefore.jpg)
+![](../images/post-images/parallelism/CloningBefore.jpg)
 
 And here right after the test:
 
-![](CloningAfter.jpg)
+![](../images/post-images/parallelism/CloningAfter.jpg)
 
 Wait, that is 50 megabytes more. As it turns out:
 
@@ -236,11 +236,11 @@ worker.postMessage(buffer, [buffer])
 
 And here are our numbers:
 
-![](TransferringTiming.jpg)
+![]( ../images/post-images/parallelism/TransferringTiming.jpg)
 
 So we got a little faster than the cloning worker, close to the original main-thread-blocking version. How are we doing in terms of memory?
 
-![](TransferringAfter.jpg)
+![](../images/post-images/parallelism/TransferringAfter.jpg)
 
 So having started with 40mb and ending up with a little more than 50mb sounds about right.
 
@@ -342,15 +342,15 @@ function isPrime(candidate) {
 
 And here are the result:
 
-![](DividingWorkersTiming.jpg)
+![](../images/post-images/parallelism/DividingWorkersTiming.jpg)
 
-![](DividingWorkersAfter.jpg)
+![](../images/post-images/parallelism/DividingWorkersAfter.jpg)
 
 So this solution took approximately half the time with quite some memory cost (40mb base memory usage + 10mb for the target buffer + 4 x 2.5mb for the buffer in each worker + 2mb overhead per worker.
 
 Here is the timeline of the application using 4 workers:
 
-![](DividingTimeline4x.png)
+![](../images/post-images/parallelism/DividingTimeline4x.png)
 
 We can see that the workers run in parallel, but we aren't getting a 4x speed-up as some workers take longer than others. This is the result of the way we divided the number range: As each worker needs to divide each number `x` by all numbers from 2 to `√x`, the workers with larger numbers need to do more divisions, i.e. more work. This can surely minimised by dividing the numbers in a way that ends up spreading the operations more equally among them. I will leave this as an exercise to you, the keen reader ;-)
 
@@ -358,11 +358,11 @@ Another question is: Could we just throw more workers at it?
 
 Here is the result for 8 workers:
 
-![](DividingWorkers8x.jpg)
+![](../images/post-images/parallelism/DividingWorkers8x.jpg)
 
 Well, this got slower! The timeline shows us why this happened:
 
-![](DividingTimeline8x.png)
+![](../images/post-images/parallelism/DividingTimeline8x.png)
 
 We see that, aside from minor overlaps, no more than 4 workers are active at the same time.
 This will depend on the system and worker characteristics and isn't a hard-and-fast number.
@@ -468,9 +468,9 @@ function isPrime(candidate) {
 
 Now for the results:
 
-![](SharingBuffer.jpg)
+![](../images/post-images/parallelism/SharingBuffer.jpg)
 
-![](SharingBufferAfter.jpg)
+![](../images/post-images/parallelism/SharingBufferAfter.jpg)
 
 I'd call this a win: We cut down the memory cost and shaved of a tiny bit of time.
 
