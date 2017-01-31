@@ -1,5 +1,5 @@
-<!-- JavaScript in parallel: Workers, transferable objects and SharedArrayBuffer -->
-# JavaScript in parallel: Workers, transferable objects and SharedArrayBuffer
+<!-- JavaScript in parallel -->
+# Workers, transferable objects and SharedArrayBuffer
 
 ## TL;DR
 
