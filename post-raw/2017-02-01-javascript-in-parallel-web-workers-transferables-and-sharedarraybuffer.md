@@ -93,7 +93,7 @@ We are using the [User Timing API](https://developer.mozilla.org/en-US/docs/Web/
 
 Now I let the test run on my trusty "old" Nexus 7 (2013):
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/MainThread.jpg)
 </div>
 
@@ -176,7 +176,7 @@ function isPrime(candidate) {
 
 And here is what we get when run again on my Nexus 7:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/SimpleWorker.jpg)
 </div>
 
@@ -198,13 +198,13 @@ I assumed this would total in 30 MB memory usage: 10 in our original ArrayBuffer
 
 Here is the memory usage before starting the test:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/CloningBefore.jpg)
 </div>
 
 And here right after the test:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/CloningAfter.jpg)
 </div>
 
@@ -246,13 +246,13 @@ worker.postMessage(buffer, [buffer])
 
 And here are our numbers:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/TransferringTiming.jpg)
 </div>
 
 So we got a little faster than the cloning worker, close to the original main-thread-blocking version. How are we doing in terms of memory?
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/TransferringAfter.jpg)
 </div>
 
@@ -356,11 +356,11 @@ function isPrime(candidate) {
 
 And here are the result:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/DividingWorkersTiming.jpg)
 </div>
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/DividingWorkersAfter.jpg)
 </div>
 
@@ -368,7 +368,7 @@ So this solution took approximately half the time with quite some memory cost (4
 
 Here is the timeline of the application using 4 workers:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/DividingTimeline4x.png)
 </div>
 
@@ -378,13 +378,13 @@ Another question is: Could we just throw more workers at it?
 
 Here is the result for 8 workers:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/DividingWorkers8x.jpg)
 </div>
 
 Well, this got slower! The timeline shows us why this happened:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/DividingTimeline8x.png)
 </div>
 
@@ -492,11 +492,11 @@ function isPrime(candidate) {
 
 Now for the results:
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/SharingBuffer.jpg)
 </div>
 
-<div style="width:50%">
+<div class="article-img" >
 ![](http://50linesofco.de/images/post-images/parallelism/SharingBufferAfter.jpg)
 </div>
 
