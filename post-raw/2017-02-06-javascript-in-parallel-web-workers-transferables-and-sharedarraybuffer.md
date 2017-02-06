@@ -1,6 +1,10 @@
 <!-- JavaScript in parallel -->
 # Workers, transferable objects and SharedArrayBuffer
 
+<div class="article-img">
+![](/images/post-images/parallelism/DividingTimeline4x.png)
+</div>
+
 ## TL;DR
 
 * JavaScript is single-threaded and long-running scripts make the page unresponsive
