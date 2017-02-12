@@ -2030,6 +2030,11 @@
 				width: 100%;
 			}
 
+		section div.article-img img {
+			display: inline-block;
+			width: 50%;
+		}
+
 /* List */
 
 	ol {

@@ -1,4 +1,9 @@
-# Exploring parallelism in JavaScript: Workers, transferable objects and SharedArrayBuffer
+<!-- JavaScript in parallel -->
+# Workers, transferable objects and SharedArrayBuffer
+
+<div class="article-img">
+![](/images/post-images/parallelism/DividingTimeline4x.png)
+</div>
 
 ## TL;DR
 
@@ -8,6 +13,7 @@
 * Using transfers mitigates the memory cost of cloning, but makes the data inaccessible to the sender
 * SharedArrayBuffers are an upcoming feature, allowing data to be shared between threads.
 * SharedArrayBuffer access can (and may need to) be synced using Atomics
+* All code can be found [in this repository](https://github.com/AVGP/js-parallelism-demos)
 
 ## An example application
 
@@ -15,7 +21,7 @@ As an example we want to build a web application that constructs a table where e
 
 We will use an [ArrayBuffer](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) to hold our booleans for us and we will be bold and make it 10 megabyte large.
 
-Now this just serves to have our script do some heavy lifting - it isn't a very useful thing, but I may use techniques described here in future posts dealing with binary data of different sorts (images, audio, video for instance). 
+Now this just serves to have our script do some heavy lifting - it isn't a very useful thing, but I may use techniques described here in future posts dealing with binary data of different sorts (images, audio, video for instance).
 
 Here we will use a very naive algorithm (there are much better ones available):
 
@@ -87,11 +93,13 @@ function isPrime(candidate) {
 }
 ```
 
-We are using the [User Timing API]() to measure time and add our own information into the timeline.
+We are using the [User Timing API](https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API/Using_the_User_Timing_API#Removing_performance_measures) to measure time and add our own information into the timeline.
 
 Now I let the test run on my trusty "old" Nexus 7 (2013):
 
-![](../images/post-images/parallelism/MainThread.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/MainThread.jpg)
+</div>
 
 Okay, that's not very impressive, is it?
 Making matters worse is that the website stops reacting to anything during these nearly 39 seconds - no scrolling, no clicking, no typing. The page is frozen.
@@ -172,7 +180,9 @@ function isPrime(candidate) {
 
 And here is what we get when run again on my Nexus 7:
 
-![](../images/post-images/parallelism/SimpleWorker.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/SimpleWorker.jpg)
+</div>
 
 Well, uhm, did all that ceremony give us anything then? After all now it is even *slower*!
 
@@ -192,11 +202,15 @@ I assumed this would total in 30 MB memory usage: 10 in our original ArrayBuffer
 
 Here is the memory usage before starting the test:
 
-![](../images/post-images/parallelism/CloningBefore.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/CloningBefore.jpg)
+</div>
 
 And here right after the test:
 
-![](../images/post-images/parallelism/CloningAfter.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/CloningAfter.jpg)
+</div>
 
 Wait, that is 50 megabytes more. As it turns out:
 
@@ -214,7 +228,7 @@ Luckily for us there is a different way of transferring data between the threads
 
 This second parameter can hold a list of [Transferable](https://developer.mozilla.org/en-US/docs/Web/API/Transferable) objects that will be excluded from cloning and will be moved or *transferred* instead.
 
-Transferring an object, however, neuters it in the source thread, so for instance our ArrayBuffer won't contain any data in the main thread after it's been transferred to the worker and its `byteLength` will be zero. 
+Transferring an object, however, neuters it in the source thread, so for instance our ArrayBuffer won't contain any data in the main thread after it's been transferred to the worker and its `byteLength` will be zero.
 This is to avoid the cost of having to implement mechanisms to deal with a bunch of issues that can happen when multiple threads access shared data.
 
 Here is the adjusted code using transfers:
@@ -236,11 +250,15 @@ worker.postMessage(buffer, [buffer])
 
 And here are our numbers:
 
-![]( ../images/post-images/parallelism/TransferringTiming.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/TransferringTiming.jpg)
+</div>
 
 So we got a little faster than the cloning worker, close to the original main-thread-blocking version. How are we doing in terms of memory?
 
-![](../images/post-images/parallelism/TransferringAfter.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/TransferringAfter.jpg)
+</div>
 
 So having started with 40mb and ending up with a little more than 50mb sounds about right.
 
@@ -258,7 +276,7 @@ We could split the range of numbers (and our buffer) among multiple workers, run
 
 Instead of launching a single worker, we are about to launch four. Each worker will receive a message instructing it with the offset to begin with and how many numbers to check.
 
-When a worker finishes, it reports back with 
+When a worker finishes, it reports back with
 
 * an ArrayBuffer containing the information about which entries are prime
 * the amount of primes it found
@@ -296,12 +314,12 @@ function runTest() {
         console.log(primesFound, view)
       }
     }
-    
+
     worker.postMessage({
       offset: offset,
       length: blockLen
     })
-    
+
     numbersToCheck -= blockLen
     offset += blockLen
   }
@@ -342,15 +360,21 @@ function isPrime(candidate) {
 
 And here are the result:
 
-![](../images/post-images/parallelism/DividingWorkersTiming.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/DividingWorkersTiming.jpg)
+</div>
 
-![](../images/post-images/parallelism/DividingWorkersAfter.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/DividingWorkersAfter.jpg)
+</div>
 
 So this solution took approximately half the time with quite some memory cost (40mb base memory usage + 10mb for the target buffer + 4 x 2.5mb for the buffer in each worker + 2mb overhead per worker.
 
 Here is the timeline of the application using 4 workers:
 
-![](../images/post-images/parallelism/DividingTimeline4x.png)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/DividingTimeline4x.png)
+</div>
 
 We can see that the workers run in parallel, but we aren't getting a 4x speed-up as some workers take longer than others. This is the result of the way we divided the number range: As each worker needs to divide each number `x` by all numbers from 2 to `√x`, the workers with larger numbers need to do more divisions, i.e. more work. This can surely minimised by dividing the numbers in a way that ends up spreading the operations more equally among them. I will leave this as an exercise to you, the keen reader ;-)
 
@@ -358,11 +382,15 @@ Another question is: Could we just throw more workers at it?
 
 Here is the result for 8 workers:
 
-![](../images/post-images/parallelism/DividingWorkers8x.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/DividingWorkers8x.jpg)
+</div>
 
 Well, this got slower! The timeline shows us why this happened:
 
-![](../images/post-images/parallelism/DividingTimeline8x.png)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/DividingTimeline8x.png)
+</div>
 
 We see that, aside from minor overlaps, no more than 4 workers are active at the same time.
 This will depend on the system and worker characteristics and isn't a hard-and-fast number.
@@ -375,7 +403,7 @@ Usually you will end up with a mix of CPU- and I/O bound workloads or problems t
 
 ## Sharing space with SharedArrayBuffers
 
-Web Workers, TypedArrays and Transferables have been around for a good while now and found their ways into most browsers. Our next trick, [being part of ES2017](), on the other hand is rather new and will likely require a browser flag or a preview version of your favourite browser (or both).
+Web Workers, TypedArrays and Transferables have been around for a good while now and found their ways into most browsers. Our next trick, [being a proposal right now](https://github.com/tc39/ecmascript_sharedmem), on the other hand is rather new and will likely require a browser flag or a preview version of your favourite browser (or both).
 
 I am talking about a [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer).
 
@@ -420,13 +448,13 @@ function runTest() {
         console.log(primesFound, view)
       }
     }
-    
+
     worker.postMessage({
       buffer: buffer, // SharedArayBuffers can't be transferred
       offset: offset,
       length: blockLen
     })
-    
+
     numbersToCheck -= blockLen
     offset += blockLen
   }
@@ -443,7 +471,7 @@ Note that `view[0]` in the worker will end up at `buffer[offset]` in the main th
 self.onmessage = function(msg) {
   var view = new Uint8Array(msg.data.buffer, msg.data.offset, msg.data.length),
       numPrimes = 0
-      
+
   console.log('start', msg.data.offset+2, 'before', msg.data.offset+2+msg.data.length)
   for(var i=0; i<msg.data.length;i++) {
     var primeCandidate = i+msg.data.offset+2 // 2 is the smalles prime number
@@ -468,9 +496,13 @@ function isPrime(candidate) {
 
 Now for the results:
 
-![](../images/post-images/parallelism/SharingBuffer.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/SharingBuffer.jpg)
+</div>
 
-![](../images/post-images/parallelism/SharingBufferAfter.jpg)
+<div class="article-img" >
+![](http://50linesofco.de/images/post-images/parallelism/SharingBufferAfter.jpg)
+</div>
 
 I'd call this a win: We cut down the memory cost and shaved of a tiny bit of time.
 
@@ -482,11 +514,15 @@ It is *very* nice and if you ever had to deal with concurrent shared memory acce
 
 Now it does require a little attention though nut that is absolutely fine as it puts you in control without putting the burden of ensuring conflict-free access.
 
-When we write to a SharedArrayBuffer, the data might not immediately be visible in other threads. Also will the code, when compiled for optimisation, require a few hints on how we are using the buffer across threads in order to remove things which would be good to remove if it weren't for our multithread usage.
+When we write to a SharedArrayBuffer, the data might not immediately be visible in other threads.
 
 ### Atomics
 
-TBD
+Our application is rather simple and does not have the problem of *race conditions*, i.e. each thread has its own part of the shared memory to write to. More complex applications can easily end up writing and reading from the same part of the shared memory at the same time, which easily results in garbage.
+
+This usually leads to very nasty bugs as the order in which the threads access memory depends on many factors and is not predictable, so *sometimes* the code will work and *sometimes* it won't.
+
+This situation can be resolved by using **Atomic operations**, referred to as [Atomics](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics), which are part of the same proposal as SharedArrayBuffer.
 
 ## Wrap up
 
