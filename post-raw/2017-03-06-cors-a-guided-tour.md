@@ -141,7 +141,8 @@ Any request that is using a method that isn't `GET` or `POST` or uses a content 
 * `text/plain`
 * `application/x-www-form-urlencoded`
 * `multipart/form-data`
-or any header that isn't [allowed for simple requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Simple_requests) requires a *preflight request*.
+
+Any other header that isn't [allowed for simple requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Simple_requests) requires a *preflight request*.
 
 This mechanism is meant to allow web servers to decide if they want to allow the actual request. The browser sets the `Access-Control-Request-Headers` and `Access-Control-Request-Method` headers to tell the server what request to expect and the server answers with corresponding headers.
 
@@ -180,7 +181,6 @@ fetch('http://good.com:3000/private')
 No matter if we are logged in to good.com or not, we will see "Please login first".
 
 The reason is that the cookie from good.com will not be sent when the request comes from another origin, in this case evil.com.
-
 We can ask the browser to send the cookies along, even when it's a cross-origin domain:
 
 ```javascript
@@ -195,10 +195,11 @@ fetch('http://good.com:3000/private', {
   })
 ```
 
-But again this won't work. That is great news, actually. Imagine any website could make authenticated requests - the request will be made but won't send the actual cookie and the response is inaccessible.
+But again this won't work. That is great news, actually.
+
+Imagine any website could make authenticated requests - the request will be made but won't send the actual cookie and the response is inaccessible.
 
 So, we don't want evil.com to be able to access this private data - but what if we want thirdparty.com to have access to `/private`?
-
 In this case we need to set the `Access-Control-Allow-Credentials` header to `true`:
 
 ```javascript
@@ -239,15 +240,19 @@ Now we have allowed one origin to do cross origin requests with authentication d
 In this case, we probably want to use a whitelist:
 
 ```javascript
-  var ALLOWED_ORIGINS = [ 'http://anotherthirdparty.com:8000', 'http://thirdparty.com:8000' ]
+const ALLOWED_ORIGINS = [
+  'http://anotherthirdparty.com:8000',
+  'http://thirdparty.com:8000'
+]
 
 app.get('/private', function(req, res) {
   if(ALLOWED_ORIGINS.indexOf(req.headers.origin) > -1) {
+    res.set('Access-Control-Allow-Credentials', 'true')
     res.set('Access-Control-Allow-Origin', req.headers.origin)
-  } else {
+  } else { // allow other origins to make unauthenticated CORS requests
     res.set('Access-Control-Allow-Origin', '*')        
   }
-  res.set('Access-Control-Allow-Credentials', 'true')
+
   if(req.session.loggedIn === true) {
     res.send('THIS IS THE SECRET')
   } else {
@@ -256,7 +261,8 @@ app.get('/private', function(req, res) {
 })
 ```
 
-**Do not directly send `req.headers.origin` as the CORS origin header. This would allow any website access to authenticated requests to your site.** There may be exceptions to this rule, but think twice before implementing CORS with credentials without the whitelist.
+**Again: Do not directly send `req.headers.origin` as the CORS origin header. This would allow any website access to authenticated requests to your site.**
+There may be exceptions to this rule, but think at least twice before implementing CORS with credentials without the whitelist.
 
 ## Summary
 
