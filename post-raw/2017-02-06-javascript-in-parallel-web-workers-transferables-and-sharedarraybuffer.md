@@ -15,6 +15,19 @@
 * SharedArrayBuffer access can (and may need to) be synced using Atomics
 * All code can be found [in this repository](https://github.com/AVGP/js-parallelism-demos)
 
+## Update: `isPrime` was incorrect
+
+Thankfully a reader pointed out that the `isPrime` function was incorrect in the original article.
+Instead of the `<` operator an `<=` is correct as we also need to check the remainder of the division with the square root of the prime candidate - not excluding the square root.
+
+Thanks to [Alberto Pettarin](https://github.com/pettarin) for pointing this out!
+
+## Update: Worker pooling
+
+A reader pointed out that you can also cut on the setup cost a little by pooling workers and initialising them upfront. I haven't benchmarked this yet, but [the solution can be found here](https://plnkr.co/edit/pu2Ouf8OanafxkCWt4s3?p=preview).
+
+Thanks to [01 Alchemist](https://twitter.com/01alchemist) for the addition!
+
 ## An example application
 
 As an example we want to build a web application that constructs a table where each entry denotes if the number that belongs to it is [prime](https://en.m.wikipedia.org/wiki/Prime_number) or not.
@@ -27,7 +40,7 @@ Here we will use a very naive algorithm (there are much better ones available):
 
 ```javascript
 function isPrime(candidate) {
-  for(var n=2; n<Math.floor(Math.sqrt(candidate)); n++) {
+  for(var n=2; n <= Math.floor(Math.sqrt(candidate)); n++) {
     // if the candidate can be divided by n without remainder it is not prime
     if(candidate % n === 0) return false
   }
@@ -86,7 +99,7 @@ function runTest() {
 }
 
 function isPrime(candidate) {
-  for(var n=2; n < Math.floor(Math.sqrt(candidate)); n++) {
+  for(var n=2; n <= Math.floor(Math.sqrt(candidate)); n++) {
     if(candidate % n === 0) return false
   }
   return true
@@ -171,7 +184,7 @@ self.onmessage = function(msg) {
 }
 
 function isPrime(candidate) {
-  for(var n=2; n < Math.floor(Math.sqrt(candidate)); n++) {
+  for(var n=2; n <= Math.floor(Math.sqrt(candidate)); n++) {
     if(candidate % n === 0) return false
   }
   return true
@@ -351,7 +364,7 @@ self.onmessage = function(msg) {
 }
 
 function isPrime(candidate) {
-  for(var n=2; n < Math.floor(Math.sqrt(candidate)); n++) {
+  for(var n=2; n <= Math.floor(Math.sqrt(candidate)); n++) {
     if(candidate % n === 0) return false
   }
   return true
@@ -487,7 +500,7 @@ self.onmessage = function(msg) {
 }
 
 function isPrime(candidate) {
-  for(var n=2; n < Math.floor(Math.sqrt(candidate)); n++) {
+  for(var n=2; n <= Math.floor(Math.sqrt(candidate)); n++) {
     if(candidate % n === 0) return false
   }
   return true
