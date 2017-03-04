@@ -4,25 +4,23 @@
 ## TL;DR
 
 * The [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) does not prevent requests being made to other origins, but disables access to the response from JavaScript.
-* [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) headers allow to access cross-origin responses.
+* [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) headers allow access to cross-origin responses.
 * CORS together with credentials require caution.
 
 ## Our example
 I will only show the request handling code here, but the [full example is available on Github](https://github.com/avgp/cors-demo-app).
 
-Let's start with an example. Say we have an amazing website with a login to protect some private data we made available to our users at `/private`.  
+Let's start with an example. Say we have an amazing website with a public API available at `http://good.com:8000/public`:
 
 ```javascript
-app.get('/private', function(req, res) {
-  if(req.session.loggedIn === true) {
-    res.send('THIS IS THE SECRET')
-  } else {
-    res.send('Please login first')
-  }
+app.get('/public', function(req, res) {
+  res.send(JSON.stringify({
+    message: 'This is public'
+  }));
 })
 ```
 
-We won't make this example too complicated, so let's say everyone logs in using the same password: `secret` and we will use cookies to protect the private data:
+We also have a simple login feature, where users enter a shared secret and a cookie is set, identifying them as authenticated:
 
 ```javascript
 app.post('/login', function(req, res) {
@@ -35,16 +33,24 @@ app.post('/login', function(req, res) {
 })
 ```
 
-Our website also offers a public API at `/public` to get some public data, too:
+We use this to protect some private data we made available to our users at `/private`.  
 
 ```javascript
-app.get('/public', function(req, res) {
-  res.send('Public info')
+app.get('/private', function(req, res) {
+  if(req.session.loggedIn === true) {
+    res.send(JSON.stringify({
+      message: 'THIS IS PRIVATE'
+    }))
+  } else {
+    res.send(JSON.stringify({
+      message: 'Please login first'
+    }))
+  }
 })
 ```
 
 ## Requesting our API via AJAX from other domains
-Now our "API" isn't particularly well-designed or fancy, but we could allow others to fetch data from our `/public` URL. Say, our API lives at `good.com/public` and our client is hosted on `thirdparty.com`, the client might run the following code:
+Now our API isn't particularly well-designed or fancy, but we could allow others to fetch data from our `/public` URL. Say, our API lives at `good.com:300/public` and our client is hosted on `thirdparty.com`, the client might run the following code:
 
 ```javascript
 fetch('http://good.com:3000/public')
@@ -66,6 +72,7 @@ The request was successful, but the result was not available. The reason can be 
 Aha! We are missing the `Access-Control-Allow-Origin` header. But why do we need it and what is it good for?
 
 ## The Same-Origin Policy
+
 The reason why we won't get the response in JavaScript is the *Same-Origin Policy*. This policy was aimed at making sure that a website can't read the result from a request made to another website.
 
 For instance: If you are on `example.org` you would not want that website to make a request to your banking website and fetch your account balance and transactions.
@@ -88,6 +95,8 @@ In a CSRF attack, the attacker makes a request to a third party page in the back
 
 Note that despite the Same-Origin Policy being in effect, our example request from `thirdparty.com` was successfully carried out to `good.com` - we just could not access the results. For CSRF we don't need the result...
 
+For example, an API that allows sending emails by doing a POST request would send an email, if we give it the right data - an attacker doesn't care about the result, they care about the email being sent which it will regardless of the ability to see the API response.
+
 ## Enabling CORS for our public API
 
 Now we *do* want to allow the JavaScript on third party sites (such as `thirdparty.com`) to access our API responses. To do so, we can enable the CORS header as the error said:
@@ -95,7 +104,7 @@ Now we *do* want to allow the JavaScript on third party sites (such as `thirdpar
 ```javascript
 app.get('/public', function(req, res) {
   res.set('Access-Control-Allow-Origin', '*')
-  res.send('Public info')
+  res.send(...)
 })
 ```
 
@@ -107,18 +116,7 @@ Here we are setting the `Access-Control-Allow-Origin` header to `*` which means:
 
 The previous example was a so-called *simple request*. Simple requests are `GET` or `POST` requests with a few allowed headers and header values.
 
-Let's change our API a little bit:
-
-```javascript
-app.get('/public', function(req, res) {
-  res.set('Access-Control-Allow-Origin', '*')
-  res.send(JSON.stringify({
-    message: 'This is public info'
-  }))
-})
-```
-
-And `thirdparty.com` changes the implementation a little, too:
+Now `thirdparty.com` changes the implementation a little to get the JSON:
 
 ```javascript
 fetch('http://good.com:3000/public', {
