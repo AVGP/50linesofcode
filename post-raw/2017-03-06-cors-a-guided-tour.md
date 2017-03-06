@@ -3,9 +3,11 @@
 
 ## TL;DR
 
-* The [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) does not prevent requests being made to other origins, but disables access to the response from JavaScript.
+* The browser enforces the [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) to avoid getting responses from websites that do not share the same origin.
+* The Same-origin policy does not prevent requests being made to other origins, but disables access to the response from JavaScript.
 * [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) headers allow access to cross-origin responses.
 * CORS together with credentials require caution.
+* CORS is a browser-enforced policy. Other applications aren't affected by it.
 
 ## Our example
 I will only show the request handling code here, but the [full example is available on Github](https://github.com/avgp/cors-demo-app).
@@ -59,7 +61,7 @@ fetch('http://good.com:3000/public')
     document.body.textContent = result
   })
 ```
-But that doesn't work!
+But that doesn't work in our browser!
 
 Let's take a look at the network tab for `http://thirdparty.com`:
 
@@ -73,7 +75,7 @@ Aha! We are missing the `Access-Control-Allow-Origin` header. But why do we need
 
 ## The Same-Origin Policy
 
-The reason why we won't get the response in JavaScript is the *Same-Origin Policy*. This policy was aimed at making sure that a website can't read the result from a request made to another website.
+The reason why we won't get the response in JavaScript is the *Same-Origin Policy*. This policy was aimed at making sure that a website can't read the result from a request made to another website and is enforced by the browser.
 
 For instance: If you are on `example.org` you would not want that website to make a request to your banking website and fetch your account balance and transactions.
 
@@ -89,7 +91,7 @@ So `http://example.org` and `http://www.example.org` and `https://example.org` a
 
 ## A note on CSRF
 
-Note that there is a class of attacks, called *Cross Site Request Forgery* that is not affected by the Same-Origin Policy.
+Note that there is a class of attacks, called *Cross Site Request Forgery* that is not mitigated by the Same-Origin Policy.
 
 In a CSRF attack, the attacker makes a request to a third party page in the background, for instance by sending a POST request to your bank website. If you have a valid session with your bank, any website can make a request in the background that will be carried out unless your bank uses counter measures against CSRF.
 
@@ -193,7 +195,7 @@ fetch('http://good.com:3000/private', {
   })
 ```
 
-But again this won't work. That is great news, actually.
+But again this won't work in the browser. That is great news, actually.
 
 Imagine any website could make authenticated requests - the request will be made but won't send the actual cookie and the response is inaccessible.
 
