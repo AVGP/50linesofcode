@@ -1,3 +1,4 @@
+<!-- How I approach side projects -->
 # How I approach side projects
 
 ![](../images/post-images/fun-projects.jpg)  
