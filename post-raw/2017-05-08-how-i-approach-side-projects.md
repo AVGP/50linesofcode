@@ -132,7 +132,7 @@ Those answered the detail questions I had and validated that each step of my ser
 
 Now that we know we can do it, well, we put the parts together!
 
-You know go through the steps and implement them, based on the learnings from your prototypes. At this point you should also check how other people build their things and if there's any advisories regarding security, best practices, etc. Also adding logging and documentation is very valuable at this point, because even if nobody else might ever see your result, you will forget how the thing you build works.
+You now go through the steps and implement them, based on the learnings from your prototypes. At this point you should also check how other people build their things and if there's any advisories regarding security, best practices, etc. Also adding logging and documentation is very valuable at this point, because even if nobody else might ever see your result, you will forget how the thing you build works.
 
 If you want to get the most out of it and be able to go back to your project one day to see "how did this work, again?" - you'll need some documentation.
 
