@@ -46,7 +46,7 @@ This is usually my first roadblock: I don't even know where to start and *uggggg
 
 **Don't let that drag you down!**
 
-Instead, start with a thing that you clearly don't know. For instance: "I don't even do what serverless *means*".
+Instead, start with a thing that you clearly don't know. For instance: "I don't even know what serverless *means*".
 
 Write that down, google it.
 
