@@ -149,6 +149,6 @@ Also: Share with others. These things are brilliant for meetup or conference tal
 **You are not the only one who wanted to figure this out!**
 Others can learn from you and maybe even give you ideas for improvements or teach you something on top of it, that you didn't find out during building your project. Everyone wins.
 
-However, unfortunately the reality is that some people may badmouth your work or expect you to now be responsible for maintaining it and offering them 24/7 support. **No.** Tell them to ~~fuck off~~ you're not doing this commercially and if they don't like it, they are free to build upon it and make it better. You are not your projects, so don't let anyone take away your achievements in learning something new and doing something cool!
+However, unfortunately the reality is that some people may badmouth your work or expect you to now be responsible for maintaining it and offering them 24/7 support. **No.** Tell them ~~to fuck off~~ you're not doing this commercially and if they don't like it, they are free to build upon it and make it better. You are not your projects, so don't let anyone take away your achievements in learning something new and doing something cool!
 
 🎈 Enjoy learning & making! 🎈
