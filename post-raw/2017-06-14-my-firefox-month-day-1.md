@@ -3,6 +3,11 @@
 
 ## TL;DR
 
+* I will try Firefox 54 on my laptops and phone for a month
+* Firefox Sync provides me with seamless access to my tabs, bookmarks, autofill data etc. across devices
+* Using Firefox with multiple profiles is easier with an Add-On like "Profile Switcher"
+* The first day had a bunch of pleasant surprises in the dev tools
+
 ## Welcome to my month with Firefox!
 
 The web is an amazing platform due to it's flexibility, resilience, versatility and openness.
@@ -57,7 +62,7 @@ Profile switcher appeared to not be working at first. I installed it, but nothin
 Using the "Customize" option in the menu finally allowed me to drag it into the tab bar to appear on my screen.
 From then on, the addon worked perfectly: I could see which profile I was using, create new profiles or launch the profile manager.
 
-## Devtools
+## Dev tools
 
 One big surprise to me were the developer tools. I knew of the **Shader Editor** already, which is pretty cool when I work with WebGL or WebVR.
 
