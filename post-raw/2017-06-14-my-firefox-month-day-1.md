@@ -77,7 +77,11 @@ A few features surprised me though, for instance:
 - **"Network analysis"** to give a breakdown of the network load by resource type, with and without cache
 ![](../images/post-images/firefox/firefox-day1-4.png)
 
-One thing I was missing, though, was the ability to pick the document in the JavaScript console. If you're using iframes this feature comes in handily as it allows you to pick which `document` you want to inspect.
+~~One thing I was missing, though, was the ability to pick the document in the JavaScript console. If you're using iframes this feature comes in handily as it allows you to pick which `document` you want to inspect.~~
+
+**Update**: Thanks to [Julien Wajsberg](https://twitter.com/jwajsberg/status/875089442444378117) I found the devtool setting to enable an additional button to select the document to inspect when iframes are present!
+
+![](../images/post-images/firefox/firefox-day1-5.png)
 
 ## Summary
 
