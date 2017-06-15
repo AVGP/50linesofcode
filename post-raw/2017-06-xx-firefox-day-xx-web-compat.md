@@ -1,4 +1,5 @@
 <!-- Firefox day 2: Web compat -->
+<!-- DRAFT -->
 # Firefox day 2: Web compat
 
 ## Web compatibility and mono culture
