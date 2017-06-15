@@ -10,8 +10,9 @@ for(var i=0; i<files.length;i++) {
   var content = fs.readFileSync(dir + '/' + files[i], 'utf8')
   var title = content.match(/<\!\-\-([^<]+)\-\->/)[1].trim()
   var desc  = content.match(/##[^\n]+\n\n([^#]+)(?=\n\n)/)[1]
-
-  items.push({title: title, description: desc, link: url + '/' + files[i].slice(0, -3) + '.html'})
+  if(!content.match(/<!-- DRAFT -->/)) {
+    items.push({title: title, description: desc, link: url + '/' + files[i].slice(0, -3) + '.html'})
+  }
 }
 
 items = items.map(function(item) {
