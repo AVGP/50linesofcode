@@ -3,11 +3,15 @@ var fs = require('fs');
 var url = process.argv.pop(),
     dir = process.argv.pop()
 
-var files = fs.readdirSync(dir)
+var files = fs.readdirSync(dir).filter((file) => {
+  const stat = fs.lstatSync(dir + '/' + file)
+  return stat.isFile()
+})
 var items = []
 
 for(var i=0; i<files.length;i++) {
   var content = fs.readFileSync(dir + '/' + files[i], 'utf8')
+  console.log(files[i])
   var title = content.match(/<\!\-\-([^<]+)\-\->/)[1].trim()
   var desc  = content.match(/##[^\n]+\n\n([^#]+)(?=\n\n)/)[1]
   if(!content.match(/<!-- DRAFT -->/)) {
@@ -15,7 +19,7 @@ for(var i=0; i<files.length;i++) {
   }
 }
 
-items = items.map(function(item) {
+items = items.reverse().map(function(item) {
   return '<item>\n\t<title>' + item.title + '</title>\n\t<link>' + item.link + '</link>\n\t<description>' + item.description + '</description>\n\t<guid isPermaLink="true">' + item.link + '</guid>\n</item>'
 })
 
