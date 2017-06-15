@@ -3,8 +3,8 @@ var fs = require('fs');
 var url = process.argv.pop(),
     dir = process.argv.pop()
 
-var files = fs.readdirSync(dir).filter((file) => {
-  const stat = fs.lstatSync(dir + '/' + file)
+var files = fs.readdirSync(dir).filter(function(file) {
+  var stat = fs.lstatSync(dir + '/' + file)
   return stat.isFile()
 })
 var items = []
