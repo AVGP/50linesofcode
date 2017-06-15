@@ -90,4 +90,7 @@ All in all I have to say I am really happy and impressed with Firefox 54 so far.
 
 It's fast, it's working well and I'm not missing much yet :-)
 
-Stay tuned for day 2!
+## The entire saga so far
+
+[Firefox day 1](2017-06-14-my-firefox-month-day-1)
+[Firefox day 2](2017-06-15-firefox-day-2-first-few-cracks)

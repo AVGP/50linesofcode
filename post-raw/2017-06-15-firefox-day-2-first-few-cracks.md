@@ -56,3 +56,8 @@ Even after that dance, I struggle with disappearing words as I type and other fu
 ## Summary
 
 I have seen a few weird glitches and a cool discovery today. So far I'm still having a pretty good feeling about this journey - let's see how it will be tomorrow!
+
+## The entire saga so far
+
+[Firefox day 1](2017-06-14-my-firefox-month-day-1)
+[Firefox day 2](2017-06-15-firefox-day-2-first-few-cracks)
