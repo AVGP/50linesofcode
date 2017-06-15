@@ -23,7 +23,9 @@ Another issue happened after visiting the great [A Week of A-Frame 64](https://a
 
 ![](../images/post-images/firefox/firefox-day2-1.png)
 
-I don't know what that was, but at least **it was temporary**. I checked back a few hours later (with nothing having changed - same laptop, same WiFi, ...) and it worked. There were no problems with playback at any time in Chrome.
+I don't know what that was, but at least **it was temporary**. I checked back a few hours later (with nothing having changed - same laptop, same WiFi, ...) and it worked. There were no problems with playback at any time in Chrome. 
+
+**Update**: [I'm being told](https://twitter.com/jwajsberg/status/875472489631162369) this is an intermittent issue on Twitter's end.
 
 I can't say the same about the [Forest Wave](https://forestwave.glitch.me) demo, though. It just never worked in Firefox. The music played to a blank window:
 
