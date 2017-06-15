@@ -81,6 +81,7 @@ A few features surprised me though, for instance:
 
 **Update**: Thanks to [Julien Wajsberg](https://twitter.com/jwajsberg/status/875089442444378117) I found the devtool setting to enable an additional button to select the document to inspect when iframes are present!
 
+![](../images/post-images/firefox/firefox-day1-6.png)
 ![](../images/post-images/firefox/firefox-day1-5.png)
 
 ## Summary
