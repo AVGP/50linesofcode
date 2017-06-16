@@ -1,4 +1,5 @@
 var fs = require('fs');
+var htmlentities = require('htmlentities').encode
 
 var url = process.argv.pop(),
     dir = process.argv.pop()
@@ -15,7 +16,7 @@ for(var i=0; i<files.length;i++) {
   var title = content.match(/<\!\-\-([^<]+)\-\->/)[1].trim()
   var desc  = content.match(/##[^\n]+\n\n([^#]+)(?=\n\n)/)[1]
   if(!content.match(/<!-- DRAFT -->/)) {
-    items.push({title: title, description: desc, link: url + '/' + files[i].slice(0, -3) + '.html'})
+    items.push({title: htmlentities(title), description: htmlentities(desc), link: url + '/' + files[i].slice(0, -3) + '.html'})
   }
 }
 

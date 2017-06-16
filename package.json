@@ -12,5 +12,8 @@
     "cssmin": "^0.4.3",
     "imagemin": "^4.0.0",
     "uglify-js": "^2.6.2"
+  },
+  "dependencies": {
+    "htmlentities": "^1.0.0"
   }
 }
