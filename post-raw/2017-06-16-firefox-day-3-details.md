@@ -63,7 +63,7 @@ Also, when opening links in Emails instead of awkwardly opening it in an "In App
 
 Today is the day I stopped feeling weird for not opening my "default browser" and I went as far as allowing Firefox to set itself as my default browser on both my laptops and my phone.
 
-The overall browsing experience is pretty smooth and enjoyable and the many small details really pay off - e.g. I felt awkward in the Firefox devtools at first as their structure and look &amp; feel is quite different from Chrome's, but the shader editor and the "Screenshot DOM node" feature are really, really handy.
+The overall browsing experience is pretty smooth and enjoyable and the many small details really pay off - e.g. I felt awkward in the Firefox devtools at first as their structure and look &amp; feel is quite different from Chrome's, but the shader editor and the "Screenshot DOM node" feature (Thanks to [Nils Solanki](https://twitter.com/nilssolanki/status/875734436226097153) for the tip!) are really, really handy.
 
 ## The entire saga so far
 
