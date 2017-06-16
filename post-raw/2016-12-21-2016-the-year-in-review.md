@@ -27,7 +27,7 @@ In addition, I am happy to announce that I am now also a [Google Developer Exper
 On the notion of sharing knowledge:
 
 This year I had the honour to speak at 26 events in 16 different countries, giving a total of 33 talks and workshops.
-I really enjoy the opportunity to share the things I've learned or experience I've painstakingly made by "doing it all wrong"&trade;!
+I really enjoy the opportunity to share the things I've learned or experience I've painstakingly made by "doing it all wrong"&amp;trade;!
 
 It's a huge privilege to have one's voice amplified by being in front of an audience (possibly even recorded and published).
 I wish this privilege to be available for more people with fresh perspectives and new experiences. Which brings me to the next point...

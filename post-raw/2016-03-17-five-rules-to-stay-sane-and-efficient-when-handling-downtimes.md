@@ -20,7 +20,7 @@ Your primary goal is to end the incident and restore normal operations as quickl
 
 1. Stay calm (no, **really**)
 2. Think out loud and be precise
-3. Remove noise & distractions
+3. Remove noise &amp; distractions
 4. Bundle up external communication
 5. Keep a paper trail for later
 
@@ -48,7 +48,7 @@ So you should **clearly** say what you are about to do *before* you do it, what 
 
 Be sure to be precise in the terms you use to avoid confusion. If anyone isn't sure what is meant by an expression, **ask and clarify**!
 
-### 3. Remove noise & distractions
+### 3. Remove noise &amp; distractions
 
 Disaster attracts onlookers.
 

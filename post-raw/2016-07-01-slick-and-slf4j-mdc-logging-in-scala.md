@@ -308,7 +308,7 @@ object MdcAsyncExecutor extends StrictLogging {
 Now to use our fresh `MdcAsyncExecutor`, we'll supply it when creating the `Database` instance:
 
 ```scala
-// Threads are named "Database-X" where "X" is the thread number & there will be 10 threads in the pool.
+// Threads are named "Database-X" where "X" is the thread number &amp; there will be 10 threads in the pool.
 val db = Database.forDataSource(connectionPool, MdcAsyncExecutor.apply("Database", 10))
 ```
 
