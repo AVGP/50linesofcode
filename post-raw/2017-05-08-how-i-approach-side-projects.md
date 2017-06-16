@@ -6,12 +6,12 @@
 
 ## TL;DR
 
-- Start with something you don't know. Research & write down the result
+- Start with something you don't know. Research &amp; write down the result
 - Research just enough to identify the major unknown-unknowns, turning them into known-unknowns
 - Break your project down into approachable steps
 - Build small prototypes for each step to validate your understanding of the project's problem
 - Put together an implementation of your project, based on learnings from the prototypes
-- 🎈 Be proud & share 🎈
+- 🎈 Be proud &amp; share 🎈
 
 ## Intro
 
@@ -136,7 +136,7 @@ You now go through the steps and implement them, based on the learnings from you
 
 If you want to get the most out of it and be able to go back to your project one day to see "how did this work, again?" - you'll need some documentation.
 
-## Next up: Release & Reflect
+## Next up: Release &amp; Reflect
 
 Once you've build it and it's running, you should take a deep breath and be proud of you.
 
