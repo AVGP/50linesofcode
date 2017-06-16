@@ -63,3 +63,4 @@ I have seen a few weird glitches and a cool discovery today. So far I'm still ha
 
 [Firefox day 1](2017-06-14-my-firefox-month-day-1)
 [Firefox day 2](2017-06-15-firefox-day-2-first-few-cracks)
+[Firefox day 3](2017-06-16-firefox-day-3-details)
