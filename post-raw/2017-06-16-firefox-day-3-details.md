@@ -1,7 +1,6 @@
-<!-- Firefox day 3: -->
-<!-- DRAFT -->
+<!-- Firefox day 3: Details -->
 
-# Firefox day 3:
+# Firefox day 3: Details
 
 ## Comeback of the ads
 
