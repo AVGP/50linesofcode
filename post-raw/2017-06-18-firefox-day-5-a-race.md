@@ -23,8 +23,6 @@ I've opened a session with four tabs:
 I measured the total memory usage, then left them open for a 30 minutes and measured the memory usage afterwards.
 Then I did the same with Firefox.
 
-Then I did the same on OSX.
-
 Chrome started with 420 MB when all pages where opened on Linux and consumed  520 MB after half an hour.
 Firefox started with 575 MB when all pages where opened on Linux and consumed 960 MB after half an hour.
 
@@ -52,4 +50,10 @@ I consider the 0.2 seconds (respectively "sub second" variations) noise rather t
 That, to me, means that memory-wise Firefox 54 isn't outperforming Chrome apparently and the pages load pretty much as fast.
 As E10n ("Electrolysis"), Firefox's multiprocess rewrite, is pretty young we might see further improvements in the future. 
 
-## 
+## The entire saga so far
+
+* [Firefox day 1](2017-06-14-my-firefox-month-day-1)
+* [Firefox day 2](2017-06-15-firefox-day-2-first-few-cracks)
+* [Firefox day 3](2017-06-16-firefox-day-3-details)
+* [Firefox day 4](2017-06-17-firefox-day-4-goin-up-the-country)
+* [Firefox day 5](2017-06-18-firefox-day-5-a-race)
