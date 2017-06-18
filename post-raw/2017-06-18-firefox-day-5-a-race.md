@@ -26,6 +26,8 @@ Then I did the same with Firefox.
 Chrome started with 420 MB when all pages where opened on Linux and consumed  520 MB after half an hour.
 Firefox started with 575 MB when all pages where opened on Linux and consumed 960 MB after half an hour.
 
+![](../images/post-images/firefox/firefox-day5-1.png)
+
 I don't know about the marketing graphic Firefox has distributed, but it doesn't reflect what I'm seeing on my Linux laptop, unless my method is wrong:
 
 1. Launch the websites
