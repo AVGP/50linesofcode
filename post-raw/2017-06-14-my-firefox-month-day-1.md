@@ -92,7 +92,8 @@ It's fast, it's working well and I'm not missing much yet :-)
 
 ## The entire saga so far
 
-[Firefox day 1](2017-06-14-my-firefox-month-day-1)
-[Firefox day 2](2017-06-15-firefox-day-2-first-few-cracks)
-[Firefox day 3](2017-06-16-firefox-day-3-details)
-[Firefox day 4](2017-06-17-goin-up-the-country)
+* [Firefox day 1](2017-06-14-my-firefox-month-day-1)
+* [Firefox day 2](2017-06-15-firefox-day-2-first-few-cracks)
+* [Firefox day 3](2017-06-16-firefox-day-3-details)
+* [Firefox day 4](2017-06-17-firefox-day-4-goin-up-the-country)
+* [Firefox day 5](2017-06-18-firefox-day-5-a-race)
