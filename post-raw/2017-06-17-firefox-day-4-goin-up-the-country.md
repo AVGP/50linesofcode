@@ -5,27 +5,27 @@
 With the weather being amazing today, I got to use Firefox on my phone a lot.
 Also, **finally I got Firefox 54 on my phone**!
 
-![](../images/post-images/firefox/firefox-day4-1.jpg)
+<img width="400" src="../images/post-images/firefox/firefox-day4-1.jpg">
 
 ## Useful little things
 
 I've found a few niceties besides the fact that **apps open links with Firefox in the background and with a little button you can tap to switch** directly to the browser - let's look at those!
 
-![](../images/post-images/firefox/firefox-day3-6.jpg)
+<img width="400" src="../images/post-images/firefox/firefox-day3-6.jpg">
 
 For instance Firefox **detects if you already have an open tab with the URL** you're typing in. It then offers the possibility to jump tho that tab immediately:
 
-![](../images/post-images/firefox/firefox-day4-2.jpg)
+<img width="400" src="../images/post-images/firefox/firefox-day4-2.jpg">
 
 It also indicates if the **URL can be opened in an installed app** on the phone:
 
-![](../images/post-images/firefox/firefox-day4-3.jpg)
+<img width="400" src="../images/post-images/firefox/firefox-day4-3.jpg">
 
 The little Android icon in the address bar can be tapped and opens the URL in the app - in this case in YouTube.
 
 Also, tabs that are opened via an app and **wait in the background show up in the notifications**, which allows for a quite nice way of accessing them later on:
 
-![](../images/post-images/firefox/firefox-day4-4.jpg)
+<img width="400" src="../images/post-images/firefox/firefox-day4-4.jpg">
 
 ## Another one who doesn't play nicely...
 
