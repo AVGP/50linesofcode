@@ -315,6 +315,8 @@ msg: db "Hello world!", 0 ; we need to explicitely put the zero byte here
 times 510-($-$$$) db 0           ; fill the output file with zeroes until 510 bytes are full
 dw 0xaa55                       ; magic number that tells the BIOS this is bootable
 ```
+(Thanks to Reddit user [pahefu](https://www.reddit.com/user/pahefu) for pointing out a typo here!
+<!-- Be aware that the "$$$" is there because Markdown, in actual code it's ($-$$) -->
 After saving it as `boot.asm` it can be compiled by running `nasm -o boot2.bin boot.asm`.
 
 Note that the order of arguments for `cmp` are the opposite of the order that `as` uses and `[org]` in nasm and `.org` in `as` are **not** the same thing!
