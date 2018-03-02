@@ -312,7 +312,7 @@ done:
 
 msg: db "Hello world!", 0 ; we need to explicitely put the zero byte here
 
-times 510-($-$$) db 0           ; fill the output file with zeroes until 510 bytes are full
+times 510-($-$$$) db 0           ; fill the output file with zeroes until 510 bytes are full
 dw 0xaa55                       ; magic number that tells the BIOS this is bootable
 ```
 After saving it as `boot.asm` it can be compiled by running `nasm -o boot2.bin boot.asm`.
