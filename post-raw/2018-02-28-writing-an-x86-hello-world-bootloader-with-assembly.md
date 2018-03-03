@@ -68,12 +68,13 @@ When we run that, we get a better result:
 
 ```shell
 as -o boot.o boot.s
-ld -o boot.bin --oformat binary -e init boot.s
+ld -o boot.bin --oformat binary -e init boot.o
 ls -lh .
   3 boot.bin
 784 boot.o
 152 boot.s
 ```
+(Typo spotted by [xnumbersx](https://www.reddit.com/user/xnumbersx))
 
 Okay, three bytes sounds much better, but this won't boot up, because it is missing the magic number `0x55AA` at bytes 511 and 512 of our binary...
 
@@ -198,7 +199,7 @@ Also, we will use a label to give us access to the address:
 init: # this is the beginning of our binary later.
   mov $0x0e, %ah # sets AH to 0xe (function teletype)
   mov $msg, %bx   # sets BX to the address of the first byte of our message
-  mov (%bl), %al   # sets AL to the first byte of our message
+  mov (%bx), %al   # sets AL to the first byte of our message
   int $0x10 # call the function in ah from interrupt 0x10
   hlt # stops executing
 
@@ -207,6 +208,7 @@ msg: .asciz "Hello world!" # stores the string (plus a byte with value "0") and 
 .fill 510-(.-init), 1, 0 # add zeroes to make it 510 bytes long
 .word 0xaa55 # magic bytes that tell BIOS that this is bootable
 ```
+(Typo spotted by [xnumbersx](https://www.reddit.com/user/xnumbersx))
 
 We have one new feature in there:
 
