@@ -13,7 +13,7 @@ var files = fs.readdirSync(dir).filter(function(file) {
   var stat = fs.lstatSync(dir + '/' + file)
   return stat.isFile()
 }).map(function(item) {
-  return '<url><loc>' + url + '/' + stripExtension(path.basename(item)) + '</loc></item>'
+  return '<url><loc>' + url + '/' + stripExtension(path.basename(item)) + '</loc></url>'
 })
 
 var sitemapContent = fs.readFileSync('sitemap-template.xml', 'utf8')
