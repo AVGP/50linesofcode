@@ -5,69 +5,174 @@
     <link>https://50linesofco.de/</link>
     <description>The /var/log of Martin Naumann</description>
     <language>en-us</language>
-    <pubDate>Sat, 15 Oct 2016 23:40:30 GMT</pubDate>
+    <pubDate>Fri, 11 May 2018 17:50:11 GMT</pubDate>
     <item>
-	<title>JSON RPC 2.0 - for simple and powerful APIs</title>
-	<link>https://50linesofco.de/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</link>
-	<description>To my surprise a contender in the field of API protocols is yet unknown: JSON-RPC 2.0.
-A standard since 2010, it is simple yet powerful but barely known amongst developers.
-This article explains what it is, what makes it different and nice to work with and how to use it.</description>
-	<guid isPermaLink="true">https://50linesofco.de/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</guid>
+	<title>Writing an x86 "Hello world" bootloader with assembly</title>
+	<link>https://50linesofco.de/post/2018-02-28-writing-an-x86-hello-world-bootloader-with-assembly.html</link>
+	<description>After booting, the BIOS of the computer reads 512 bytes from the boot devices and, if it detects a two-byte "magic number" at the end of those 512 bytes, loads the data from these 512 bytes as code and runs it. 
+
+This kind of code is called a "bootloader" (or "boot sector") and we're writing a tiny bit of assembly code to make a virtual machine run our code and display "Hello world" for the fun of it. Bootloaders are also the very first stage of booting an operating system.
+</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2018-02-28-writing-an-x86-hello-world-bootloader-with-assembly.html</guid>
 </item>
 <item>
-	<title>Five rules to stay levelheaded and efficient when handling downtimes</title>
-	<link>https://50linesofco.de/2016-03-17-five-rules-to-stay-levelheaded-and-efficient-when-handling-downtimes.html</link>
-	<description>Downtimes, Crashes, Incidents, System Failures - they have many names, but most people involved with technology to some degree have experienced at least one at some point in their career.
+	<title>Firefox day 5: A race</title>
+	<link>https://50linesofco.de/post/2017-06-18-firefox-day-5-a-race.html</link>
+	<description>I've opened a session with four tabs:
 
-I've seen many different teams and many different incarnations of the above-mentioned situations. I've been on the different sides of them: The user, the developer, the system administrator, the site reliability engineer and the consultant.
+1. Facebook
+2. Twitter
+3. A Stackoverflow thread
+4. A Github page
+5. An Archilogic model with a 3D model
 
-Some of them I have caused, some of them I helped to resolve and in some of them I was a mere bystander.
+I measured the total memory usage, then left them open for a 30 minutes and measured the memory usage afterwards.
+Then I did the same with Firefox.
 
-This post is the distilled essence on how different teams that I had the pleasure of being a member, dealt and deal with the stress and the specific characteristics of these tense situations to ensure timely and proper resolution.</description>
-	<guid isPermaLink="true">https://50linesofco.de/2016-03-17-five-rules-to-stay-levelheaded-and-efficient-when-handling-downtimes.html</guid>
+Chrome started with 420 MB when all pages where opened on Linux and consumed  520 MB after half an hour.
+Firefox started with 575 MB when all pages where opened on Linux and consumed 960 MB after half an hour.
+
+![](../images/post-images/firefox/firefox-day5-1.png)
+
+I don't know about the marketing graphic Firefox has distributed, but it doesn't reflect what I'm seeing on my Linux laptop, unless my method is wrong:
+
+1. Launch the websites
+2. Read the RSS for all browser processes
+
+Also: Your milage may vary, I guess.</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-06-18-firefox-day-5-a-race.html</guid>
 </item>
 <item>
-	<title>Five rules to stay sane and efficient when handling downtimes</title>
-	<link>https://50linesofco.de/2016-03-17-five-rules-to-stay-sane-and-efficient-when-handling-downtimes.html</link>
-	<description>Downtimes, Crashes, Incidents, System Failures - they have many names, but most people involved with technology to some degree have experienced at least one at some point in their career.
+	<title>Firefox day 4: Goin' up the country</title>
+	<link>https://50linesofco.de/post/2017-06-17-firefox-day-4-goin-up-the-country.html</link>
+	<description>I've found a few niceties besides the fact that **apps open links with Firefox in the background and with a little button you can tap to switch** directly to the browser - let's look at those!
 
-I've seen many different teams and many different incarnations of the above-mentioned situations. I've been on the different sides of them: The user, the developer, the system administrator, the site reliability engineer and the consultant.
 
-Some of them I have caused, some of them I helped to resolve and in some of them I was a mere bystander.
 
-This post is the distilled essence on how different teams that I had the pleasure of being a member, dealt and deal with the stress and the specific characteristics of these tense situations to ensure timely and proper resolution.</description>
-	<guid isPermaLink="true">https://50linesofco.de/2016-03-17-five-rules-to-stay-sane-and-efficient-when-handling-downtimes.html</guid>
+For instance Firefox **detects if you already have an open tab with the URL** you're typing in. It then offers the possibility to jump tho that tab immediately:
+
+
+
+It also indicates if the **URL can be opened in an installed app** on the phone:
+
+
+
+The little Android icon in the address bar can be tapped and opens the URL in the app - in this case in YouTube.
+
+Also, tabs that are opened via an app and **wait in the background show up in the notifications**, which allows for a quite nice way of accessing them later on:
+
+</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-06-17-firefox-day-4-goin-up-the-country.html</guid>
 </item>
 <item>
-	<title>Slick and slf4j MDC logging in Scala</title>
-	<link>https://50linesofco.de/2016-07-01-slick-and-slf4j-mdc-logging-in-scala.html</link>
-	<description>* Multi-user applications need log messages to retain **context**, so the situation can be examined on a transaction-basis
-* The **mapped diagnostic context**, short `MDC`, allows to put context to all log statements for a single thread
-* Scala allows us to build an `ExecutionContext` where we can copy the `MDC` to any new thread that is being used giving us **multi-thread MDC logging**
-* Slick requires us to also provide an `Executor` that uses this `ExecutionContext`
-* There's a package for that: `de.geekonaut.slickmdc`</description>
-	<guid isPermaLink="true">https://50linesofco.de/2016-07-01-slick-and-slf4j-mdc-logging-in-scala.html</guid>
+	<title>Firefox day 3: Details</title>
+	<link>https://50linesofco.de/post/2017-06-16-firefox-day-3-details.html</link>
+	<description>When switching browsers three days ago, I forgot to install an ad blocker.
+I have to say I'm surprised **how well Firefox seems to deal with ads** as I haven't really noticed any ads up to this point.
+
+
+
+However, the day had to come where an ad banner popped into a website, prompting me to install [uBlock origin](https://addons.mozilla.org/en/firefox/addon/ublock-origin/?src=hp-dl-featured).</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-06-16-firefox-day-3-details.html</guid>
 </item>
 <item>
-	<title>The overwhelming web</title>
-	<link>https://50linesofco.de/2016-07-04-the-overwhelming-web.html</link>
-	<description>Web Development can be pretty strange these days.
+	<title>Firefox day 2: First few cracks</title>
+	<link>https://50linesofco.de/post/2017-06-15-firefox-day-2-first-few-cracks.html</link>
+	<description>Today I happened to visit my own website, [geekonaut.de](http://geekonaut.de) and noticed a few interesting glitches on my page:
 
-On the one hand we tell beginners that they need ALL the things:
-build tools, task runners, package managers, frameworks, polyfills, libraries, runtimes and
-deployment systems.
+![](../images/post-images/firefox/firefox-day2-4.png)
 
-On the other hand some are airing their concerns about some flavour of "fatigue",
-be it a framework, library, JavaScript or even frontend fatigue.
+The first thing to do was to go to the devtools and inspect the elements:
+![](../images/post-images/firefox/firefox-day2-3.png)
 
-I also noticed a sense of urgency for *everything*. Mobile-first, Offline-first, Accessibility-first, Content-first and the list goes on. It starts to feel like "everything-first", which of course really would mean: Nothing first.
+So the 3D transforms aren't doing too well on my trusty linux laptop. I've not seen this problem with Chrome. Then again, graphics can be wonky on Linux, so I double checked with my OSX machine to find that it's indeed a **compatibility bug between Firefox and Linux** in my case.
 
-Where are the olden days, where all you needed to build websites was a text editor and some space online to put it?</description>
-	<guid isPermaLink="true">https://50linesofco.de/2016-07-04-the-overwhelming-web.html</guid>
+Also for some reason Firefox required me to put an `overflow-x: hidden` into an element that is styled to be `width: 100vh` and displayed as such. No biggie but something I'll investigate further as I can't fully explain it yet.</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-06-15-firefox-day-2-first-few-cracks.html</guid>
+</item>
+<item>
+	<title>My Firefox month: Day 1</title>
+	<link>https://50linesofco.de/post/2017-06-14-my-firefox-month-day-1.html</link>
+	<description>* I will try Firefox 54 on my laptops and phone for a month
+* Firefox Sync provides me with seamless access to my tabs, bookmarks, autofill data etc. across devices
+* Using Firefox with multiple profiles is easier with an Add-On like "Profile Switcher"
+* The first day had a bunch of pleasant surprises in the dev tools</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-06-14-my-firefox-month-day-1.html</guid>
+</item>
+<item>
+	<title>How I approach side projects</title>
+	<link>https://50linesofco.de/post/2017-05-08-how-i-approach-side-projects.html</link>
+	<description>- Start with something you don't know. Research &amp; write down the result
+- Research just enough to identify the major unknown-unknowns, turning them into known-unknowns
+- Break your project down into approachable steps
+- Build small prototypes for each step to validate your understanding of the project's problem
+- Put together an implementation of your project, based on learnings from the prototypes
+- 🎈 Be proud &amp; share 🎈</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-05-08-how-i-approach-side-projects.html</guid>
+</item>
+<item>
+	<title>CORS - a guided tour</title>
+	<link>https://50linesofco.de/post/2017-03-06-cors-a-guided-tour.html</link>
+	<description>* The browser enforces the [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) to avoid getting responses from websites that do not share the same origin.
+* The Same-origin policy does not prevent requests being made to other origins, but disables access to the response from JavaScript.
+* [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) headers allow access to cross-origin responses.
+* CORS together with credentials require caution.
+* CORS is a browser-enforced policy. Other applications aren't affected by it.</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-03-06-cors-a-guided-tour.html</guid>
+</item>
+<item>
+	<title>Bits and bytes in JavaScript</title>
+	<link>https://50linesofco.de/post/2017-02-13-bits-and-bytes-in-javascript.html</link>
+	<description>* when dealing with binary data or communicating with hardware, you may find yourself needing ways to manipulate individual bits
+* JavaScript has operations for this case:
+** bit-shift operators push bits to the left or right
+** bit-wise arithmetic operators merge two sets of bits or flip the bits
+* when dealing with bytes, ArrayBuffers allow different ways of handling the data without needing to copy it around</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-02-13-bits-and-bytes-in-javascript.html</guid>
+</item>
+<item>
+	<title>JavaScript in parallel</title>
+	<link>https://50linesofco.de/post/2017-02-06-javascript-in-parallel-web-workers-transferables-and-sharedarraybuffer.html</link>
+	<description>* JavaScript is single-threaded and long-running scripts make the page unresponsive
+* Web Workers allow running JavaScript in separate threads, communicating with the main thread using messages.
+* Messages that transfer large amount of data in TypedArrays or ArrayBuffers cause large memory cost due to data being cloned
+* Using transfers mitigates the memory cost of cloning, but makes the data inaccessible to the sender
+* SharedArrayBuffers are an upcoming feature, allowing data to be shared between threads.
+* SharedArrayBuffer access can (and may need to) be synced using Atomics
+* All code can be found [in this repository](https://github.com/AVGP/js-parallelism-demos)</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-02-06-javascript-in-parallel-web-workers-transferables-and-sharedarraybuffer.html</guid>
+</item>
+<item>
+	<title>Understanding different number systems</title>
+	<link>https://50linesofco.de/post/2017-01-16-understanding-different-number-systems.html</link>
+	<description>![Leibnitz' notes on the binary system](../images/post-images/binary-system.jpg)
+
+* The fact that we use a number system with 10 symbols (0-9),aka "Base 10" or decimal is an arbitrary choice
+* Systems with different bases can help us express numbers in specific contexts more intuitively (e.g. hexadecimal or binary when working with digital systems)
+* Reading numbers in any number system can be done by multiplying each digit value with a power of the base, starting with the zero-th power for the right most digit and increasing the exponent by one for each step to the left, e.g. 123 = `3x10^0 + 2x10^1 + 1x10^2` for decimal numbers (base 10)</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2017-01-16-understanding-different-number-systems.html</guid>
+</item>
+<item>
+	<title>2016: The year in review</title>
+	<link>https://50linesofco.de/post/2016-12-21-2016-the-year-in-review.html</link>
+	<description>
+
+This year I finally finished the draft of my book on Polymer!
+If things work out, it will be in print at the beginning of next year... which makes me very happy.
+Right after finishing the raw script in May (a mere week before my wedding) I swore I'd never write a book again but I was very happy to have pushed through. Fun fact: I am writing another book now, so there's that.
+
+I also had the honour to give an [interview about WebVR](https://habrahabr.ru/company/jugru/blog/315868/) to the russian Java User Group. It's in Russian, but Google Translate seems to be keeping up with it quite well.
+
+Right now I have a few more writing projects brewing, both for books and articles, so watch this space if you're interested in me sharing more of the things I failed at and what I learned while doing so.
+
+In addition, I am happy to announce that I am now also a [Google Developer Expert]() for Web. This means that Google will support me in mentoring and helping developers and creating content to share my knowledge with the broader web developer community.
+
+</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2016-12-21-2016-the-year-in-review.html</guid>
 </item>
 <item>
 	<title>HTML, DOM and JavaScript unraveled</title>
-	<link>https://50linesofco.de/2016-10-16-html-dom-and-javascript-unraveled.html</link>
+	<link>https://50linesofco.de/post/2016-10-16-html-dom-and-javascript-unraveled.html</link>
 	<description>The web platform has started out with HTML to allow users to share documents
 and link them in a user friendly and standardised way.
 
@@ -82,7 +187,66 @@ Today, the different technologies may be a little too much to take in at first
 and it won't get easier as things such as the Shadow DOM is added and frameworks and libraries may bring a Virtual DOM along.
 
 So let's dive right in an have a look at the different bits and pieces that are at play here.</description>
-	<guid isPermaLink="true">https://50linesofco.de/2016-10-16-html-dom-and-javascript-unraveled.html</guid>
+	<guid isPermaLink="true">https://50linesofco.de/post/2016-10-16-html-dom-and-javascript-unraveled.html</guid>
+</item>
+<item>
+	<title>The overwhelming web</title>
+	<link>https://50linesofco.de/post/2016-07-04-the-overwhelming-web.html</link>
+	<description>Web Development can be pretty strange these days.
+
+On the one hand we tell beginners that they need ALL the things:
+build tools, task runners, package managers, frameworks, polyfills, libraries, runtimes and
+deployment systems.
+
+On the other hand some are airing their concerns about some flavour of "fatigue",
+be it a framework, library, JavaScript or even frontend fatigue.
+
+I also noticed a sense of urgency for *everything*. Mobile-first, Offline-first, Accessibility-first, Content-first and the list goes on. It starts to feel like "everything-first", which of course really would mean: Nothing first.
+
+Where are the olden days, where all you needed to build websites was a text editor and some space online to put it?</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2016-07-04-the-overwhelming-web.html</guid>
+</item>
+<item>
+	<title>Slick and slf4j MDC logging in Scala</title>
+	<link>https://50linesofco.de/post/2016-07-01-slick-and-slf4j-mdc-logging-in-scala.html</link>
+	<description>* Multi-user applications need log messages to retain **context**, so the situation can be examined on a transaction-basis
+* The **mapped diagnostic context**, short `MDC`, allows to put context to all log statements for a single thread
+* Scala allows us to build an `ExecutionContext` where we can copy the `MDC` to any new thread that is being used giving us **multi-thread MDC logging**
+* Slick requires us to also provide an `Executor` that uses this `ExecutionContext`
+* There's a package for that: `de.geekonaut.slickmdc`</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2016-07-01-slick-and-slf4j-mdc-logging-in-scala.html</guid>
+</item>
+<item>
+	<title>Five rules to stay sane and efficient when handling downtimes</title>
+	<link>https://50linesofco.de/post/2016-03-17-five-rules-to-stay-sane-and-efficient-when-handling-downtimes.html</link>
+	<description>Downtimes, Crashes, Incidents, System Failures - they have many names, but most people involved with technology to some degree have experienced at least one at some point in their career.
+
+I've seen many different teams and many different incarnations of the above-mentioned situations. I've been on the different sides of them: The user, the developer, the system administrator, the site reliability engineer and the consultant.
+
+Some of them I have caused, some of them I helped to resolve and in some of them I was a mere bystander.
+
+This post is the distilled essence on how different teams that I had the pleasure of being a member, dealt and deal with the stress and the specific characteristics of these tense situations to ensure timely and proper resolution.</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2016-03-17-five-rules-to-stay-sane-and-efficient-when-handling-downtimes.html</guid>
+</item>
+<item>
+	<title>Five rules to stay levelheaded and efficient when handling downtimes</title>
+	<link>https://50linesofco.de/post/2016-03-17-five-rules-to-stay-levelheaded-and-efficient-when-handling-downtimes.html</link>
+	<description>Downtimes, Crashes, Incidents, System Failures - they have many names, but most people involved with technology to some degree have experienced at least one at some point in their career.
+
+I've seen many different teams and many different incarnations of the above-mentioned situations. I've been on the different sides of them: The user, the developer, the system administrator, the site reliability engineer and the consultant.
+
+Some of them I have caused, some of them I helped to resolve and in some of them I was a mere bystander.
+
+This post is the distilled essence on how different teams that I had the pleasure of being a member, dealt and deal with the stress and the specific characteristics of these tense situations to ensure timely and proper resolution.</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2016-03-17-five-rules-to-stay-levelheaded-and-efficient-when-handling-downtimes.html</guid>
+</item>
+<item>
+	<title>JSON RPC 2.0 - for simple and powerful APIs</title>
+	<link>https://50linesofco.de/post/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</link>
+	<description>To my surprise a contender in the field of API protocols is yet unknown: JSON-RPC 2.0.
+A standard since 2010, it is simple yet powerful but barely known amongst developers.
+This article explains what it is, what makes it different and nice to work with and how to use it.</description>
+	<guid isPermaLink="true">https://50linesofco.de/post/2016-03-09-json-rpc-2-for-simple-and-powerful-apis.html</guid>
 </item>
   </channel>
 </rss>

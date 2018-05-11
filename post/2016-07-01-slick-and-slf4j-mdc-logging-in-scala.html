@@ -11,7 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/prism.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link rel="canonical" href="https://50linesofco.de" />
 	</head>
 	<body>
 
@@ -281,7 +283,7 @@ object MdcAsyncExecutor extends StrictLogging {
 }
 </code></pre>
 <p>Now to use our fresh <code>MdcAsyncExecutor</code>, we&#39;ll supply it when creating the <code>Database</code> instance:</p>
-<pre><code class="lang-scala">// Threads are named &quot;Database-X&quot; where &quot;X&quot; is the thread number &amp; there will be 10 threads in the pool.
+<pre><code class="lang-scala">// Threads are named &quot;Database-X&quot; where &quot;X&quot; is the thread number &amp;amp; there will be 10 threads in the pool.
 val db = Database.forDataSource(connectionPool, MdcAsyncExecutor.apply(&quot;Database&quot;, 10))
 </code></pre>
 <h2 id="introducing-de-geekonaut-slickmdc">Introducing de.geekonaut.slickmdc</h2>
@@ -329,6 +331,6 @@ val db = Database.forDataSource(connectionPool, MdcAsyncExecutor.apply(&quot;Dat
 			  ga('send', 'pageview');
 
 			</script>
-
+			<script src="/assets/js/prism.js" defer></script>
 	</body>
 </html>
