@@ -16,11 +16,15 @@ Back in December 2017 I was looking forward to my lecture at the HWZ and I am ha
 
 The year was busy with conferences again. I went to **35** events, speaking at 33 of them - sometimes with more than one talk. This meant taking 56 flights for 72,883 miles.
 
+<div class="article-img">
 ![](../images/post-images/flights2018.png)
+</div>
 
 I also got the fantastic opportunity to be the MC at the amazing Fronteers conference. It was exhausting but incredibly wonderful.
 
+<div class="article-img">
 ![](../images/post-images/fronteers-mc.jpg)
+</div>
 
 ## Diversity and community
 
