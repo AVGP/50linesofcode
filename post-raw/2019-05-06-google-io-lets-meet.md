@@ -2,6 +2,8 @@
 
 # Google I/O - let's meet!
 
+<img width="300" src="/images/post-images/IO.jpg">
+
 I will be at Google I/O this week! If you wanna meet up or talk to me, you will have many opportunities to do so :)
 
 ## Tuesday: Floating around
