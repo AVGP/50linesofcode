@@ -1,13 +1,13 @@
 <!-- SEO codelabs for developers -->
 
-# SEO codelabs for developers
-
 SEO and web development are two ingredients to successful websites, if done right.
 As one of my goals this year is to make SEO more approachable to web developers,
 I wanted to create interactive tutorials to help everyone who wants to learn more
 about how to make websites more discoverable via Search and I believe codelabs are
 a great way to do that, so I sat together with [Lizzi](https://twitter.com/lizziharvey) 
 to create a few codelabs!
+
+## Our brand new codelabs
 
 ![Try the codelabs right from your browser!](/images/post-images/codelabs.png)
 
