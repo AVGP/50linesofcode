@@ -21,6 +21,9 @@ We came up with two completely fresh codelabs that we're pretty proud of:
 We also took a look at the existing structured data codelab and updated it, so [check out the Structured Data codelab](https://codelabs.developers.google.com/codelabs/structured-data/), too!
 Each codelab allows you to let us know if there's something that needs improvement and we're happy to hear your feedback on [Twitter](https://twitter.com/g33konaut)!
 
+I'd like to also thank the amazing Webmaster Product Experts (PEs) and Google Developer Experts (GDEs) for their help with testing the codelabs and giving us invaluable feedback.
+Without their help and input, these codelabs wouldn't have gotten into the great shape they're in today!
+
 If you're at Google I/O this year, you can also go and do the codelabs there!
 
 Have fun and enjoy :)
