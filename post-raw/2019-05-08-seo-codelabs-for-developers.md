@@ -9,7 +9,9 @@ to create a few codelabs!
 
 ## Our brand new codelabs
 
+<div class="article-img">
 ![Try the codelabs right from your browser!](/images/post-images/codelabs.png)
+</div>
 
 We came up with two completely fresh codelabs that we're pretty proud of:
 
