@@ -5,6 +5,8 @@ the pleasure and opportunity to go to Google I/O. It was a great opportunity to
 meet many people from all over the world, who are part of the web developer and 
 SEO communities, but also to meet people working on various Google Search teams.
 
+<img src="/images/post-images/io19/io19.jpg" alt="I/O 2019 is done!" width="60%">
+
 This year I [came back for I/O 2019](https://50linesofco.de/post/2019-05-06-google-io-lets-meet)
 and I wanted to make sure to give as much as possible back to the community and
 mingle with as many people as possible to hear what I can do to help make building great web content easier.
