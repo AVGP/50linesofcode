@@ -1,7 +1,7 @@
 <!-- A new adventure -->
 
 As a few people already know or have heard, I have recently left [Archilogic](https://spaces.archilogic.com) to join Google's "Webmaster Trends Analyst" team.
-I am very thankful and happy to have a chance to join such a wonderful team of smart, friendly folks here in Zürich.
+I am very thankful and happy to have a chance to join such a wonderful team of smart, friendly folks here in Zuerich.
 
 My role is Developer Advocate and my mission continues to be making the web better for users and developers alike. I feel like I have found my place here (quite literally, as you'll see below).
 
