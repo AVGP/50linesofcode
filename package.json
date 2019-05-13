@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "htmlentities": "^1.0.0",
+    "marked": "^0.6.2",
     "striptags": "^3.0.1"
   }
 }

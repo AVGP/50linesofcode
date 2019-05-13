@@ -1,8 +1,20 @@
 var fs = require('fs');
 var striptags = require('striptags');
+var md = require('marked');
 
 var url = process.argv.pop(),
     dir = process.argv.pop()
+
+md.setOptions({
+  renderer: new md.Renderer(),
+  gfm:         true,
+  tables:      true,
+  breaks:      true,
+  pedantic:    false,
+  sanitize:    false,
+  smartLists:  true,
+  smartypants: false
+});
 
 var files = fs.readdirSync(dir).filter(function(file) {
   var stat = fs.lstatSync(dir + '/' + file)
@@ -16,7 +28,7 @@ for(var i=0; i<files.length;i++) {
   var title = content.match(/<\!\-\-([^<]+)\-\->/)[1].trim()
   var desc  = content.match(/##[^\n]+\n\n([^#]+)(?=\n\n)/)[1]
   if(!content.match(/<!-- DRAFT -->/)) {
-    items.push({title: title, description: striptags(desc), link: url + '/' + files[i].slice(0, -3)})
+    items.push({title: title, description: striptags(md(desc)), link: url + '/' + files[i].slice(0, -3)})
   }
 }
 
