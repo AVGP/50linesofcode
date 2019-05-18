@@ -125,7 +125,7 @@ Here are a few examples:
 23 >> 2 // will become 5 (10111 shifting two places to the right will become 101)
 ```
 
-Generally we can think of a left shift as a multiplication by two and of a left shift of a remainder-free division by two for each bit we are shifting:
+Generally we can think of a left shift as a multiplication by two and of a right shift of a remainder-free division by two for each bit we are shifting:
 
 ```
  2 << 1 // equals 2x2
