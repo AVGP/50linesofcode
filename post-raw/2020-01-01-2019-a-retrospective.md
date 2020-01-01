@@ -2,8 +2,6 @@
 
 A look at what I thought 2019 would be like, how it was like and a few guesses for 2020.
 
-# 2019 a retrospective
-
 ## What I wrote a year ago
 
 Before we review how the year *actually* went, let's see what I thought about it a year ago before it started :)
