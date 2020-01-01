@@ -31,7 +31,9 @@ I'm truly blessed to be part of this amazing, global network of wonderful people
 
 One highlight definitely was the opportunity to be a speaker at Google I/O for the first time with John as well as a second time with Zoe.
 
-((IMAGE GOES HERE))
+<div class="article-img">
+![](../images/post-images/io19/io-sign-2019.jpg)
+</div>
 
 The opportunity to visit communities around the globe and hear about the different challenges people were facing when it comes to technical SEO was amazing and I'm very grateful for all the conversations I had throughout the year.
 
@@ -48,9 +50,17 @@ I am beyond blessed to have a fantastic team of co-organisers for [Web Zürich](
 
 When Web Zuerich started with the [first monthly meetup event](https://www.meetup.com/de-DE/Web-Zurich/events/231415028/) on June 2nd, 2016 with 10 people attending, I couldn't imagine what we, the team, would put together and run for now more than three years. This year we also took a big step forward in what we can do with [this amazing community of over 1900 people](https://www.meetup.com/de-DE/Web-Zurich) by founding the Web Zurich Verein to foster the local web creator community.
 
-((IMAGES GO HERE))
+Here is a picture from the first meetup:
+<div class="article-img">
+![](../images/post-images/webzurich-2016.jpg)
+</div>
 
-I also had the pleasure to support the events of other local communities
+And here is one from our December 2019 meetup (note: I couldn't even fit everyone into the picture):
+<div class="article-img">
+![](../images/post-images/webzurich-2019.jpg)
+</div>
+
+I also had the opportunity to support events from other communities in Zurich, like Vue Vixen Switzerland or the Women Techmakers!
 
 ## Off the clock and in the moment
 
