@@ -8,4 +8,4 @@ I found out that I can't eat the licorice that I love the most, because it conta
 
 ## Day 3
 
-All good.
+Besides my "Burger Sauce" not being vegan, all good. The burger is pretty great without it, too.
