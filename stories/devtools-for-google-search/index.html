@@ -87,18 +87,6 @@
       }
       </script>
       <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-      <amp-analytics type="gtag" data-credentials="include">
-      <script type="application/json">
-      {
-        "vars" : {
-          "gtag_id": "UA-33444478-2",
-          "config" : {
-            "UA-33444478-2": { "groups": "default" }
-          }
-        }
-      }
-      </script>
-      </amp-analytics>
     </head>
   <body>
     <amp-story standalone
@@ -190,7 +178,19 @@
           </ul>
         </amp-story-grid-layer>
       </amp-story-page>
-      <amp-story-bookend src="bookend.json" layout="nodisplay"></amp-story-bookend>
-    </amp-story>
+      <amp-analytics type="gtag" data-credentials="include">
+        <script type="application/json">
+        {
+          "vars" : {
+            "gtag_id": "UA-33444478-2",
+            "config" : {
+              "UA-33444478-2": { "groups": "default" }
+            }
+          }
+        }
+        </script>
+        </amp-analytics>      
+        <amp-story-bookend src="bookend.json" layout="nodisplay"></amp-story-bookend>
+      </amp-story>
   </body>
 </html>
