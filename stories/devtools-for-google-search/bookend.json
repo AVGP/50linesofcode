@@ -1,0 +1,45 @@
+{
+  "bookendVersion": "v1.0",
+  "shareProviders": [
+    "facebook",
+    "twitter",
+    "email"
+  ],
+  "components": [
+    {
+      "type": "heading",
+      "text": "Learn more"
+    },
+    {
+      "type": "landscape",
+      "title": "Watch the Web.dev Live talk",
+      "url": "https://www.youtube.com/watch?v=himvKu12YCY&list=PLNYkxOF6rcIDC0-BiwSL52yQ0n9rNozaF&index=8",
+      "image": "assets/bookend_video.png"
+    },
+    {
+      "type": "small",
+      "title": "Read the full article on web.dev",
+      "url": "https://web.dev/google-search-tools/",
+      "image": "assets/bookend_article.png"
+    },
+    {
+      "type": "small",
+      "title": "Watch the JavaScript SEO video series",
+      "url": "https://www.youtube.com/watch?v=LXF8bM4g-J4&list=PLKoqnv2vTMUPOalM1zuWDP9OQl851WMM9",
+      "image": "assets/bookend_seoj.jpg"
+    },
+    {
+      "type": "cta-link",
+      "links": [
+        {
+          "text": "Read the docs",
+          "url": "https://developers.google.com/search/guides"
+        },
+        {
+          "text": "Tweet me",
+          "url": "https://twitter.com/g33konaut"
+        }
+      ]
+    }
+  ]
+}

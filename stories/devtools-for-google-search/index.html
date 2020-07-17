@@ -8,10 +8,10 @@
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400" rel="stylesheet">
     <style amp-custom>
       amp-story {
-        font-family: 'Oswald',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: #000;
       }
       amp-story-page {
@@ -51,6 +51,10 @@
         background-color: #000;
         line-height: 2em;
       }
+
+      .bright {
+        background-color: white;
+      }
     </style>
   </head>
   <body>
@@ -61,13 +65,74 @@
         poster-portrait-src="assets/cover.png">
       <amp-story-page id="cover">
         <amp-story-grid-layer template="fill">
-          <amp-img src="assets/cover.png" width="600" height="800" layout="responsive"></amp-img>
+          <amp-img src="assets/cover.png" width="720" height="1280" layout="responsive"></amp-img>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical">
           <h1>Developer tools for Google Search</h1>
           <p>Debugging SEO issues for web developers</p>
         </amp-story-grid-layer>
       </amp-story-page>
+      <amp-story-page id="organic-traffic-matters">
+        <amp-story-grid-layer template="vertical" class="bright">
+          <h1>Why organic search matters</h1>
+          <amp-img animate-in="fly-in-bottom" src="assets/organic-traffic.png" width="665" height="462" layout="responsive"></amp-img>
+          <p animate-in="fly-in-bottom" animate-in-delay="500ms">According to a <a href="https://brightedge.com/resources/research-reports/channel_share">BrightEdge analysis</a>, organic search traffic makes up 53% of the traffic to a website on average.</p>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      <amp-story-page id="why-developers-should-care">
+        <amp-story-grid-layer template="vertical" class="bright">
+          <h1>Developers and SEO</h1>
+          <amp-img src="assets/search-engine-process.png" animate-in="whoosh-in-left" width="780" height="387" layout="responsive"></amp-img>
+          <p animate-in="whoosh-in-right" animate-in-delay="200ms">As developers, we influence how search engines can process &amp; present our website.</p>
+          <p animate-in="whoosh-in-left" animate-in-delay="500ms"><strong>Technical SEO</strong> focuses on how search engines can crawl and index your website efficiently.</p>
+        </amp-story-grid-layer>
+      </amp-story-page>
+
+      <amp-story-page id="lighthouse-seo-audit">
+        <amp-story-grid-layer template="fill">
+          <amp-img src="assets/lighthouse-seo-audit.png" width="720" height="1280" layout="responsive"></amp-img>
+        </amp-story-grid-layer>
+        <amp-story-grid-layer template="thirds">
+          <h1>Lighthouse SEO audits</h1>
+          <p grid-area="lower-third">
+            Lighthouse includes <strong>basic checks</strong> for common SEO issues.
+            Use this to do a first quick investigation of your web pages.
+          </p>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      <amp-story-page id="mobile-friendly-test">
+        <amp-story-grid-layer template="vertical" class="bright">
+          <h1>Mobile-friendly test</h1>
+          <amp-img src="assets/mobile-friendly-test.png" width="720" height="443" layout="responsive"></amp-img>
+          <p animate-in="whoosh-in-left" animate-in-delay="1s">Use the <a href="https://developers.google.com/search/tools">testing tools</a> to check how Googlebot sees your pages.</p>
+          <p animate-in="whoosh-in-right" animate-in-delay="2s">Check the <strong>rendered HTML</strong> to see if your content is available to Googlebot.</p>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      <amp-story-page id="search-console">
+        <amp-story-grid-layer template="vertical" class="bright">
+          <h1>Google Search Console</h1>
+          <amp-img src="assets/google-search-console.png" width="720" height="500" layout="responsive"></amp-img>
+          <p animate-in="fly-in-bottom"><a href="https://search.google.com/search-console">Google Search Console</a> is a free toolbox to monitor and check your site in Google Search.</p>
+          <p animate-in="fly-in-bottom" animate-in-delay="1s">It contains reports, testing tools and sends you notifications on your site.</p>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      <amp-story-page id="search-console-url-inspection">
+        <amp-story-grid-layer template="vertical" class="bright">
+          <h1>URL inspection tool</h1>
+          <amp-img src="assets/url-inspection-tool.png" width="720" height="531" layout="responsive"></amp-img>
+          <p>The URL inspection tool is part of Google Search Console.</p>
+          <p animate-in="whoosh-in-left" animate-in-delay="1s">It shows you the status of an individual URL of your site in Google Search.</p>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      <amp-story-page id="search-console-vitals-report">
+        <amp-story-grid-layer template="vertical" class="bright">
+          <h1>Core Web Vitals Report</h1>
+          <amp-img src="assets/core-web-vitals.png" width="720" height="577" layout="responsive"></amp-img>
+          <p>Also part of Google Search Console, it tells you which pages need improvement.</p>
+          <p animate-in="whoosh-in-right" animate-in-delay="1s">It uses the <a href="https://web.dev/vitals">core web vitals</a> to determine page speed.</p>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      <amp-story-bookend src="bookend.json" layout="nodisplay"></amp-story-bookend>
     </amp-story>
   </body>
 </html>
