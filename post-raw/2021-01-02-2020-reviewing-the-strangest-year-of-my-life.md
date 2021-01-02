@@ -51,7 +51,9 @@ Working from home itself is very much bearable - I have the comfort of a good se
 We do quite a bit of work with the video team and they, just like everyone else, had to hit the ground running this year.
 
 With studios closed the joyful journey of setting up a make-shift studio space came to our homes.
+<div class="article-img">
 ![](/images/post-images/home-studio.jpg)
+</div>
 
 I also realised that I feel lonely sometimes. Luckily, we established a daily "coffee chat" with coworkers where the usual office banter was conducted via Google Meet. I also missed the people from the community, so I decided to do two other things:
 
@@ -61,7 +63,9 @@ I also realised that I feel lonely sometimes. Luckily, we established a daily "c
 Both of these are great! I really enjoy the interactions that happen during these initiatives. On Twitch, a steady small group of people regularly joins the live chat and we share laughs, stories and daily tidbits with each other.
 It was during one of these streams that the infamous sheep made their first appearance:
 
+<div class="article-img">
 ![](/images/post-images/sheep.jpg)
+</div>
 
 ## Diving and biking
 
@@ -76,7 +80,9 @@ I finished 2020 with **152 dives in total**, I am a certified Rescue Diver and I
 
 I also picked up biking and ended up biking a total of **1796 kilometers**. My biggest milestone there was to cycle around Lake Zurich for 100km in one go.
 
+<div class="article-img">
 ![](/images/post-images/biking-lake-zurich.jpg)
+</div>
 
 ## A look forward
 
